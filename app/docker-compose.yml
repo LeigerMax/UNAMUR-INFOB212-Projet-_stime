@@ -1,0 +1,17 @@
+services:
+  pythonapp:
+    container_name: stimeapp
+    build: ./python/
+    command: "python3 ./stime.py"
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: stimedb
+    build: ./mysql/
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'dbstime'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
