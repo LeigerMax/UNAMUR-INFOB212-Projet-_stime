@@ -4,7 +4,7 @@ from datetime import date
 ### GESTION BASE DE DONNEES ###
 
 connection = mysql.connector.connect(
-    user='root', password='root', host='localhost', port="3306", database='dbstime')
+    user='root', password='root', host='stimeapp', port="3306", database='dbstime')
 print("DB connected")
 
 cursor = connection.cursor()

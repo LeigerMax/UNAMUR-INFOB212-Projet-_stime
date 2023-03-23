@@ -2,7 +2,7 @@
 ![Generic badge](https://img.shields.io/badge/STATUT-DEV-blue.svg)   ![Generic badge](https://img.shields.io/badge/VERSION-0.0-green.svg) ![Generic badge](https://img.shields.io/badge/SCHOOL_PROJET-UNamur-green.svg)
 
 
-# UNamur- Projet Base de données - Stime
+# UNamur - Projet Base de données - Stime
 
 <details>
   <summary>Table of Contents</summary>
@@ -17,10 +17,10 @@
 </details>
 
 
-## About The Projet
+## About The Project
 
 ## Installation
-1. Download the Projet
+1. Download the Project
 2. ```sh docker-compose up ``` in /app/
 
     
@@ -35,7 +35,7 @@
 ## 🛠 Build with
 - [Docker](https://www.docker.com/)
 - [Python](https://www.python.org/)
-- [MySQL](https://www.mysql.com/fr//)
+- [MySQL](https://www.mysql.com/fr/)
 
 
 
