@@ -1,4 +1,4 @@
-CREATE DATABASE dbstime;
+CREATE DATABASE IF NOT EXISTS dbstime;
 use dbstime;
 
 CREATE TABLE user(
