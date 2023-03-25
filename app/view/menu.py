@@ -1,4 +1,4 @@
-from app.Exceptions import UserInputNotAnIntegerException, InputNumberNotInRangeException
+from app.exceptions import UserInputNotAnIntegerException, InputNumberNotInRangeException
 from app.view.console_utils.io import clear_console, color_print, int_input
 from app.view.console_utils.colors import BLUE, RED_BLD
 
@@ -19,7 +19,7 @@ def login_register_menu(error_message=None):
     """
 
     options = """
-    What do you wish to do ? Enter the number you wish for :
+    What do you want to do ?
     1.  Register
     2.  Login
     3.  Leave
@@ -34,7 +34,7 @@ def login_register_menu(error_message=None):
     try:
         return int_input(1, 3, placeholder="Choice: ")
     except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
-        return login_register_menu("/!\\ Invalid input /!\\")
+        return login_register_menu("Invalid input")
 
     # match choice1:
     #     case 1:

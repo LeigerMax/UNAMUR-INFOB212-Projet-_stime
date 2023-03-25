@@ -1,8 +1,10 @@
 import os
+import sys
 from getpass import getpass
 
-from app.Exceptions import InputNumberNotInRangeException, UserInputNotAnIntegerException, UnknownColorException, \
-    InputStringNotInRangeException
+from app.exceptions import InputNumberNotInRangeException, UserInputNotAnIntegerException, UnknownColorException, \
+    InputStringNotInRangeException, InputNotAnEmailException
+from app.utils import is_valid_email
 from app.view.console_utils.colors import END
 
 
@@ -104,7 +106,12 @@ def password_input(placeholder=None):
     if placeholder:
         print(placeholder, end='')
 
-    return getpass(placeholder)
+    password = getpass(placeholder)
+
+    if len(password) > 0:
+        return password
+    else:
+        raise InputStringNotInRangeException(password, 1, sys.maxsize)
 
 
 def email_input(placeholder=None):
@@ -114,4 +121,12 @@ def email_input(placeholder=None):
     :return: user input (a string being a valid email address)
     """
 
-    pass
+    if placeholder:
+        print(placeholder, end='')
+    user_input = input()
+
+    if is_valid_email(user_input):
+        return user_input
+    else:
+        raise InputNotAnEmailException(user_input)
+

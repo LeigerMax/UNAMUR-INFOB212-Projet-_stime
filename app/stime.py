@@ -113,31 +113,7 @@ def show_menu():
 ##################################
 
 
-## fonction d'inscription
-def register():
-    clear_console()
-    print('\033[1;34m[REGISTER]\033[0m \n')
-    print('Please enter the following information:')
-    print('Choose a username')
-    username = str(input())
-    print('What is your password')
-    password = str(input())
-    print('What is your firstname')
-    firstname = str(input())
-    print('What is your name')
-    name = str(input())
-    print('What is your email')
-    email = str(input())
 
-    ## retravailler, pose soucis
-    ##
-    ##
-    # sql = "INSERT INTO user (Username, Password, Firstname, Surname, Email, Birthdate, DateInscription) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-    # now = date.today()
-    # val = (username, password, firstname, name, email, now, now)
-    # cursor.execute(sql, val)
-    # Une fois l'inscription effecuté
-    login_register_menu()
 
 
 

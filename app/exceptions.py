@@ -15,6 +15,9 @@ class InputNumberNotInRangeException(Exception):
 
 class InputStringNotInRangeException(Exception):
     def __init__(self, user_string, min_size, max_size):
-        super().__init__(f'Input string {user_string} is not between {min_size} and {max_size}!')
+        super().__init__(f'Input string length {user_string} is not between {min_size} and {max_size}!')
 
 
+class InputNotAnEmailException(Exception):
+    def __init__(self, email):
+        super().__init__(f'Input "{email}" is not a valid email address!')
