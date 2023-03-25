@@ -1,5 +1,5 @@
 import os
-from app.view.console_utils import clear_console
+from app.view.console_utils.io import clear_console
 
 ##################################
 ###          LIBRARY           ###
@@ -155,28 +155,7 @@ def login():
     ##IF login OK -> show_menu()
 
 
-## fonction menu login/register
-def login_register_menu():
-    clear_console()
-    print("\033[1;34m********************************************")
-    print("*                                          *")
-    print("*       Welcome to the Stime platform!     *")
-    print("*                                          *")
-    print("******************************************** \033[0m \n")
-    print('What do you wish to do ? Enter the number you wish for :')
-    print('1.  Register')
-    print('2.  Login')
-    print('3.  Leave')
 
-    choice1 = int(input())
-
-    match choice1:
-        case 1:
-            register()
-        case 2:
-            login()
-        case 3:
-            leave()
 
 
 login_register_menu()
