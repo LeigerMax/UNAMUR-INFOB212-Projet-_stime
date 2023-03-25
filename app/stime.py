@@ -140,19 +140,7 @@ def register():
     login_register_menu()
 
 
-## fonction login
-def login():
-    clear_console()
-    print('\033[1;34m[LOGIN]\033[0m \n')
-    print('Please enter the following information:')
-    print('Enter your username')
-    username = str(input())
-    print('Enter your password')
-    password = str(input())
-    show_menu()
 
-    ## produire le SQL query en dessous
-    ##IF login OK -> show_menu()
 
 
 
