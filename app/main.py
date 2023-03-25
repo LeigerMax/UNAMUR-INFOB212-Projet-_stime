@@ -11,6 +11,7 @@ def main():
         raise Exception(f"This project requires Python {PyVersion.MAJOR}.{PyVersion.MINOR} or higher")
 
     print("Hello World!")
+    # login_register_menu()
 
 
 if __name__ == "__main__":
