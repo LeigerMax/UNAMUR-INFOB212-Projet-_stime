@@ -1,31 +1,12 @@
 import os
-
-##################################
-###          TERMINAL          ###
-##################################
-
-# Nettoyer le terminal
-def clear_terminal():
-    if os.name == "posix":
-        os.system("clear")
-    else:
-        os.system("cls")
-
-
-# Quitter le terminal
-def leave():
-    clear_terminal()
-    print("Leave the Stime platform...")
-    exit()
-
+from app.view.console_utils import clear_console
 
 ##################################
 ###          LIBRARY           ###
 ##################################
 
-
 def show_library():
-    clear_terminal()
+    clear_console()
     print('\033[1;34m[YOUR LIBRARY]\033[0m \n')
 
     ## produire le SQL query en dessous
@@ -67,7 +48,7 @@ def show_library():
 ##################################
 
 def show_game_shop():
-    clear_terminal()
+    clear_console()
     print('\033[1;34m[STORE]\033[0m \n')
 
     ## produire le SQL query en dessous
@@ -78,7 +59,7 @@ def show_game_shop():
 ##################################
 
 def show_item_shop():
-    clear_terminal()
+    clear_console()
     print('\033[1;34m[ITEM MARKET]\033[0m \n')
 
     ## produire le SQL query en dessous
@@ -89,7 +70,7 @@ def show_item_shop():
 ##################################
 
 def my_item():
-    clear_terminal()
+    clear_console()
     print('\033[1;34m[YOUR ITEM]\033[0m \n')
 
     ## produire le SQL query en dessous
@@ -100,7 +81,7 @@ def my_item():
 ##################################
 
 def show_menu():
-    clear_terminal()
+    clear_console()
     username = "max"
 
     print("Welcome \033[1;34m" + username + "\033[0m ! \n")
@@ -134,7 +115,7 @@ def show_menu():
 
 ## fonction d'inscription
 def register():
-    clear_terminal()
+    clear_console()
     print('\033[1;34m[REGISTER]\033[0m \n')
     print('Please enter the following information:')
     print('Choose a username')
@@ -161,7 +142,7 @@ def register():
 
 ## fonction login
 def login():
-    clear_terminal()
+    clear_console()
     print('\033[1;34m[LOGIN]\033[0m \n')
     print('Please enter the following information:')
     print('Enter your username')
@@ -176,7 +157,7 @@ def login():
 
 ## fonction menu login/register
 def login_register_menu():
-    clear_terminal()
+    clear_console()
     print("\033[1;34m********************************************")
     print("*                                          *")
     print("*       Welcome to the Stime platform!     *")
