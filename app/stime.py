@@ -76,45 +76,6 @@ def my_item():
     ## produire le SQL query en dessous
 
 
-##################################
-###      MENU PLATFORME        ###
-##################################
-
-def show_menu():
-    clear_console()
-    username = "max"
-
-    print("Welcome \033[1;34m" + username + "\033[0m ! \n")
-    print('what do you wish to do ? Enter the number you wish for :')
-    print('1.  See my games')
-    print('2.  Buy a game')
-    print('3.  Buy / sell an item')
-    print('4.  See my items')
-    print('5.  Leave')
-    print('')
-
-    choice2 = int(input())
-
-    match choice2:
-        case 1:
-            show_library()
-        case 2:
-            show_game_shop()
-        case 3:
-            show_item_shop()
-        case 4:
-            my_item()
-        case 5:
-            leave()
-
-
-##################################
-###       LOGIN/REGISTRE       ###
-##################################
-
-
-
-
 
 
 
