@@ -2,7 +2,7 @@ from app.view.console_utils.colors import BLUE
 from app.view.console_utils.io import clear_console, color_print
 
 
-def show_library(games):
+def library_view(games):
     """
     Display games of the user in a beautiful array.
     :param games: the list of games to show

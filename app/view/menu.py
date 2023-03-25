@@ -3,7 +3,7 @@ from app.view.console_utils.io import clear_console, color_print, int_input
 from app.view.console_utils.colors import BLUE, RED_BLD
 
 
-def login_register_menu(error_message=None):
+def login_register_menu_view(error_message=None):
     """
     Show login and register menu to console, then return user choice.
     :param error_message: a message to display
@@ -34,18 +34,10 @@ def login_register_menu(error_message=None):
     try:
         return int_input(1, 3, placeholder="Choice: ")
     except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
-        return login_register_menu("Invalid input")
-
-    # match choice1:
-    #     case 1:
-    #         register()
-    #     case 2:
-    #         login()
-    #     case 3:
-    #         leave()
+        return login_register_menu_view("Invalid input")
 
 
-def main_menu(username, error_message=None):
+def main_menu_view(username, error_message=None):
     """
     Show main menu when connected, then return user choice.
     :param username: name of the connected user.
@@ -73,17 +65,4 @@ def main_menu(username, error_message=None):
     try:
         return int_input(1, 5, placeholder="Choice: ")
     except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
-        return main_menu(username, "Invalid input")
-
-
-    # match choice2:
-    #     case 1:
-    #         show_library()
-    #     case 2:
-    #         show_game_shop()
-    #     case 3:
-    #         show_item_shop()
-    #     case 4:
-    #         my_item()
-    #     case 5:
-    #         leave()
+        return main_menu_view(username, "Invalid input")

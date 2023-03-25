@@ -3,7 +3,7 @@ from app.view.console_utils.colors import BLUE, RED_BLD
 from app.view.console_utils.io import clear_console, color_print, string_input, password_input, email_input
 
 
-def register(error_message=None):
+def register_view(error_message=None):
     """
     Show register form, then return user inputs.
     :param error_message: a message to display
@@ -25,9 +25,9 @@ def register(error_message=None):
         lastname = string_input(placeholder="Your lastname: ")
         email = email_input(placeholder="Your email address: ")
     except InputStringNotInRangeException:
-        return register("One or many fields do not respect size limit")
+        return register_view("One or many fields do not respect size limit")
     except InputNotAnEmailException:
-        return register("Email is not valid")
+        return register_view("Email is not valid")
 
     return {
         "username": username,
