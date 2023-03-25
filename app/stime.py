@@ -1,19 +1,4 @@
-import mysql.connector
 import os
-
-##################################
-###   GESTION BASE DE DONNEES  ###
-##################################
-
-connection = mysql.connector.connect(
-    user='root', password='root', host='localhost', port="3306", database='dbstime')
-print("DB connected")
-
-cursor = connection.cursor()
-cursor.execute('Select * FROM user')
-users = cursor.fetchall()
-connection.close()
-
 
 ##################################
 ###          TERMINAL          ###
