@@ -1,13 +1,13 @@
 import os
 
-from app.view.console_utils.colors import Colors
+from app.view.console_utils.colors import END
 
 
 def color_print(text, clr):
     """ Print a string in the console with the selected color. """
 
     if hasattr(clr, 'color'):
-        print(f"{clr.color}{text}{Colors.END.color}")
+        print(f"{clr.color}{text}{END.color}")
     else:
         raise Exception("Unknown color selected")
 
