@@ -8,14 +8,14 @@ from app.view.console_utils.io import exit_stime
 from app.view import welcome_menu_view, main_menu_view
 
 
-def login_or_register_menu():
+def welcome_menu():
     user_choice = welcome_menu_view()
 
     match user_choice:
         case 1:
             register()
         case 2:
-            login()
+            main_menu(login())
         case 3:
             exit_stime()
 
