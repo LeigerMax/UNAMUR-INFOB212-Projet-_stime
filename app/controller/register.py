@@ -18,9 +18,6 @@ def register():
 
     return username
 
-    ## retravailler, pose soucis
-    ##
-    ##
     # sql = "INSERT INTO user (Username, Password, Firstname, Surname, Email, Birthdate, DateInscription) VALUES (%s, %s, %s, %s, %s, %s, %s)"
     # now = date.today()
     # val = (username, password, firstname, name, email, now, now)

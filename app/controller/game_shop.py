@@ -1,2 +1,6 @@
+from app.view.game_shop import game_shop_view
+
+
 def game_shop():
-    pass
+    game_shop_view()
+    input()

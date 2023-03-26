@@ -1,2 +1,6 @@
+from app.view.inventory import my_item_view
+
+
 def my_item():
-    pass
+    my_item_view()
+    input()

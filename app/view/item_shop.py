@@ -1,4 +1,8 @@
+from app.view.console_utils.colors import BLUE
+from app.view.console_utils.io import color_print, clear_console
+
+
 def item_shop_view():
-    # clear_console()
-    # print('\033[1;34m[ITEM MARKET]\033[0m \n')
-    pass
+    clear_console()
+    color_print("[ITEM MARKET]", BLUE)
+    print("\nPress enter to continue...")

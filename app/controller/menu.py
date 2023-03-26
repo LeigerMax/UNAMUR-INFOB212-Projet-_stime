@@ -25,12 +25,16 @@ def main_menu(username):
 
     match user_choice:
         case 1:
-            library()
+            library(username)
+            main_menu(username)
         case 2:
             game_shop()
+            main_menu(username)
         case 3:
             item_shop()
+            main_menu(username)
         case 4:
             my_item()
+            main_menu(username)
         case 5:
             exit_stime()

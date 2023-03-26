@@ -8,8 +8,6 @@ def library_view(games):
     :param games: the list of games to show
     """
 
-    # games = [('Game Title 1',), ('Game Title 2',), ('Game Title EXTRA LONG 3',), ('Game Title 4',)]  # A SUPPRIMER
-
     clear_console()
     color_print("[YOUR LIBRARY]", BLUE)
 
@@ -40,3 +38,5 @@ def library_view(games):
             print(f'|{" " * space_before_title}{game_title}{padding}{" " * space_before_title}  |')
             # Lower lines for the array
             print('|' + '-' * (total_width + 2) + '|')
+
+    print("\nPress enter to continue...")
