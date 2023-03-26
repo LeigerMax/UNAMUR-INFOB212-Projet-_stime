@@ -1,4 +1,5 @@
-from app.view.login import login_menu_view
+from app.controller.menu import main_menu
+from app.view import login_menu_view
 
 
 def login():
@@ -15,3 +16,4 @@ def login():
 
         credentials_ok = True
 
+    main_menu("John")
