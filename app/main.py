@@ -11,7 +11,6 @@ def main():
     if not (sys.version_info[0] == PyVersion.MAJOR and sys.version_info[1] >= PyVersion.MINOR):
         raise Exception(f"This project requires Python {PyVersion.MAJOR}.{PyVersion.MINOR} or higher")
 
-    # print("Hello World!")
     login_or_register_menu()
 
 

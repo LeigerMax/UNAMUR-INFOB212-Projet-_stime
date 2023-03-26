@@ -11,18 +11,18 @@ def login_register_menu_view(error_message=None):
     """
 
     header = """
-    ********************************************
-    *                                          *
-    *       Welcome to the Stime platform!     *
-    *                                          *
-    ********************************************
+********************************************
+*                                          *
+*       Welcome to the Stime platform!     *
+*                                          *
+********************************************
     """
 
     options = """
-    What do you want to do ?
-    1.  Register
-    2.  Login
-    3.  Leave
+What do you want to do ?
+1.  Register
+2.  Login
+3.  Leave
     """
 
     clear_console()
@@ -48,12 +48,12 @@ def main_menu_view(username, error_message=None):
     welcome_msg = f"Welcome {username} !"
 
     options = """
-    What do you want to do ?
-    1.  See my games
-    2.  Buy a game
-    3.  Buy / sell an item
-    4.  See my items
-    5.  Leave
+What do you want to do ?
+1.  See my games
+2.  Buy a game
+3.  Buy / sell an item
+4.  See my items
+5.  Leave
     """
 
     clear_console()
