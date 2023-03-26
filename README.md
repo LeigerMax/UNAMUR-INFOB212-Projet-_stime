@@ -20,10 +20,26 @@
 ## About The Project
 
 ## Installation
-1. Download the Project
-2. ```sh docker-compose up ``` in /app/
 
-    
+### Windows
+1. `git clone https://github.com/LeigerMax/UNAMUR-INFOB212-Projet-_stime` to clone the project
+2. `dir UNAMUR-INFOB212-Projet-_stime` to change current directory
+3. `python3 -m venv .env` to create a python virtual environment
+4. `.env\Scripts\activate.bat` to activate the virtual environment
+5. `pip install -r requirements.txt` to install python packages
+6. `docker-compose up` to launch the database
+7. `python3 app\main.py` to run the program
+
+### Linux
+1. `git clone https://github.com/LeigerMax/UNAMUR-INFOB212-Projet-_stime` to clone the project
+2. `cd UNAMUR-INFOB212-Projet-_stime` to change current directory
+3. `python3 -m venv .env` to create a python virtual environment
+4. `source .env/bin/actiate` to activate the virtual environment
+5. `pip install -r requirements.txt` to install python packages
+6. `docker-compose up` to launch the database
+7. `python3 app/main.py` to run the program
+
+
 ## Authors
 - [@LeigerMax](https://github.com/LeigerMax) 
 - [@BenjaminPans](https://github.com/BenjaminPans) 
@@ -32,7 +48,7 @@
 - [@simo-ath](https://github.com/simo-ath)
 
 
-## 🛠 Build with
+## 🛠 Built with
 - [Docker](https://www.docker.com/)
 - [Python](https://www.python.org/)
 - [MySQL](https://www.mysql.com/fr/)
