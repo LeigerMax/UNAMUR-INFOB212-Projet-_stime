@@ -1,10 +1,10 @@
 import os
+import re
 import sys
 from getpass import getpass
 
 from app.exceptions import InputNumberNotInRangeException, UserInputNotAnIntegerException, UnknownColorException, \
     InputStringNotInRangeException, InputNotAnEmailException
-from app.utils import is_valid_email
 from app.view.console_utils.colors import END
 
 
@@ -34,11 +34,14 @@ def clear_console():
         os.system("cls")
 
 
-def print_leave():
-    """ Clear the console and print leave message. """
+def exit_stime():
+    """ Exit safely the program. """
 
+    # TODO: close db connection
     clear_console()
     print("Leaving the Stime platform...")
+
+    sys.exit(0)
 
 
 # --------- In functions ---------
@@ -120,6 +123,16 @@ def email_input(placeholder=None):
     :param placeholder: placeholder to print in console
     :return: user input (a string being a valid email address)
     """
+
+    def is_valid_email(email):
+        """
+        Check if string is a valid email.
+        :param email: the email to validate
+        :return: true or false
+        """
+        email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+
+        return re.fullmatch(email_regex, email)
 
     if placeholder:
         print(placeholder, end='')

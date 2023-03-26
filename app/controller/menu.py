@@ -4,7 +4,7 @@ from app.controller.item_shop import item_shop
 from app.controller.library import library
 from app.controller.login import login
 from app.controller.register import register
-from app.utils import exit_stime
+from app.view.console_utils.io import exit_stime
 from app.view.menu import login_register_menu_view, main_menu_view
 
 
