@@ -1,4 +1,4 @@
-from app.view import login_menu_view
+from app.view.login_register import login_view
 
 
 def login():
@@ -8,9 +8,9 @@ def login():
 
     while not credentials_ok:
         if first_try:
-            credentials = login_menu_view()
+            credentials = login_view()
         else:
-            credentials = login_menu_view("Credentials incorrect")
+            credentials = login_view("Credentials incorrect")
 
         # TODO: check credentials
         username = credentials["username"]

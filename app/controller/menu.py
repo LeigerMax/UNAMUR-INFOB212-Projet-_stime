@@ -5,7 +5,7 @@ from app.controller.library import library
 from app.controller.login import login
 from app.controller.register import register
 from app.view.console_utils.io import exit_stime
-from app.view import welcome_menu_view, main_menu_view
+from app.view.menu import welcome_menu_view, main_menu_view
 
 
 def welcome_menu():

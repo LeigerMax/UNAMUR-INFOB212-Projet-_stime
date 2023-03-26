@@ -1,4 +1,4 @@
-from app.view import register_view
+from app.view.login_register import register_view
 
 
 def register():
@@ -17,3 +17,12 @@ def register():
         fields_ok = True
 
     return username
+
+    ## retravailler, pose soucis
+    ##
+    ##
+    # sql = "INSERT INTO user (Username, Password, Firstname, Surname, Email, Birthdate, DateInscription) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    # now = date.today()
+    # val = (username, password, firstname, name, email, now, now)
+    # cursor.execute(sql, val)
+    # Une fois l'inscription effecuté
