@@ -13,7 +13,7 @@ def welcome_menu():
 
     match user_choice:
         case 1:
-            register()
+            main_menu(register())
         case 2:
             main_menu(login())
         case 3:

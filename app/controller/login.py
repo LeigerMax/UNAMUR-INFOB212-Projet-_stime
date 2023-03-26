@@ -14,7 +14,6 @@ def login():
 
         # TODO: check credentials
         username = credentials["username"]
-
         credentials_ok = True
 
     return username

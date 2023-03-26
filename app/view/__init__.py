@@ -55,8 +55,6 @@ def library_view(games):
 def game_shop_view():
     # clear_console()
     # print('\033[1;34m[STORE]\033[0m \n')
-    #
-    # ## produire le SQL query en dessous
     pass
 
 
@@ -67,8 +65,6 @@ def game_shop_view():
 def item_shop_view():
     # clear_console()
     # print('\033[1;34m[ITEM MARKET]\033[0m \n')
-    #
-    # ## produire le SQL query en dessous
     pass
 
 
@@ -77,11 +73,8 @@ def item_shop_view():
 ##################################
 
 def my_item_view():
-
     # clear_console()
     # print('\033[1;34m[YOUR ITEM]\033[0m \n')
-    #
-    # ## produire le SQL query en dessous
     pass
 
 
@@ -176,11 +169,6 @@ def login_menu_view(error_message=None):
         "username": username,
         "password": password
     }
-
-    #show_menu()
-
-    ## produire le SQL query en dessous
-    ##IF login OK -> show_menu()
 
 
 def register_view(error_message=None):
