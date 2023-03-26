@@ -1,4 +1,5 @@
 from app.exceptions import UserInputNotAnIntegerException, InputNumberNotInRangeException
+from app.model.user import User
 from app.view.console_utils.io import clear_console, color_print, int_input
 from app.view.console_utils.colors import BLUE, RED_BLD
 

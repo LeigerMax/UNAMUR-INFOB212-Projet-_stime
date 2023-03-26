@@ -2,6 +2,8 @@ import mysql.connector
 from mysql.connector import errorcode
 
 from app.settings import Database
+from app.view.console_utils.colors import RED_BLD
+from app.view.console_utils.io import color_print
 
 connection_setting = {
     "user": Database.USER,
@@ -13,15 +15,13 @@ connection_setting = {
 
 
 def connect():
-    cnx = None
-
     try:
         cnx = mysql.connector.connect(**connection_setting)
     except mysql.connector.Error as err:
-        cnx.close()
+        color_print(err, RED_BLD)
         raise err
-
-    return cnx
+    else:
+        return cnx
 
 
 def with_connection(f):
@@ -35,7 +35,7 @@ def with_connection(f):
         cnx = connect()
 
         try:
-            result = f(cnx, *args, **kwargs)
+            result = f(*args, connection=cnx, **kwargs)
         except Exception as e:
             cnx.rollback()
             raise e
