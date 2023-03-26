@@ -106,10 +106,8 @@ def password_input(placeholder=None):
     :param placeholder: placeholder to print in console
     :return: user input (a string not visible when entering input)
     """
-    if placeholder:
-        print(placeholder, end='')
 
-    password = getpass(placeholder)
+    password = getpass(prompt=placeholder)
 
     if len(password) > 0:
         return password
