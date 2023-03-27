@@ -19,6 +19,12 @@
 
 ## About The Project
 
+## Requirements
+
+- Python 3.10 or higher
+- Docker engine
+- Docker compose
+
 ## Installation
 
 ### Windows
