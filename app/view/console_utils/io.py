@@ -3,9 +3,9 @@ import re
 import sys
 from getpass import getpass
 
-from app.exceptions import InputNumberNotInRangeException, UserInputNotAnIntegerException, UnknownColorException, \
+from app.exceptions import InputNumberNotInRangeException, UserInputNotAnIntegerException, \
     InputStringNotInRangeException, InputNotAnEmailException
-from app.view.console_utils.colors import END
+from app.view.console_utils.colors import color_text
 
 
 # --------- Out functions ---------
@@ -18,10 +18,7 @@ def color_print(text, clr):
     :return:
     """
 
-    if hasattr(clr, 'color'):
-        print(f"{clr.color}{text}{END.color}")
-    else:
-        raise UnknownColorException(clr)
+    print(color_text(text, clr))
 
 
 def clear_console():

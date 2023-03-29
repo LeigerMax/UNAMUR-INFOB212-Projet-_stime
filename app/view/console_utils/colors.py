@@ -1,3 +1,6 @@
+from app.exceptions import UnknownColorException
+
+
 class ConsoleColor:
     def __init__(self, color):
         self.color = color
@@ -35,3 +38,17 @@ BLUE_BLD = ConsoleColor('\33[94m')
 VIOLET_BLD = ConsoleColor('\33[95m')
 CYAN_BLD = ConsoleColor('\33[96m')
 WHITE_BLD = ConsoleColor('\33[97m')
+
+
+def color_text(text, clr):
+    """
+    Colorize a string with the selected color.
+    :param text: the string to colorize
+    :param clr: the color to applies
+    :return: the colorized text
+    """
+
+    if hasattr(clr, 'color'):
+        return f"{clr.color}{text}{END.color}"
+    else:
+        raise UnknownColorException(clr)
