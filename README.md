@@ -21,29 +21,39 @@
 
 ## Requirements
 
-- Python 3.10 or higher
-- Docker engine
-- Docker compose
+- Python `3.10` or higher
+- Docker Engine
+- Docker Compose
+- Docker Desktop (optional)
 
 ## Installation
 
 ### Windows
 1. `git clone https://github.com/LeigerMax/UNAMUR-INFOB212-Projet-_stime` to clone the project
 2. `dir UNAMUR-INFOB212-Projet-_stime` to change current directory
-3. `python3 -m venv .env` to create a python virtual environment
+3. `python3 -m venv .env` to create a Python virtual environment
 4. `.env\Scripts\activate.bat` to activate the virtual environment
-5. `pip install -r requirements.txt` to install python packages
-6. `docker-compose up` to launch the database
-7. `python3 app\main.py` to run the program
+5. `pip install -r requirements.txt` to install Python packages
 
 ### Linux
 1. `git clone https://github.com/LeigerMax/UNAMUR-INFOB212-Projet-_stime` to clone the project
 2. `cd UNAMUR-INFOB212-Projet-_stime` to change current directory
-3. `python3 -m venv .env` to create a python virtual environment
+3. `python3 -m venv .env` to create a Python virtual environment
 4. `source .env/bin/actiate` to activate the virtual environment
-5. `pip install -r requirements.txt` to install python packages
+5. `pip install -r requirements.txt` to install Python packages
 6. `docker-compose up` to launch the database
 7. `python3 app/main.py` to run the program
+
+## Running the project
+
+1. activate the virtual environment (via `.env`)
+2. `docker-compose up` to launch the database service (can be launched via Docker Desktop)
+3. `python main.py` to run the program
+
+## Stopping the project
+
+1. `docker-compose stop` to stop the database service (can be stopped via Docker Desktop)
+2. `deactivate` to exit the Python virtual environment
 
 
 ## Authors
