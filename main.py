@@ -3,7 +3,7 @@ __author__ = "AIT HASSOU Mohamed, ALLEMEERSCH Maxime, CAVRENNE Louis, PANS Benja
 import sys
 
 from app.controller.menu import welcome_menu
-from settings import PyVersion
+from app.settings import PyVersion
 
 
 def main():
