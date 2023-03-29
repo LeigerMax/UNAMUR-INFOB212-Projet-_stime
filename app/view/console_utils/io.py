@@ -17,7 +17,6 @@ def color_print(text, clr):
     :param clr: the color to format
     :return:
     """
-    """  """
 
     if hasattr(clr, 'color'):
         print(f"{clr.color}{text}{END.color}")
