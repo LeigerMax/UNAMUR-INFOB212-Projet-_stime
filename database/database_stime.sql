@@ -8,76 +8,70 @@ create table ABONNEMENT (
 
 create table PANIER (
      PanierId int not null,
-     Montant float(1) not null,
+     Montant float not null,
      constraint IDACHAT primary key (PanierId));
 
 create table ADRESSE (
      AdresseId int not null,
-     Numéro varchar(1) not null,
-     Rue varchar(1) not null,
-     Ville varchar(1) not null,
+     Numero varchar(255) not null,
+     Rue varchar(255) not null,
+     Ville varchar(255) not null,
      CodePostal int not null,
-     Pays varchar(1) not null,
+     Pays varchar(255) not null,
      constraint IDADRESSE primary key (AdresseId));
 
 create table AVIS (
      Date date not null,
      Note int not null,
-     Commentaire varchar(1) not null,
-     constraint IDAVIS primary key (Date, , ));
-
-create table BOITE DEV (
-);
+     Commentaire varchar(255) not null,
+     constraint IDAVIS primary key (Date, Note, Commentaire)); 
 
 create table CATEGORIE_JEU (
-     Nom varchar(1) not null,
-     Description varchar(1) not null,
+     Nom varchar(255) not null,
+     Description varchar(255) not null,
      constraint IDCATEGORIE_JEU primary key (Nom));
 
-create table EDITEUR (
-);
-
 create table achat (
-     MontantTotal float(1) not null,
+     MontantTotal float not null,
      DateAchat date not null);
 
 create table MOYEN_PAIEMENT (
      MoyenPaiementId int not null,
-     Nom varchar(1) not null,
+     Nom varchar(255) not null,
      taxeDuMoyen int not null,
      constraint IDMOYEN_PAIEMENT primary key (MoyenPaiementId));
 
 create table ENTREPRISE (
      NumSiret int not null,
-     Nom varchar(1) not null,
-     Description varchar(1) not null,
-     AdresseWeb char(1) not null,
+     Nom varchar(255) not null,
+     Description varchar(255) not null,
+     AdresseWeb char(255) not null,
      constraint IDENTREPRISE primary key (NumSiret));
 
 create table IMAGE_JEU (
-     URL_image varchar(1) not null,
-     Alt varchar(1) not null,
+     URL_image varchar(255) not null,
+     Alt varchar(255) not null,
      constraint IDIMAGE_JEU primary key (URL_image));
 
 create table JEU (
      GameId int not null,
-     Nom varchar(1) not null,
-     Description varchar(1) not null,
+     Nom varchar(255) not null,
+     Description varchar(255) not null,
      DateDeSortie date not null,
-     Prix float(1) not null,
-     EstDLC char default 'False' not null,
+     Prix float not null,
+     EstDLC BOOLEAN default FALSE not null,
      GamePass char not null,
      constraint IDJEUX primary key (GameId));
 
 create table LANGUE_JEU (
-     Langue varchar(1) not null,
-     Raccourci varchar(1) not null,
+     Langue varchar(255) not null,
+     Raccourci varchar(255) not null,
      constraint IDLANGUE primary key (Langue));
 
 create table OBJET (
      ObjetId int not null,
-     Nom varchar(1) not null,
-     Description varchar(1) not null,
+     Nom varchar(255) not null,
+     Description varchar(255) not null,
      constraint IDOBJET primary key (ObjetId));
 
 create table OBJET_INSTANCE (
@@ -86,7 +80,7 @@ create table OBJET_INSTANCE (
      constraint IDOBJET_INSTANCE primary key (ID));
 
 create table SOLDE (
-     SoldeId char(1) not null,
+     SoldeId char(255) not null,
      TauxSolde int not null,
      DateDebutSolde date not null,
      DateFinSolde date not null,
@@ -95,18 +89,24 @@ create table SOLDE (
 create table TRANSACTION (
      TransactionId int not null,
      DateMiseEnVente date not null,
-     DateVente [0-1] date not null,
+     DateVente date not null,
      PrixVente int not null,
      constraint IDMARCHE primary key (TransactionId));
 
 create table UTILISATEUR (
-     UserId varchar(1) not null,
-     Username varchar(1) not null,
-     Prénom varchar(1) not null,
-     Nom varchar(1) not null,
-     Email varchar(1) not null,
-     MDP varchar(1) not null,
+     UserId varchar(255) not null,
+     Username varchar(255) not null,
+     Prenom varchar(255) not null,
+     Nom varchar(255) not null,
+     Email varchar(255) not null,
+     MDP varchar(255) not null,
      DateInscription date not null,
      DateNaissance date not null,
-     Portefeuille float(1) not null,
+     Portefeuille float not null,
      constraint IDUTILISATEUR primary key (UserId));
+
+
+INSERT INTO LANGUE_JEU (Langue, Raccourci) VALUES ('Français', 'FR');
+INSERT INTO LANGUE_JEU (Langue, Raccourci) VALUES ('Anglais', 'EN');
+INSERT INTO LANGUE_JEU (Langue, Raccourci) VALUES ('Espagnol', 'ES');
+INSERT INTO LANGUE_JEU (Langue, Raccourci) VALUES ('Allemand', 'DE');

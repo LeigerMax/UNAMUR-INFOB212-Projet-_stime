@@ -55,6 +55,9 @@
 1. `docker-compose stop` to stop the database service (can be stopped via Docker Desktop)
 2. `deactivate` to exit the Python virtual environment
 
+## Adminer
+1. Go to "http://localhost:8000/"
+2. Enter database connection information
 
 ## Authors
 - [@LeigerMax](https://github.com/LeigerMax) 
