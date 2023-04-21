@@ -10,7 +10,7 @@ connection_setting = {
     "password": Database.PASSWORD,
     "host": Database.HOST,
     "port": Database.PORT,
-    "database": Database.NAME
+    "database": Database.NAME,
 }
 
 

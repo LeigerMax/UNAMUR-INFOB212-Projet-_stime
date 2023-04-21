@@ -13,11 +13,11 @@ services:
       MYSQL_PASSWORD: "secretpassword123"
     volumes:
       - "./database/database_stime.sql:/docker-entrypoint-initdb.d/init.sql"
-    #healthcheck:
-    #  test: mysql --user=$$MYSQL_USER --password=$$MYSQL_PASSWORD -e 'SHOW DATABASES;'
-    #  interval: 10s
-    #  timeout: 5s
-    #  retries: 5
+    healthcheck:
+      test: mysql --user=$$MYSQL_USER --password=$$MYSQL_PASSWORD -e 'SHOW DATABASES;'
+      interval: 10s
+      timeout: 5s
+      retries: 5
   adminer:
       image: adminer:latest
       ports:
