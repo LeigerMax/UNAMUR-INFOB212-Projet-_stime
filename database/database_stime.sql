@@ -1,6 +1,10 @@
 CREATE DATABASE IF NOT EXISTS dbstime;
 use dbstime;
 
+/***********************
+*       CREATE         *
+***********************/
+
 create table ABONNEMENT (
      Type varchar(255) not null,
      Prix int not null,
@@ -105,6 +109,20 @@ create table UTILISATEUR (
      Portefeuille float not null,
      constraint IDUTILISATEUR primary key (UserId));
 
+
+/***********************
+*       TRIGGER        *
+***********************/
+
+
+/***********************
+*        VIEW          *
+***********************/
+
+
+/***********************
+*       INSERT         *
+***********************/
 
 INSERT INTO ABONNEMENT (Type, Prix) VALUES ('Basique', 0);
 INSERT INTO ABONNEMENT (Type, Prix) VALUES ('Premium', 4.99);

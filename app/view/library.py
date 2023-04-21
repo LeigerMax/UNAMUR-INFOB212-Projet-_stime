@@ -16,27 +16,25 @@ def library_view(games):
     else:
         print(f"You have {len(games)} game(s).\n")
 
-        # Max length for game titles
-        game_title_size = 0
-        for game in games:
-            if len(game[0]) > game_title_size:
-                game_title_size = len(game[0])
+        
+        # Fonction pour tronquer une chaîne de caractères à une longueur donnée
+        def tronquer_chaine(chaine, longueur_max):
+            if len(chaine) <= longueur_max:
+                return chaine
+            else:
+                return chaine[:longueur_max-3] + "..."
 
-        # Spaces before title
-        space_before_title = 2
+        # Déterminer la largeur maximale de la colonne "Jeu"
+        largeur_max_jeu = max(len(jeu[0]) for jeu in games)
 
-        # Total width
-        total_width = (space_before_title * 2) + game_title_size
+        # Afficher les données dans la table formatée avec un numéro devant chaque jeu
+        print("| {:<4} | {:<{}} | {:<100} |".format("Num", "Jeu", largeur_max_jeu, "Description"))
+        print("+{}+{}+{}+".format("-"*6, "-"*(largeur_max_jeu+2), "-"*102))
+        for i, jeu in enumerate(games, start=1):
+            jeu_tronque = tronquer_chaine(jeu[0], largeur_max_jeu)
+            description_tronquee = tronquer_chaine(jeu[1], 100)
+            print("| {:<4} | {:<{}} | {:<100} |".format(i, jeu_tronque, largeur_max_jeu, description_tronquee))
 
-        # Top of the array
-        print('|' + '-' * (total_width + 2) + '|')
 
-        for game in games:
-            game_title = game[0]
-            padding_width = total_width - len(game_title) - (space_before_title * 2)
-            padding = ' ' * padding_width
-            print(f'|{" " * space_before_title}{game_title}{padding}{" " * space_before_title}  |')
-            # Lower lines for the array
-            print('|' + '-' * (total_width + 2) + '|')
 
     print("\nPress enter to continue...")

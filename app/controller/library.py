@@ -1,11 +1,13 @@
+from app.model.store import Store
+
 from app.view.library import library_view
 
 
 def library(username):
 
-    # TODO: fetch user's games
-    games = [('Game Title 1',), ('Game Title 2',), ('Game Title EXTRA LONG 3',), ('Game Title 4',)]
+    
+    game_list = Store().select_all_games_shop_page()
 
-    library_view(games)
+    library_view(game_list)
 
     input()
