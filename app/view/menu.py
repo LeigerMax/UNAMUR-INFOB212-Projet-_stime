@@ -52,8 +52,9 @@ What do you want to do ?
 1.  See my games
 2.  Buy a game
 3.  Buy / sell an item
-4.  See my items
-5.  Leave
+4.  Panier
+5.  See my items
+6.  Leave
     """
 
     clear_console()
@@ -63,6 +64,6 @@ What do you want to do ?
         color_print(error_message, RED_BLD)
 
     try:
-        return int_input(1, 5, placeholder="Choice: ")
+        return int_input(1, 6, placeholder="Choice: ")
     except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
         return main_menu_view(username, "Invalid input")

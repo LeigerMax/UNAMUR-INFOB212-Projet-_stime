@@ -3,6 +3,7 @@ from app.controller.inventory import my_item
 from app.controller.item_shop import item_shop
 from app.controller.library import library
 from app.controller.login import login
+from app.controller.shop_panier import shop_panier
 from app.controller.register import register
 from app.view.console_utils.io import exit_stime
 from app.view.menu import welcome_menu_view, main_menu_view
@@ -34,7 +35,10 @@ def main_menu(username):
             item_shop(username)
             main_menu(username)
         case 4:
-            my_item(username)
+            shop_panier(username)
             main_menu(username)
         case 5:
+            my_item(username)
+            main_menu(username)
+        case 6:
             exit_stime()

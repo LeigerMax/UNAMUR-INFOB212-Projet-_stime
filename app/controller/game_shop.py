@@ -1,8 +1,6 @@
 from app.model.game import Game
 
 from app.view.game_shop import game_shop_view
-from mysql.connector import *
-from app.settings import Database
 from app.view.menu import main_menu_view
 from app.controller.game_shop_page_details import game_shop_page_details
 

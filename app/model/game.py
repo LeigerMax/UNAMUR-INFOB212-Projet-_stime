@@ -13,11 +13,6 @@ class Game:
     
     @classmethod
     @with_connection
-    def select(cls, **kwargs):
-        pass
-
-    @classmethod
-    @with_connection
     def select_all_games_shop_page(cls, **kwargs):
         """
         Get all games in the database
@@ -60,16 +55,3 @@ class Game:
         #game_data.append((game[0], game[1], game[2], game[3], game[4], game[5], game[6]))
 
         return game_data
-
-
-    @classmethod
-    def create(cls, user):
-        pass
-
-    @classmethod
-    def update(cls, user):
-        pass
-
-    @classmethod
-    def delete(cls, user):
-        pass

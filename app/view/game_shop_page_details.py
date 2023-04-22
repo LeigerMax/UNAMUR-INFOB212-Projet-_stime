@@ -33,7 +33,7 @@ def game_shop_page_details_view(gameNumber,languages):
     #IF DEJA ACHETER 
         # print("You already have the product in your library")
     #IF ELSE PAS ACHETER
-        # ACHAT --> redirige vers une page achat qui va choisir le moyen de paiement, soustraire l'argent sur le compte et ajouter le jeu dans la table achat de l'user
+        # return add panier
     #ELSE 
         # Return game_shop 
 
@@ -42,6 +42,12 @@ def game_shop_page_details_view(gameNumber,languages):
     #except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
     #    return game_shop_page_details_view("Invalid input")
 
+   
+
+def game_shop_page_details_review_view(avisList):
+    print("Review game")
+
+    #TODO: créer les avis
+
+
     print("\nPress enter to continue...")
-
-

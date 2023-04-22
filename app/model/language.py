@@ -2,20 +2,18 @@ from app.database.connector import with_connection
 
 
 class Language:
-    def __init__(self, gameId=None):
+    def __init__(self, gameId=None,langue=None, raccourci=None):
         self.gameId = gameId
+        self.langue = langue
+        self.raccourci = raccourci
     
-    @classmethod
-    @with_connection
-    def select(cls, **kwargs):
-        pass
 
     @classmethod
     @with_connection
     def select_language_of_game(cls,gameId, **kwargs):
         """
         Get language of game in the database
-        :return: games fetched
+        :return: language fetched
         """
 
         # get connection and cursor
@@ -38,7 +36,7 @@ class Language:
     def select_language_all_games(cls, **kwargs):
         """
         Get language all games in the database
-        :return: games fetched
+        :return: language fetched
         """
 
         # get connection and cursor
@@ -56,14 +54,3 @@ class Language:
 
         return language_list
 
-    @classmethod
-    def create(cls, user):
-        pass
-
-    @classmethod
-    def update(cls, user):
-        pass
-
-    @classmethod
-    def delete(cls, user):
-        pass

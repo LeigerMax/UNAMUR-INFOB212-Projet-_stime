@@ -24,7 +24,7 @@ def game_shop_view(games):
         jeu_total = jeu_total+1
 
     # Afficher les données dans la table formatée avec un numéro devant chaque jeu
-    print("| {:<4} | {:<{}} | {:<80} | {:<7} |".format("Num", "Jeu", largeur_max_jeu, "Description", "Prix"))
+    print("| {:<4} | {:<{}} | {:<80} | {:<7} |".format("Num", "Title", largeur_max_jeu, "Description", "Price"))
     print("+{}+{}+{}+{}+".format("-"*6, "-"*(largeur_max_jeu+2), "-"*82, "-"*9))
     for i, jeu in enumerate(games, start=1):
         jeu_tronque = tronquer_chaine(jeu[0], largeur_max_jeu)
@@ -40,6 +40,6 @@ def game_shop_view(games):
     print(options)
 
     try:
-        return int_input(0, jeu_total, placeholder="Choice: ")
+        return int_input(0, jeu_total, placeholder="Choice: ") #TODO jeu_total not working 
     except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
         return game_shop_view("Invalid input")
