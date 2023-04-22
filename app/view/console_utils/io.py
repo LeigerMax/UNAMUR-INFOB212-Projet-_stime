@@ -1,6 +1,7 @@
 import os
 import re
 import sys
+import datetime
 from getpass import getpass
 
 from app.exceptions import InputNumberNotInRangeException, UserInputNotAnIntegerException, \
@@ -137,3 +138,17 @@ def email_input(placeholder=None):
     else:
         raise InputNotAnEmailException(user_input)
 
+def date_input(placeholder):
+    """
+    Retrieves the user's date of birth as a string
+    :param placeholder: The prompt text for the input
+    :return: The date of birth as a character string in the format "YYYY-MM-DD"
+    """
+    while True:
+        date_str = input(placeholder)
+        try:
+            # Vérifier si la chaîne de caractères est au format "YYYY-MM-DD"
+            datetime.datetime.strptime(date_str, '%Y-%m-%d')
+            return date_str
+        except ValueError:
+            print("Please enter a valid date in YYYY-MM-DD format.")

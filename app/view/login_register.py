@@ -1,7 +1,8 @@
 from app.exceptions import InputStringNotInRangeException, InputNotAnEmailException
-from app.view.console_utils.io import clear_console, color_print, string_input, password_input, email_input
+from app.view.console_utils.io import clear_console, color_print, string_input, password_input, email_input, date_input
 from app.view.console_utils.colors import BLUE, RED_BLD
 
+import datetime
 
 def login_view(error_message=None):
     """ Show login menu, then return user inputs. """
@@ -44,6 +45,7 @@ def register_view(error_message=None):
         firstname = string_input(placeholder="Your firstname: ")
         lastname = string_input(placeholder="Your lastname: ")
         email = email_input(placeholder="Your email address: ")
+        date_of_birth = date_input(placeholder="Your date of birth (YYYY-MM-DD): ") 
     except InputStringNotInRangeException:
         return register_view("One or many fields do not respect size limit")
     except InputNotAnEmailException:
@@ -55,5 +57,6 @@ def register_view(error_message=None):
         "confirm_password": password_confirm,
         "firstname": firstname,
         "lastname": lastname,
-        "email": email
+        "email": email,
+        "date_of_birth": date_of_birth
     }

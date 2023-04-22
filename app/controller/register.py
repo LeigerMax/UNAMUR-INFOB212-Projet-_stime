@@ -1,5 +1,7 @@
 from app.view.login_register import register_view
+from app.model.user import User
 
+import datetime
 
 def register():
     fields_ok = False
@@ -23,6 +25,8 @@ def register():
         firstname = user_information["firstname"]
         lastname = user_information["lastname"]
         email = user_information["email"]
+        date_of_birth = user_information["date_of_birth"]
+        
 
         # Check si password et confirm_password sont identique
         try:
@@ -36,13 +40,8 @@ def register():
         first_try = False
 
     # Sauvegarde dans la BDD
+    inscription_date = datetime.date.today()
+    User.insert_new_user(username, password, firstname, lastname, email,date_of_birth, inscription_date)
 
         
-
     return username
-
-    # sql = "INSERT INTO user (Username, Password, Firstname, Surname, Email, Birthdate, DateInscription) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-    # now = date.today()
-    # val = (username, password, firstname, name, email, now, now)
-    # cursor.execute(sql, val)
-    # Une fois l'inscription effecuté

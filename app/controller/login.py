@@ -1,4 +1,8 @@
 from app.view.login_register import login_view
+from app.view.menu import main_menu_view
+from app.model.user import User
+from app.view.console_utils.io import color_print
+from app.view.console_utils.colors import RED_BLD
 
 
 def login():
@@ -9,11 +13,20 @@ def login():
     while not credentials_ok:
         if first_try:
             credentials = login_view()
-        else:
-            credentials = login_view("Credentials incorrect")
 
-        # TODO: check credentials
         username = credentials["username"]
-        credentials_ok = True
+        password = credentials["password"]
+        
+#        check_user = User.check_user_login(username, password)
+#        if check_user is not None:
+#            credentials_ok = True
+#            main_menu_view(username)
+#        else:
+#            color_print("Error: Incorrect username or password. Please try again.", RED_BLD)
+#            first_try = False
+#            credentials = login_view()
+
+       #TODO delete after
+        credentials_ok = True    
 
     return username
