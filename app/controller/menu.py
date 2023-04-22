@@ -28,13 +28,13 @@ def main_menu(username):
             library(username)
             main_menu(username)
         case 2:
-            game_shop()
+            game_shop(username)
             main_menu(username)
         case 3:
-            item_shop()
+            item_shop(username)
             main_menu(username)
         case 4:
-            my_item()
+            my_item(username)
             main_menu(username)
         case 5:
             exit_stime()

@@ -1,5 +1,6 @@
 from app.view.console_utils.colors import BLUE
-from app.view.console_utils.io import color_print, clear_console
+from app.view.console_utils.io import color_print, clear_console, int_input
+from app.exceptions import UserInputNotAnIntegerException, InputNumberNotInRangeException
 
 
 def game_shop_view(games):
@@ -14,19 +15,31 @@ def game_shop_view(games):
         else:
             return chaine[:longueur_max-3] + "..."
 
-    # Déterminer la largeur maximale de la colonne "Jeu"
-    largeur_max_jeu = max(len(jeu[0]) for jeu in games)
+    # Déterminer la largeur maximale de la colonne "Jeu" & le nombre de jeu
+    jeu_total = 0
+    largeur_max_jeu = 0
+    for jeu in games:
+        if(len(jeu[0]) > largeur_max_jeu):
+            largeur_max_jeu = len(jeu[0])
+        jeu_total = jeu_total+1
 
     # Afficher les données dans la table formatée avec un numéro devant chaque jeu
-    print("| {:<4} | {:<{}} | {:<100} | {:<7} |".format("Num", "Jeu", largeur_max_jeu, "Description", "Prix"))
-    print("+{}+{}+{}+{}+".format("-"*6, "-"*(largeur_max_jeu+2), "-"*102, "-"*9))
+    print("| {:<4} | {:<{}} | {:<80} | {:<7} |".format("Num", "Jeu", largeur_max_jeu, "Description", "Prix"))
+    print("+{}+{}+{}+{}+".format("-"*6, "-"*(largeur_max_jeu+2), "-"*82, "-"*9))
     for i, jeu in enumerate(games, start=1):
         jeu_tronque = tronquer_chaine(jeu[0], largeur_max_jeu)
-        description_tronquee = tronquer_chaine(jeu[1], 100)
-        print("| {:<4} | {:<{}} | {:<100} | {:<6.2f}€ |".format(i, jeu_tronque, largeur_max_jeu, description_tronquee, jeu[2]))
+        description_tronquee = tronquer_chaine(jeu[1], 80)
+        print("| {:<4} | {:<{}} | {:<80} | {:<6.2f}€ |".format(i, jeu_tronque, largeur_max_jeu, description_tronquee, jeu[2]))
 
 
+    options = """
+    What do you want to do ?
+    Game number you want to explore
+    0. for leave
+    """
+    print(options)
 
-
-
-    print("\nPress enter to continue...")
+    try:
+        return int_input(0, jeu_total, placeholder="Choice: ")
+    except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
+        return game_shop_view("Invalid input")
