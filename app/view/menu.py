@@ -50,10 +50,10 @@ def main_menu_view(username, error_message=None):
     options = """
 What do you want to do ?
 1.  See my games
-2.  Buy a game
-3.  Buy / sell an item
-4.  Panier
-5.  See my items
+2.  See my items
+3.  Buy a game
+4.  Buy / sell an item
+5.  Cart
 6.  Leave
     """
 

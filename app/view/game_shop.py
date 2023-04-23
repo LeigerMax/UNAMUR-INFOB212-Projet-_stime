@@ -42,4 +42,4 @@ def game_shop_view(games):
     try:
         return int_input(0, jeu_total, placeholder="Choice: ") #TODO jeu_total not working 
     except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
-        return game_shop_view("Invalid input")
+        return game_shop_view(games)

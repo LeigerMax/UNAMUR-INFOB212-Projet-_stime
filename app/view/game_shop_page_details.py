@@ -5,7 +5,7 @@ from app.exceptions import UserInputNotAnIntegerException, InputNumberNotInRange
 from app.view.console_utils.io import int_input
 
 
-def game_shop_page_details_view(gameNumber,languages):
+def game_shop_page_details_view(gameNumber,languages,avisList):
     clear_console()
     color_print(f"[DETAILS PAGE OF {gameNumber[1]} ]", BLUE)
 
@@ -30,24 +30,66 @@ def game_shop_page_details_view(gameNumber,languages):
     if(gameNumber[5] == True):
         print("This is a DLC of <DLC GAME>, so you must own the original game in order to purchase this product.")
 
-    #IF DEJA ACHETER 
-        # print("You already have the product in your library")
-    #IF ELSE PAS ACHETER
-        # return add panier
-    #ELSE 
-        # Return game_shop 
-
-    #try:
-    #    return int_input(1, 3, placeholder="Choice: ")
-    #except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
-    #    return game_shop_page_details_view("Invalid input")
-
-   
-
-def game_shop_page_details_review_view(avisList):
-    print("Review game")
-
     #TODO: créer les avis
+    print("\nReview game")
+
+    
+def game_shop_page_details_in_library_view():
+    print("You already have the product in your library")
+
+def game_shop_page_details_buy_sub_view():
+    print("Do you want purchase or take this product ? (Free your during your subscription)")
+    options = """
+    1. Yes, take free
+    2. Yes, purchase this product
+    3. No (leave)
+    """
+    print(options)
+    try:
+        return int_input(1, 3, placeholder="Choice: ") 
+    except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
+        return game_shop_page_details_view()
+
+def game_shop_page_details_buy_view():
+    print("Do you want purchase this product ?")
+    options = """
+    1. Yes, purchase this product
+    2. No (leave)
+    """
+    print(options)
+
+    try:
+        return int_input(1, 2, placeholder="Choice: ") 
+    except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
+        return game_shop_page_details_view()
 
 
-    print("\nPress enter to continue...")
+
+#if(acheterCheck):
+#        print("You already have the product in your library")
+#
+#    elif(not acheterCheck and abonnementCheck):
+#        print("Do you want purchase or take this product ? (Free your during your subscription)")
+#        options = """
+#        1. Yes, take free
+#        2. Yes, purchase this product
+#        3. No (leave)
+#        """
+#        print(options)
+#        try:
+#            return int_input(1, 3, placeholder="Choice: ") 
+#        except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
+#            return game_shop_page_details_view(gameNumber,languages, acheterCheck,abonnementCheck)
+#        
+#    elif(not acheterCheck):
+#        print("Do you want purchase this product ?")
+#        options = """
+#        1. Yes, purchase this product
+#        2. No (leave)
+#        """
+#        print(options)
+#
+#        try:
+#            return int_input(1, 2, placeholder="Choice: ") 
+#        except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
+#            return game_shop_page_details_view(gameNumber,languages, acheterCheck,abonnementCheck)

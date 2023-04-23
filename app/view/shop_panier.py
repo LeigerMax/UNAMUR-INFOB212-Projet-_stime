@@ -31,7 +31,7 @@ def shop_panier_view(panier):
     try:
         return int_input(1, 3, placeholder="Choice: ")
     except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
-        return shop_panier_view(panier, "Invalid input")
+        return shop_panier_view(panier)
 
 
 def shop_panier_delete_elem_view(panier):
