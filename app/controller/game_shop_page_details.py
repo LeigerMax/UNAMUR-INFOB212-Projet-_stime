@@ -1,6 +1,5 @@
 from app.model.game import Game
 from app.model.language import Language
-from app.controller.game_shop import game_shop
 from app.controller.shop_panier import shop_panier
 
 from app.view.game_shop_page_details import game_shop_page_details_view,game_shop_page_details_in_library_view,game_shop_page_details_buy_sub_view,game_shop_page_details_buy_view
@@ -31,7 +30,7 @@ def game_shop_page_details(username,gameId):
             case 2:
                 shop_panier(username)
             case 3:
-                game_shop(username)
+                return
 
     elif(not acheterCheck):
         user_choice = game_shop_page_details_buy_view()
@@ -39,12 +38,9 @@ def game_shop_page_details(username,gameId):
             case 1:
                 shop_panier(username)
             case 2:
-                game_shop(username)
+                return
 
 
-    #TODO: Récuperer le choix de l'user. Soit leave, soit acheter le jeu
-    #TODO: Check Si il y a déjà le jeu dans sa libraire
-    #TODO: Ajouter le jeu si pas dans la libraire et possède GamePass
     #TODO: Ajouter un avis si jeu acheter
 
     input()
