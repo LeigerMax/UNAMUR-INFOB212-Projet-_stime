@@ -2,7 +2,7 @@ from app.view.console_utils.colors import BLUE
 from app.view.console_utils.io import color_print, clear_console, int_input
 from app.exceptions import UserInputNotAnIntegerException, InputNumberNotInRangeException
 
-def shop_panier_view(panier):
+def shop_panier_view(username,panier):
     clear_console()
     color_print("[PANIER]", BLUE)
 
@@ -29,7 +29,7 @@ def shop_panier_view(panier):
 
     print(options)
     try:
-        return int_input(1, 3, placeholder="Choice: ")
+        return int_input(1, 3, placeholder="Choice: "),total_price
     except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
         return shop_panier_view(panier)
 
@@ -42,17 +42,24 @@ def shop_panier_delete_elem_view(panier):
         print("The cart is empty.")
     else:
         print("Games in the cart:")
+        jeu_total = 0
         for i, jeu in enumerate(panier):
+            jeu_total = jeu_total +1
             nom_jeu, prix_jeu = jeu
             print(f"{i + 1}. Game name: {nom_jeu} | Price: {prix_jeu} €")
 
         print("Enter the number of the game you want to remove (0 to cancel): ")
-        index = int_input()
-        if index == 0:
-            return
-        elif index < 1 or index > len(panier):
-            print("Invalid input.")
-        else:
-            nom_jeu, prix_jeu = panier[index - 1]
-            panier.pop(index - 1)
-            print(f"{nom_jeu} has been removed from the cart.")
+        try:
+            return int_input(0, jeu_total, placeholder="Choice: ") #TODO: jeu_total not working
+        except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
+            return shop_panier_delete_elem_view(panier)
+        
+        #index = int_input()
+        #if index == 0:
+        #    return
+        #elif index < 1 or index > len(panier):
+        #    print("Invalid input.")
+        #else:
+        #    nom_jeu, prix_jeu = panier[index - 1]
+        #    panier.pop(index - 1)
+        #    print(f"{nom_jeu} has been removed from the cart.")

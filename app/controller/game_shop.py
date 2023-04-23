@@ -17,4 +17,4 @@ def game_shop(username):
         game_shop_page_details(username,user_choice)
 
 
-    input()
+    #input()

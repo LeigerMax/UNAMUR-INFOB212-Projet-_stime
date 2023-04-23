@@ -43,6 +43,6 @@ def game_shop_page_details(username,gameId):
 
     #TODO: Ajouter un avis si jeu acheter
 
-    input()
+    #input()
 
 
