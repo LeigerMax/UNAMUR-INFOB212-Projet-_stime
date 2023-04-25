@@ -1,4 +1,4 @@
-from app.view.console_utils.colors import BLUE
+from app.view.console_utils.colors import BLUE,GREEN
 from app.view.console_utils.io import color_print, clear_console
 from app.model.language import Language
 from app.exceptions import UserInputNotAnIntegerException, InputNumberNotInRangeException
@@ -25,7 +25,7 @@ def game_shop_page_details_view(gameNumber,languages,avisList):
         print(f" - {language[0]} ( {language[1]} ) ")
 
     if(gameNumber[6] == True):
-        print("Available in GamePass !")
+        color_print("Available in GamePass !", GREEN)
 
     if(gameNumber[5] == True):
         print("This is a DLC of <DLC GAME>, so you must own the original game in order to purchase this product.")
@@ -64,32 +64,6 @@ def game_shop_page_details_buy_view():
         return game_shop_page_details_view()
 
 
-
-#if(acheterCheck):
-#        print("You already have the product in your library")
-#
-#    elif(not acheterCheck and abonnementCheck):
-#        print("Do you want purchase or take this product ? (Free your during your subscription)")
-#        options = """
-#        1. Yes, take free
-#        2. Yes, purchase this product
-#        3. No (leave)
-#        """
-#        print(options)
-#        try:
-#            return int_input(1, 3, placeholder="Choice: ") 
-#        except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
-#            return game_shop_page_details_view(gameNumber,languages, acheterCheck,abonnementCheck)
-#        
-#    elif(not acheterCheck):
-#        print("Do you want purchase this product ?")
-#        options = """
-#        1. Yes, purchase this product
-#        2. No (leave)
-#        """
-#        print(options)
-#
-#        try:
-#            return int_input(1, 2, placeholder="Choice: ") 
-#        except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
-#            return game_shop_page_details_view(gameNumber,languages, acheterCheck,abonnementCheck)
+def take_game_free_sucess_view():
+    print("Congratulations ! You take this product")
+    print("\nPress enter to leave...")

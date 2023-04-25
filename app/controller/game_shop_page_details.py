@@ -2,7 +2,7 @@ from app.model.game import Game
 from app.model.language import Language
 from app.controller.shop_panier import shop_panier
 
-from app.view.game_shop_page_details import game_shop_page_details_view,game_shop_page_details_in_library_view,game_shop_page_details_buy_sub_view,game_shop_page_details_buy_view
+from app.view.game_shop_page_details import game_shop_page_details_view,game_shop_page_details_in_library_view,game_shop_page_details_buy_sub_view,game_shop_page_details_buy_view,take_game_free_sucess_view
 
 
 def game_shop_page_details(username,gameId):
@@ -26,7 +26,9 @@ def game_shop_page_details(username,gameId):
         match user_choice:
             case 1:
                 #TODO: ADD library 
-                print("ok")
+                take_game_free_sucess_view()
+                input()
+                return
             case 2:
                 shop_panier(username)
             case 3:
@@ -43,6 +45,6 @@ def game_shop_page_details(username,gameId):
 
     #TODO: Ajouter un avis si jeu acheter
 
-    #input()
+    
 
 
