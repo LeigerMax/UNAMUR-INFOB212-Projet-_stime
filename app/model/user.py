@@ -2,7 +2,8 @@ from app.database.connector import with_connection
 
 
 class User:
-    def __init__(self, user_id=None, username=None, firstname=None, lastname=None, email=None, password=None, inscription_date=None, date_of_birth=None, wallet=None, bill_address=None, delivery_address=None):
+    def __init__(self, user_id=None, username=None, firstname=None, lastname=None, email=None, password=None,
+                 inscription_date=None, date_of_birth=None, wallet=None, bill_address=None, delivery_address=None):
         self.user_id = user_id
         self.username = username
         self.firstname = firstname
