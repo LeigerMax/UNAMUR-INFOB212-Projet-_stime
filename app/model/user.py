@@ -19,11 +19,6 @@ class User:
     @classmethod
     @with_connection
     def select(cls, user_id, **kwargs):
-        """
-        Get one user from the database
-        :param user_id: the id of the user to fetch
-        :return: the user fetched
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -37,11 +32,6 @@ class User:
     @classmethod
     @with_connection
     def check_user_login(cls, username, password, **kwargs):
-        """
-        Get one user from the database
-        :param user_id: the id of the user to fetch
-        :return: the user fetched
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -55,10 +45,6 @@ class User:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-        """
-        Get all users in the database
-        :return: users fetched
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -75,12 +61,8 @@ class User:
         return users
 
     @classmethod
+    @with_connection
     def create(cls, user, **kwargs):
-        """
-        Insert one user from the database
-        :param user_id: the id of the user to fetch
-        :return: the user fetched
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -92,6 +74,7 @@ class User:
         return User(*cursor.fetchone())
 
     @classmethod
+    @with_connection
     def update(cls, user, **kwargs):
         """
         Update the user from the database
@@ -109,5 +92,6 @@ class User:
         return User(*cursor.fetchone())
 
     @classmethod
+    @with_connection
     def delete(cls, user):
         pass

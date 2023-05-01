@@ -2,15 +2,15 @@ from app.database.connector import with_connection, get_cursor
 
 
 class Image:
-    def __init__(self, url=None ,alt=None, gameId=None ):
+    def __init__(self, url=None, alt=None, game_id=None):
         self.url = url
         self.alt = alt
-        self.gameId = gameId
-
+        self.game_id = game_id
 
     @classmethod
     @with_connection
-    def select(cls,url, **kwargs):
+    def select(cls, url, **kwargs):
+
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -18,17 +18,17 @@ class Image:
         query = "SELECT * FROM IMAGE_JEU WHERE URL_image = %s "
         cursor.execute(query, (url,))
 
-         # instantiate all images from cursor
+        # instantiate all images from cursor
         images = []
         for image in cursor:
             images.append(Image(*image))
 
         return images
-    
 
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
+
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -36,7 +36,7 @@ class Image:
         query = "SELECT * FROM IMAGE_JEU "
         cursor.execute(query)
 
-         # instantiate all images from cursor
+        # instantiate all images from cursor
         images = []
         for image in cursor:
             images.append(Image(*image))
@@ -46,11 +46,6 @@ class Image:
     @classmethod
     @with_connection
     def insert(cls, image, **kwargs):
-        """
-        Insert new image
-        :param: image
-        :return: the image inserted
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -64,11 +59,6 @@ class Image:
     @classmethod
     @with_connection
     def update(cls, image, **kwargs):
-        """
-        Update the image
-        :param: image
-        :return: the image updated
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -78,15 +68,10 @@ class Image:
         cursor.execute(query, (image.alt, image.jeu,image.url))
 
         return Image(*cursor.fetchone())
-    
 
     @classmethod
     @with_connection
     def delete(cls, image, **kwargs):
-        """
-        Delete the image
-        :param: the id of the image
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)

@@ -2,19 +2,19 @@ from app.database.connector import with_connection, get_cursor
 
 
 class Panier:
-    def __init__(self, panierId=None, montant=None):
-        self.panierId = panierId
+    def __init__(self, panier_id=None, montant=None):
+        self.panier_id = panier_id
         self.montant = montant
     
     @classmethod
     @with_connection
-    def select(cls,panierId, **kwargs):
+    def select(cls, panier_id, **kwargs):
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM PANIER WHERE PanierId = %s "
-        cursor.execute(query, (panierId,))
+        cursor.execute(query, (panier_id,))
 
         # instantiate one panier from cursor
         paniers = []
@@ -22,11 +22,11 @@ class Panier:
             paniers.append(Panier(*panier))
 
         return paniers
-    
 
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
+
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -34,7 +34,7 @@ class Panier:
         query = "SELECT * FROM PANIER "
         cursor.execute(query)
 
-         # instantiate all panier from cursor
+        # instantiate all panier from cursor
         paniers = []
         for panier in cursor:
             paniers.append(Panier(*panier))
@@ -44,29 +44,19 @@ class Panier:
     @classmethod
     @with_connection
     def insert(cls, panier, **kwargs):
-        """
-        Insert new panier
-        :param: panier
-        :return: the panier inserted
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO PANIER (PanierId, Montant, DateDebutSolde, DateFinSolde) VALUES (%s, %s)"
-        cursor.execute(query, (panier.panierId, panier.montant))
+        cursor.execute(query, (panier.panier_id, panier.montant))
 
         return panier 
 
     @classmethod
     @with_connection
     def update(cls, panier, **kwargs):
-        """
-        Update the panier
-        :param: panier
-        :return: the panier updated
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -76,15 +66,10 @@ class Panier:
         cursor.execute(query, (panier.motant,panier.url))
 
         return Panier(*cursor.fetchone())
-    
 
     @classmethod
     @with_connection
     def delete(cls, panier, **kwargs):
-        """
-        Delete the panier
-        :param: the id of the panier
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -92,5 +77,3 @@ class Panier:
         # execute query
         query = "DELETE FROM PANIER WHERE PanierId = %s"
         cursor.execute(query, (panier))
-  
-    

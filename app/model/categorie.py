@@ -9,11 +9,6 @@ class Categorie:
     @classmethod
     @with_connection
     def select(cls, nom, **kwargs):
-        """
-        Get one categorie from
-        :param nom: the name of the categorie to fetch
-        :return: the categorie fetched
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -21,10 +16,6 @@ class Categorie:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-        """
-        Get all users in the database
-        :return: users fetched
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -43,11 +34,6 @@ class Categorie:
     @classmethod
     @with_connection
     def insert(cls, categorie, **kwargs):
-        """
-        Insert new categorie
-        :param: categorie
-        :return: the categorie inserted
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -61,11 +47,6 @@ class Categorie:
     @classmethod
     @with_connection
     def update(cls, categorie, **kwargs):
-        """
-        Update the categorie
-        :param: categorie
-        :return: the categorie updated
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -78,15 +59,11 @@ class Categorie:
     
     @classmethod
     @with_connection
-    def delete(cls, id, **kwargs):
-        """
-        Delete the categorie
-        :param: the id of the categorie
-        """
+    def delete(cls, nom, **kwargs):
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM CATEGORIE WHERE Nom = %s"
-        cursor.execute(query, (id))
+        cursor.execute(query, (nom))

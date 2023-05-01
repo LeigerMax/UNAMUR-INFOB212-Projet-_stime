@@ -2,27 +2,22 @@ from app.database.connector import with_connection, get_cursor
 
 
 class Game:
-    def __init__(self, gameId=None, nom=None, description=None, dateDeSortie=None, prix=None,gamePass=None, developpeur=None, editeur=None, solde=None, estDLC=None,dlc = None ):
-        self.gameId = gameId
+    def __init__(self, game_id=None, nom=None, description=None, date_de_sortie=None, prix=None, game_pass=None, developpeur=None, editeur=None, solde=None, est_dlc=None, dlc=None):
+        self.game_id = game_id
         self.nom = nom
         self.description = description
-        self.dateDeSortie = dateDeSortie
+        self.date_de_sortie = date_de_sortie
         self.prix = prix
-        self.gamePass = gamePass
+        self.game_pass = game_pass
         self.developpeur = developpeur
         self.editeur = editeur
         self.solde = solde
-        self.estDLC = estDLC
-        self.gamePass = gamePass
+        self.estDLC = est_dlc
         self.dlc = dlc
     
     @classmethod
     @with_connection
     def select_all_games_shop_page(cls, **kwargs):
-        """
-        Get all games in the database
-        :return: games fetched
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -41,10 +36,6 @@ class Game:
     @classmethod
     @with_connection
     def select_game_shop_details_page(cls,gameId, **kwargs):
-        """
-        Get of game in the database
-        :return: games fetched
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)

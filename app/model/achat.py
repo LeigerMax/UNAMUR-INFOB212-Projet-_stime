@@ -2,25 +2,24 @@ from app.database.connector import with_connection, get_cursor
 
 
 class Achat:
-    def __init__(self, achatId=None, montantTotal=None, dateAchat=None, utilisateur=None, moyenPaiement=None,panier=None):
-        self.achatId = achatId
-        self.montantTotal = montantTotal
-        self.dateAchat = dateAchat
+    def __init__(self, achat_id=None, montant_total=None, date_achat=None, utilisateur=None, moyen_paiement=None, panier=None):
+        self.achat_id = achat_id
+        self.montant_total = montant_total
+        self.date_achat = date_achat
         self.utilisateur = utilisateur
-        self.moyenPaiement = moyenPaiement
+        self.moyen_paiement = moyen_paiement
         self.panier = panier
-
 
     @classmethod
     @with_connection
-    def select(cls,achatId, **kwargs):
+    def select(cls, achat_id, **kwargs):
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM ACHAT WHERE AchatId = %s "
-        cursor.execute(query, (achatId,))
+        cursor.execute(query, (achat_id,))
 
         # instantiate one evaluation from cursor
         achats = []
@@ -28,7 +27,6 @@ class Achat:
             achats.append(Achat(*achat))
 
         return achats
-    
 
     @classmethod
     @with_connection
@@ -41,7 +39,7 @@ class Achat:
         query = "SELECT * FROM ACHAT "
         cursor.execute(query)
 
-         # instantiate all achats from cursor
+        # instantiate all achats from cursor
         achats = []
         for achat in cursor:
             achats.append(Achat(*achat))
@@ -51,46 +49,32 @@ class Achat:
     @classmethod
     @with_connection
     def insert(cls, achat, **kwargs):
-        """
-        Insert new achat
-        :param: achat
-        :return: the achat inserted
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO ACHAT (AchatId, MontantTotal,DateAchat,Utilisateur,MoyenPaiement,Panier) VALUES (%s, %s, %s,%s, %s, %s)"
-        cursor.execute(query, (achat.achatId, achat.montantTotal,achat.dateAchat,achat.utilisateur,achat.moyenPaiement,achat.panier))
+        cursor.execute(query, (achat.achat_id, achat.montant_total, achat.date_achat, achat.utilisateur, achat.moyen_paiement, achat.panier))
 
         return achat
     
     @classmethod
     @with_connection
     def update(cls, achat, **kwargs):
-        """
-        Update the achat
-        :param: achat
-        :return: the achat updated
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
         # execute query
         query = "UPDATE ACHAT SET MontantTotal = %s,DateAchat = %s ,Utilisateur = %s ,MoyenPaiement = %s,Panier = %s WHERE AchatId = %s"
-        cursor.execute(query, (achat.montantTotal,achat.dateAchat,achat.utilisateur,achat.moyenPaiement, achat.panier, achat.achatId))
+        cursor.execute(query, (achat.montant_total, achat.date_achat, achat.utilisateur, achat.moyen_paiement, achat.panier, achat.achat_id))
 
         return Achat(*cursor.fetchone())
     
     @classmethod
     @with_connection
     def delete(cls, achat, **kwargs):
-        """
-        Delete the achat
-        :param: the id of the achat
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
