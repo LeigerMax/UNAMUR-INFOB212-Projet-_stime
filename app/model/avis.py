@@ -18,15 +18,10 @@ class Avis:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM AVIS WHERE AvisId = %s "
-        cursor.execute(query, (avis_id,))
+        query = "SELECT * FROM AVIS WHERE AvisId = %s"
+        cursor.execute(query, (avis_id))
 
-        # instantiate one adresse from cursor
-        avis = []
-        for avisI in cursor:
-            avis.append(Avis(*avisI))
-
-        return avis
+        return Avis(*cursor.fetchone())
 
     @classmethod
     @with_connection
@@ -36,12 +31,12 @@ class Avis:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM AVIS "
+        query = "SELECT * FROM AVIS"
         cursor.execute(query)
 
         # instantiate all avis from cursor
         avis = []
-        for avisI in cursor:
+        for avisI in cursor.fetchall():
             avis.append(Avis(*avisI))
 
         return avis
@@ -54,8 +49,11 @@ class Avis:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO AVIS (AvisId, Jeu,Auteur,Date,Note,Commentaire) VALUES (%s, %s, %s,%s, %s, %s)"
-        cursor.execute(query, (avis.avis_id, avis.jeu, avis.auteur, avis.date, avis.note, avis.commentaire))
+        query = "INSERT INTO AVIS (Jeu, Auteur, Date, Note, Commentaire) VALUES (%s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (avis.jeu, avis.auteur, avis.date, avis.note, avis.commentaire))
+
+        # store new id
+        avis.avis_id = cursor.lastrowid
 
         return avis
     
@@ -67,10 +65,10 @@ class Avis:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "UPDATE AVIS SET Jeu = %s,Auteur = %s ,Date = %s ,Note = %s,Commentaire = %s WHERE AvisId = %s"
+        query = "UPDATE AVIS SET Jeu = %s, Auteur = %s, Date = %s, Note = %s, Commentaire = %s WHERE AvisId = %s"
         cursor.execute(query, (avis.game_id, avis.auteur, avis.date, avis.note, avis.commentaire, avis.avis_id))
 
-        return Avis(*cursor.fetchone())
+        return avis
     
     @classmethod
     @with_connection
@@ -82,3 +80,5 @@ class Avis:
         # execute query
         query = "DELETE FROM AVIS WHERE AchatId = %s"
         cursor.execute(query, (avis))
+
+        return cursor.rowcount > 0

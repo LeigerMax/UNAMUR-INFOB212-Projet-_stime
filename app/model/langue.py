@@ -1,11 +1,10 @@
 from app.database.connector import with_connection, get_cursor
 
 
-class Language:
-    def __init__(self, langue=None, raccourci=None, game_id=None):
+class Langue:
+    def __init__(self, langue=None, raccourci=None):
         self.langue = langue
         self.raccourci = raccourci
-        self.game_id = game_id
 
     @classmethod
     @with_connection
@@ -16,14 +15,9 @@ class Language:
 
         # execute query
         query = "SELECT * FROM LANGUE WHERE Langue = %s"
-        cursor.execute(query, (langue,))
-        languages = cursor.fetchall()
+        cursor.execute(query, (langue))
 
-        language_list = []
-        for language in languages:
-            language_list.append((language[0], language[1]))
-
-        return language_list
+        return Langue(*cursor.fetchone())
     
     @classmethod
     @with_connection
@@ -35,13 +29,12 @@ class Language:
         # execute query
         query = "SELECT * FROM LANGUE"
         cursor.execute(query)
-        languages = cursor.fetchall()
 
-        language_list = []
-        for language in languages:
-            language_list.append((language[0], language[1]))
+        langues = []
+        for language in cursor.fetchall():
+            langues.append((language[0], language[1]))
 
-        return language_list
+        return langues
     
     @classmethod
     @with_connection
@@ -54,7 +47,7 @@ class Language:
         query = "UPDATE LANGUE SET Raccourci = %s WHERE langue = %s"
         cursor.execute(query, (langue.raccourci, langue.langue))
 
-        return Language(*cursor.fetchone())
+        return langue
 
     @classmethod
     @with_connection
@@ -66,3 +59,5 @@ class Language:
         # execute query
         query = "DELETE FROM LANGUE WHERE Langue = %s"
         cursor.execute(query, (langue))
+
+        return cursor.rowcount > 0

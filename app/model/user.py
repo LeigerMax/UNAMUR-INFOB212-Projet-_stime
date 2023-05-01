@@ -55,7 +55,7 @@ class User:
 
         # instantiate all users from cursor
         users = []
-        for user in cursor:
+        for user in cursor.fetchall():
             users.append(User(*user))
 
         return users
@@ -71,16 +71,14 @@ class User:
         query = "INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Portefeuille) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0))
 
-        return User(*cursor.fetchone())
+        # store new id
+        user.user_id = cursor.lastrowid
+
+        return user
 
     @classmethod
     @with_connection
     def update(cls, user, **kwargs):
-        """
-        Update the user from the database
-        :param user: the user to update
-        :return: the user updated
-        """
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
@@ -89,9 +87,17 @@ class User:
         query = "UPDATE UTILISATEUR SET Username = %s, Prenom = %s, Nom = %s, Email = %s, DateNaissance = %s, PorteFeuille = %s, AdresseLivraison = %s, AdresseFacturation = %s WHERE UserId = %s"
         cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0))
 
-        return User(*cursor.fetchone())
+        return user
 
     @classmethod
     @with_connection
-    def delete(cls, user):
-        pass
+    def delete(cls, user_id, **kwargs):
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "DELETE FROM USER WHERE UserId = %s"
+        cursor.execute(query, (user_id))
+
+        return cursor.rowcount > 0

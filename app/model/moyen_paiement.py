@@ -15,15 +15,10 @@ class MoyenPaiement:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM MOYEN_PAIEMENT WHERE MoyenPaiementId = %s "
-        cursor.execute(query, (moyen_paiement_id,))
+        query = "SELECT * FROM MOYEN_PAIEMENT WHERE MoyenPaiementId = %s"
+        cursor.execute(query, (moyen_paiement_id))
 
-        # instantiate all images from cursor
-        moyens = []
-        for moyen in cursor:
-            moyens.append(MoyenPaiement(*moyen))
-
-        return moyens
+        return MoyenPaiement(*cursor.fetchone())
 
     @classmethod
     @with_connection
@@ -33,12 +28,12 @@ class MoyenPaiement:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM MOYEN_PAIEMENT "
+        query = "SELECT * FROM MOYEN_PAIEMENT"
         cursor.execute(query)
 
-        # instantiate all images from cursor
+        # instantiate all moyens de paiement from cursor
         moyens = []
-        for moyen in cursor:
+        for moyen in cursor.fetchall():
             moyens.append(MoyenPaiement(*moyen))
 
         return moyens
@@ -51,7 +46,34 @@ class MoyenPaiement:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO MOYEN_PAIEMENT (MoyenPaiementId, Nom,TaxeDuMoyen) VALUES (%s, %s, %s)"
+        query = "INSERT INTO MOYEN_PAIEMENT (MoyenPaiementId, Nom, TaxeDuMoyen) VALUES (%s, %s, %s)"
         cursor.execute(query, (moyen_paiement.moyen_paiement_id, moyen_paiement.nom, moyen_paiement.taxe_du_moyen))
 
+        # store new id
+        moyen_paiement.moyen_paiement_id = cursor.lastrowid
+
         return moyen_paiement
+
+    @classmethod
+    @with_connection
+    def update(cls, moyen_paiement, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "UPDATE MOYEN_PAIEMENT SET Nom = %s, TaxeDuMoyen = %s WHERE MoyenPaiementId = %s"
+        cursor.execute(query, (moyen_paiement.nom, moyen_paiement.taxe_du_moyen, moyen_paiement.moyen_paiement_id))
+
+        return moyen_paiement
+
+    @classmethod
+    @with_connection
+    def delete(cls, moyen_paiement_id, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "DELETE FROM MOYEN_PAIEMENT WHERE MoyenPaiementId = %s"
+        cursor.execute(query, (moyen_paiement_id))
+
+        return cursor.rowcount > 0

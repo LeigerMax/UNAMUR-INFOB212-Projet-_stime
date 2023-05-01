@@ -19,14 +19,9 @@ class Entreprise:
 
         # execute query
         query = "SELECT * FROM ENTREPRISE WHERE NumSiret = %s "
-        cursor.execute(query, (num_siret,))
+        cursor.execute(query, (num_siret))
 
-        # instantiate one evaluation from cursor
-        entreprises = []
-        for entreprise in cursor:
-            entreprises.append(Entreprise(*entreprise))
-
-        return entreprises
+        return Entreprise(*cursor.fetchone())
 
     @classmethod
     @with_connection
@@ -41,7 +36,7 @@ class Entreprise:
 
         # instantiate all entreprises from cursor
         entreprises = []
-        for entreprise in cursor:
+        for entreprise in cursor.fetchall():
             entreprises.append(Entreprise(*entreprise))
 
         return entreprises
@@ -54,7 +49,7 @@ class Entreprise:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO ENTREPRISE (NumSiret, Nom, Description,AdresseWeb,EstBoiteDev,EstEditeur) VALUES (%s, %s, %s,%s, %s, %s)"
+        query = "INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb, EstBoiteDev, EstEditeur) VALUES (%s, %s, %s, %s, %s, %s)"
         cursor.execute(query, (entreprise.num_siret, entreprise.nom, entreprise.description, entreprise.adresse_web, entreprise.est_boite_dev, entreprise.est_editeur))
 
         return entreprise
@@ -67,10 +62,10 @@ class Entreprise:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "UPDATE ENTREPRISE SET Nom = %s ,Description = %s ,AdresseWeb = %s,EstBoiteDev = %s, EstEditeur = %s WHERE NumSiret = %s"
+        query = "UPDATE ENTREPRISE SET Nom = %s, Description = %s, AdresseWeb = %s, EstBoiteDev = %s, EstEditeur = %s WHERE NumSiret = %s"
         cursor.execute(query, (entreprise.nom, entreprise.description, entreprise.adresse_web, entreprise.est_boite_dev, entreprise.est_editeur, entreprise.num_siret))
 
-        return Entreprise(*cursor.fetchone())
+        return entreprise
     
     @classmethod
     @with_connection
@@ -82,3 +77,5 @@ class Entreprise:
         # execute query
         query = "DELETE FROM ENTREPRISE WHERE NumSiret = %s"
         cursor.execute(query, (entreprise))
+
+        return cursor.rowcount > 0

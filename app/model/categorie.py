@@ -12,6 +12,12 @@ class Categorie:
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT * FROM CATEGORIE WHERE Nom = %s"
+        cursor.execute(query, (nom))
+
+        return Categorie(*cursor.fetchone())
     
     @classmethod
     @with_connection
@@ -26,7 +32,7 @@ class Categorie:
 
         # instantiate all users from cursor
         categories = []
-        for categorie in categories:
+        for categorie in cursor.fetchall():
             categories.append(Categorie(*categorie))
 
         return categories
@@ -42,7 +48,7 @@ class Categorie:
         query = "INSERT INTO CATEGORIE (Nom, Description) VALUES (%s, %s)"
         cursor.execute(query, (categorie.nom, categorie.description))
 
-        return Categorie(*cursor.fetchone())
+        return categorie
     
     @classmethod
     @with_connection
@@ -55,7 +61,7 @@ class Categorie:
         query = "UPDATE CATEGORIE SET Description = %s WHERE Nom = %s"
         cursor.execute(query, (categorie.description, categorie.nom))
 
-        return Categorie(*cursor.fetchone())
+        return categorie
     
     @classmethod
     @with_connection
@@ -67,3 +73,5 @@ class Categorie:
         # execute query
         query = "DELETE FROM CATEGORIE WHERE Nom = %s"
         cursor.execute(query, (nom))
+
+        return cursor.rowcount > 0

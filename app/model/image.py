@@ -15,15 +15,10 @@ class Image:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM IMAGE_JEU WHERE URL_image = %s "
-        cursor.execute(query, (url,))
+        query = "SELECT * FROM IMAGE_JEU WHERE URL_image = %s"
+        cursor.execute(query, (url))
 
-        # instantiate all images from cursor
-        images = []
-        for image in cursor:
-            images.append(Image(*image))
-
-        return images
+        return Image(*cursor.fetchone())
 
     @classmethod
     @with_connection
@@ -33,12 +28,12 @@ class Image:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM IMAGE_JEU "
+        query = "SELECT * FROM IMAGE_JEU"
         cursor.execute(query)
 
         # instantiate all images from cursor
         images = []
-        for image in cursor:
+        for image in cursor.fetchall():
             images.append(Image(*image))
 
         return images
@@ -51,8 +46,8 @@ class Image:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO IMAGE_JEU (URL_image, Alt,Jeu) VALUES (%s, %s, %s)"
-        cursor.execute(query, (image.url, image.alt,image.jeu ))
+        query = "INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES (%s, %s, %s)"
+        cursor.execute(query, (image.url, image.alt, image.jeu))
 
         return image
 
@@ -65,17 +60,19 @@ class Image:
 
         # execute query
         query = "UPDATE IMAGE_JEU SET Alt = %s, Jeu = %s WHERE URL_image = %s"
-        cursor.execute(query, (image.alt, image.jeu,image.url))
+        cursor.execute(query, (image.alt, image.jeu, image.url))
 
-        return Image(*cursor.fetchone())
+        return image
 
     @classmethod
     @with_connection
-    def delete(cls, image, **kwargs):
+    def delete(cls, url, **kwargs):
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM IMAGE_JEU WHERE URL_image = %s"
-        cursor.execute(query, (image))
+        cursor.execute(query, (url))
+
+        return cursor.rowcount > 0

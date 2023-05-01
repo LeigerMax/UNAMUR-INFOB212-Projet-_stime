@@ -9,19 +9,15 @@ class Panier:
     @classmethod
     @with_connection
     def select(cls, panier_id, **kwargs):
+
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM PANIER WHERE PanierId = %s "
+        query = "SELECT * FROM PANIER WHERE PanierId = %s"
         cursor.execute(query, (panier_id,))
 
-        # instantiate one panier from cursor
-        paniers = []
-        for panier in cursor:
-            paniers.append(Panier(*panier))
-
-        return paniers
+        return Panier(*cursor.fetchone())
 
     @classmethod
     @with_connection
@@ -31,12 +27,12 @@ class Panier:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM PANIER "
+        query = "SELECT * FROM PANIER"
         cursor.execute(query)
 
         # instantiate all panier from cursor
         paniers = []
-        for panier in cursor:
+        for panier in cursor.fetchall():
             paniers.append(Panier(*panier))
 
         return paniers
@@ -49,8 +45,8 @@ class Panier:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO PANIER (PanierId, Montant, DateDebutSolde, DateFinSolde) VALUES (%s, %s)"
-        cursor.execute(query, (panier.panier_id, panier.montant))
+        query = "INSERT INTO PANIER (Montant) VALUES (%s, %s)"
+        cursor.execute(query, (panier.montant))
 
         return panier 
 
@@ -63,17 +59,19 @@ class Panier:
 
         # execute query
         query = "UPDATE PANIER SET Montant = %s WHERE PanierId = %s"
-        cursor.execute(query, (panier.motant,panier.url))
+        cursor.execute(query, (panier.motant, panier.panier_id))
 
-        return Panier(*cursor.fetchone())
+        return panier
 
     @classmethod
     @with_connection
-    def delete(cls, panier, **kwargs):
+    def delete(cls, panier_id, **kwargs):
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM PANIER WHERE PanierId = %s"
-        cursor.execute(query, (panier))
+        cursor.execute(query, (panier_id))
+
+        return cursor.rowcount > 0

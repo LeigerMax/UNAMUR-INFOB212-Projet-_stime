@@ -20,14 +20,9 @@ class Transaction:
 
         # execute query
         query = "SELECT * FROM TRANSACTION WHERE TransactionId = %s"
-        cursor.execute(query, (transaction_id,))
+        cursor.execute(query, (transaction_id))
 
-        # instantiate one transaction from cursor
-        transactions = []
-        for transaction in cursor:
-            transactions.append(Transaction(*transaction))
-
-        return transactions
+        return Transaction(*cursor.fetchone())
 
     @classmethod
     @with_connection
@@ -37,12 +32,12 @@ class Transaction:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM TRANSACTION "
+        query = "SELECT * FROM TRANSACTION"
         cursor.execute(query)
 
         # instantiate all transactions from cursor
         transactions = []
-        for transaction in cursor:
+        for transaction in cursor.fetchall():
             transactions.append(Transaction(*transaction))
 
         return transactions
@@ -55,7 +50,35 @@ class Transaction:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO TRANSACTION (TransactionId, DateMiseEnVente, DateVente,PrixVente,Revendeur,Acheteur,Objet) VALUES (%s, %s, %s,%s, %s, %s, %s)"
-        cursor.execute(query, (transaction.transaction_id, transaction.date_mise_en_vente, transaction.date_vente, transaction.prix_vente, transaction.revendeur, transaction.acheteur, transaction.objet))
+        query = "INSERT INTO TRANSACTION (DateMiseEnVente, DateVente, PrixVente, Revendeur, Acheteur, Objet) VALUES (%s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (transaction.date_mise_en_vente, transaction.date_vente, transaction.prix_vente, transaction.revendeur, transaction.acheteur, transaction.objet))
+
+        # store new id
+        transaction.transaction_id = cursor.lastrowid
 
         return transaction
+
+    @classmethod
+    @with_connection
+    def update(cls, transaction, **kwargs):
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "UPDATE TRANSACTION SET DateMiseEnVente = %s, DateVente = %s, PrixVente = %s, Revendeur = %s, Acheteur = %s, Objet = %s WHERE TransactionId = %s"
+        cursor.execute(query, (transaction.date_mise_en_vente, transaction.date_vente, transaction.prix_vente, transaction.revendeur, transaction.acheteur, transaction.objet, transaction.transaction_id))
+
+        return transaction
+
+    @classmethod
+    @with_connection
+    def delete(cls, transaction_id, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "DELETE FROM TRANSACTION WHERE TransactionId = %s"
+        cursor.execute(query, (transaction_id))
+
+        return cursor.rowcount > 0

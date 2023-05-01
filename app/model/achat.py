@@ -18,15 +18,10 @@ class Achat:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM ACHAT WHERE AchatId = %s "
-        cursor.execute(query, (achat_id,))
+        query = "SELECT * FROM ACHAT WHERE AchatId = %s"
+        cursor.execute(query, (achat_id))
 
-        # instantiate one evaluation from cursor
-        achats = []
-        for achat in cursor:
-            achats.append(Achat(*achat))
-
-        return achats
+        return Achat(*cursor.fetchone())
 
     @classmethod
     @with_connection
@@ -36,12 +31,12 @@ class Achat:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM ACHAT "
+        query = "SELECT * FROM ACHAT"
         cursor.execute(query)
 
         # instantiate all achats from cursor
         achats = []
-        for achat in cursor:
+        for achat in cursor.fetchall():
             achats.append(Achat(*achat))
 
         return achats
@@ -54,8 +49,11 @@ class Achat:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO ACHAT (AchatId, MontantTotal,DateAchat,Utilisateur,MoyenPaiement,Panier) VALUES (%s, %s, %s,%s, %s, %s)"
-        cursor.execute(query, (achat.achat_id, achat.montant_total, achat.date_achat, achat.utilisateur, achat.moyen_paiement, achat.panier))
+        query = "INSERT INTO ACHAT (MontantTotal, DateAchat, Utilisateur, MoyenPaiement, Panier) VALUES (%s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (achat.montant_total, achat.date_achat, achat.utilisateur, achat.moyen_paiement, achat.panier))
+
+        # store new id
+        achat.achat_id = cursor.lastrowid
 
         return achat
     
@@ -67,10 +65,10 @@ class Achat:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "UPDATE ACHAT SET MontantTotal = %s,DateAchat = %s ,Utilisateur = %s ,MoyenPaiement = %s,Panier = %s WHERE AchatId = %s"
+        query = "UPDATE ACHAT SET MontantTotal = %s, DateAchat = %s, Utilisateur = %s, MoyenPaiement = %s, Panier = %s WHERE AchatId = %s"
         cursor.execute(query, (achat.montant_total, achat.date_achat, achat.utilisateur, achat.moyen_paiement, achat.panier, achat.achat_id))
 
-        return Achat(*cursor.fetchone())
+        return achat
     
     @classmethod
     @with_connection
@@ -82,3 +80,5 @@ class Achat:
         # execute query
         query = "DELETE FROM ACHAT WHERE AchatId = %s"
         cursor.execute(query, (achat))
+
+        return cursor.rowcount > 0

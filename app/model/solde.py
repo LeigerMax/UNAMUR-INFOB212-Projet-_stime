@@ -19,12 +19,7 @@ class Solde:
         query = "SELECT * FROM SOLDE WHERE SoldeId = %s "
         cursor.execute(query, (solde_id,))
 
-        # instantiate one transaction from cursor
-        soldes = []
-        for solde in cursor:
-            soldes.append(Solde(*solde))
-
-        return soldes
+        return Solde(*cursor.fetchone())
 
     @classmethod
     @with_connection
@@ -39,7 +34,7 @@ class Solde:
 
         # instantiate all transactions from cursor
         soldes = []
-        for solde in cursor:
+        for solde in cursor.fetchall():
             soldes.append(Solde(*solde))
 
         return soldes
@@ -52,10 +47,13 @@ class Solde:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO SOLDE (SoldeId, TauxSolde, DateDebutSolde, DateFinSolde) VALUES (%s, %s, %s, %s)"
-        cursor.execute(query, (solde.solde_id, solde.taux_solde, solde.date_debut_solde, solde.date_fin_solde))
+        query = "INSERT INTO SOLDE (TauxSolde, DateDebutSolde, DateFinSolde) VALUES (%s, %s, %s)"
+        cursor.execute(query, (solde.taux_solde, solde.date_debut_solde, solde.date_fin_solde))
 
-        return solde   
+        # store new id
+        solde.objet_id = cursor.lastrowid
+
+        return solde
     
     @classmethod
     @with_connection
@@ -65,18 +63,20 @@ class Solde:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "UPDATE SOLDE SET TauxSolde = %s,DateDebutSolde = %s,DateFinSolde = %s WHERE SoldeId = %s"
+        query = "UPDATE SOLDE SET TauxSolde = %s, DateDebutSolde = %s, DateFinSolde = %s WHERE SoldeId = %s"
         cursor.execute(query, (solde.taux_solde, solde.date_debut_solde, solde.date_fin_solde, solde.solde_id))
 
-        return Solde(*cursor.fetchone())
+        return solde
 
     @classmethod
     @with_connection
-    def delete(cls, solde, **kwargs):
+    def delete(cls, solde_id, **kwargs):
 
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM SOLDE WHERE SoldeId = %s"
-        cursor.execute(query, (solde))
+        cursor.execute(query, (solde_id))
+
+        return cursor.rowcount > 0
