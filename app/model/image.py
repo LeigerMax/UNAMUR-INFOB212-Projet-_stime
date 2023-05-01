@@ -10,7 +10,6 @@ class Image:
     @classmethod
     @with_connection
     def select(cls, url, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -23,7 +22,6 @@ class Image:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -41,7 +39,6 @@ class Image:
     @classmethod
     @with_connection
     def insert(cls, image, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -54,7 +51,6 @@ class Image:
     @classmethod
     @with_connection
     def update(cls, image, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -67,7 +63,6 @@ class Image:
     @classmethod
     @with_connection
     def delete(cls, url, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 

@@ -9,7 +9,6 @@ class Langue:
     @classmethod
     @with_connection
     def select(cls, langue, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -22,7 +21,6 @@ class Langue:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -35,11 +33,22 @@ class Langue:
             langues.append((language[0], language[1]))
 
         return langues
+
+    @classmethod
+    @with_connection
+    def insert(cls, langue, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "INSERT INTO LANGUE (Langue, Raccourci) VALUES (%s, %s)"
+        cursor.execute(query, (langue.langue, langue.raccourci))
+
+        return langue
     
     @classmethod
     @with_connection
     def update(cls, langue, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -52,7 +61,6 @@ class Langue:
     @classmethod
     @with_connection
     def delete(cls, langue, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 

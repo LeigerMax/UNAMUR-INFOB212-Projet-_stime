@@ -19,7 +19,6 @@ class User:
     @classmethod
     @with_connection
     def select(cls, user_id, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -32,7 +31,6 @@ class User:
     @classmethod
     @with_connection
     def check_user_login(cls, username, password, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -45,7 +43,6 @@ class User:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -63,7 +60,6 @@ class User:
     @classmethod
     @with_connection
     def create(cls, user, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -79,7 +75,6 @@ class User:
     @classmethod
     @with_connection
     def update(cls, user, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -92,7 +87,6 @@ class User:
     @classmethod
     @with_connection
     def delete(cls, user_id, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 

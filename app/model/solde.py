@@ -11,7 +11,6 @@ class Solde:
     @classmethod
     @with_connection
     def select(cls, solde_id, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -24,7 +23,6 @@ class Solde:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -42,7 +40,6 @@ class Solde:
     @classmethod
     @with_connection
     def insert(cls, solde, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -58,7 +55,6 @@ class Solde:
     @classmethod
     @with_connection
     def update(cls, solde, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -71,7 +67,6 @@ class Solde:
     @classmethod
     @with_connection
     def delete(cls, solde_id, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 

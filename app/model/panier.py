@@ -9,7 +9,6 @@ class Panier:
     @classmethod
     @with_connection
     def select(cls, panier_id, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -22,7 +21,6 @@ class Panier:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -40,7 +38,6 @@ class Panier:
     @classmethod
     @with_connection
     def insert(cls, panier, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -53,7 +50,6 @@ class Panier:
     @classmethod
     @with_connection
     def update(cls, panier, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -66,7 +62,6 @@ class Panier:
     @classmethod
     @with_connection
     def delete(cls, panier_id, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 

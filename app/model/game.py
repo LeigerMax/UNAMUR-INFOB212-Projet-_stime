@@ -18,7 +18,6 @@ class Game:
     @classmethod
     @with_connection
     def select(cls, gameId, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -31,7 +30,6 @@ class Game:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -49,7 +47,6 @@ class Game:
     @classmethod
     @with_connection
     def insert(cls, game, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -65,7 +62,6 @@ class Game:
     @classmethod
     @with_connection
     def update(cls, game, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 

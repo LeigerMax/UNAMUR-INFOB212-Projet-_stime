@@ -14,7 +14,6 @@ class Transaction:
     @classmethod
     @with_connection
     def select(cls, transaction_id, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -27,7 +26,6 @@ class Transaction:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -45,7 +43,6 @@ class Transaction:
     @classmethod
     @with_connection
     def insert(cls, transaction, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -61,7 +58,6 @@ class Transaction:
     @classmethod
     @with_connection
     def update(cls, transaction, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 

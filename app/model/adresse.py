@@ -13,7 +13,6 @@ class Adresse:
     @classmethod
     @with_connection
     def select(cls, adresse_id, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -26,7 +25,6 @@ class Adresse:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -44,7 +42,6 @@ class Adresse:
     @classmethod
     @with_connection
     def insert(cls, adresse, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -60,7 +57,6 @@ class Adresse:
     @classmethod
     @with_connection
     def update(cls, adresse, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -73,7 +69,6 @@ class Adresse:
     @classmethod
     @with_connection
     def delete(cls, adresse, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 

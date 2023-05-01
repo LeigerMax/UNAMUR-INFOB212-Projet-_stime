@@ -10,7 +10,6 @@ class MoyenPaiement:
     @classmethod
     @with_connection
     def select(cls, moyen_paiement_id, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -23,7 +22,6 @@ class MoyenPaiement:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -41,7 +39,6 @@ class MoyenPaiement:
     @classmethod
     @with_connection
     def insert(cls, moyen_paiement, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 

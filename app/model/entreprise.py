@@ -13,7 +13,6 @@ class Entreprise:
     @classmethod
     @with_connection
     def select(cls, num_siret, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -26,7 +25,6 @@ class Entreprise:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -44,7 +42,6 @@ class Entreprise:
     @classmethod
     @with_connection
     def insert(cls, entreprise, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -57,7 +54,6 @@ class Entreprise:
     @classmethod
     @with_connection
     def update(cls, entreprise, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
@@ -70,7 +66,6 @@ class Entreprise:
     @classmethod
     @with_connection
     def delete(cls, entreprise, **kwargs):
-
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)
 
