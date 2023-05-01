@@ -306,5 +306,10 @@ INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet5', 'Description de l''o
 
 INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("12", "Rue de la babouche", "Andenne", 5300, "Belgique");
 
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com","wéwéwé","2022-03-01","2000-06-06")
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com","wéwéwé","2022-03-01","2000-06-06");
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("test", "test", "test", "test@test.be","test","2022-03-01","2000-04-02");
 
+INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,1, FALSE);
+INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,2, FALSE);
+INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,3, FALSE);
+INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,4, FALSE);
