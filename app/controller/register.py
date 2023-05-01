@@ -1,7 +1,6 @@
 from app.view.login_register import register_view
 from app.model.user import User
-
-import datetime
+from datetime import date
 
 def register():
     fields_ok = False
@@ -32,16 +31,23 @@ def register():
         try:
             if password != confirm_password:
                 raise ValueError("Passwords do not match")
-
             fields_ok = True
+            myUser = {
+                "username" : username,
+                "password" : password,
+                "firstname" : firstname,
+                "lastname" :lastname,
+                "email" :email,
+                "date_of_birth" :date_of_birth,
+                "inscription_date" : date.today()
+            }
         except ValueError as e:
             print(f"Error: {e}")
 
         first_try = False
 
     # Sauvegarde dans la BDD
-    inscription_date = datetime.date.today()
-    User.insert_new_user(username, password, firstname, lastname, email,date_of_birth, inscription_date)
+    User.create(myUser)
 
         
     return username

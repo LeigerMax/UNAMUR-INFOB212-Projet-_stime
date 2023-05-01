@@ -12,7 +12,7 @@ create table ABONNEMENT (
 );
 
 create table PANIER (
-     PanierId int not null,
+     PanierId int not null AUTO_INCREMENT ,
      Montant float not null,
      constraint ID_PANIER primary key (PanierId)
 );
@@ -32,14 +32,14 @@ create table LANGUE (
 
 
 create table MOYEN_PAIEMENT (
-     MoyenPaiementId int not null,
+     MoyenPaiementId int not null AUTO_INCREMENT,
      Nom varchar(255) not null,
      taxeDuMoyen int not null,
      constraint ID_MOYEN_PAIEMENT primary key (MoyenPaiementId)
 );
 
 create table SOLDE (
-     SoldeId int not null,
+     SoldeId int not null AUTO_INCREMENT,
      TauxSolde int not null,
      DateDebutSolde date not null,
      DateFinSolde date not null,
@@ -48,7 +48,7 @@ create table SOLDE (
 
 
 create table ADRESSE (
-     AdresseId int not null,
+     AdresseId int not null AUTO_INCREMENT,
      Numero varchar(10) not null,
      Rue varchar(255) not null,
      Ville varchar(255) not null,
@@ -58,7 +58,7 @@ create table ADRESSE (
 );
 
 create table UTILISATEUR (
-     UserId int not null,
+     UserId int not null AUTO_INCREMENT,
      Username varchar(255) not null,
      Prenom varchar(255) not null,
      Nom varchar(255) not null,
@@ -66,9 +66,9 @@ create table UTILISATEUR (
      MDP varchar(255) not null,
      DateInscription date not null,
      DateNaissance date not null,
-     Portefeuille float not null,
-     AdresseLivraison int not null,
-     AdresseFacturation int not null,
+     Portefeuille float default 00.00 not null,
+     AdresseLivraison int null,
+     AdresseFacturation int null,
      constraint ID_UTILISATEUR primary key (UserId),
      constraint FK_ADRESSE_LIVRAISON foreign key (AdresseLivraison) references ADRESSE (AdresseId),
      constraint FK_ADRESSE_FACTURATION foreign key (AdresseFacturation) references ADRESSE (AdresseId)
@@ -95,7 +95,7 @@ create table ENTREPRISE_ADRESSE (
 
 
 create table JEU (
-     GameId int not null,
+     GameId int not null AUTO_INCREMENT,
      Nom varchar(255) not null,
      Description varchar(255) not null,
      DateDeSortie date not null,
@@ -114,7 +114,7 @@ create table JEU (
 );
 
 create table OBJET (
-     ObjetId int not null,
+     ObjetId int not null AUTO_INCREMENT,
      Nom varchar(255) not null,
      Description varchar(255) not null,
      Jeu int not null,
@@ -123,7 +123,7 @@ create table OBJET (
 );
 
 create table OBJET_INSTANCE (
-     Id int not null,
+     Id int not null AUTO_INCREMENT,
      DateObtention date not null,
      Possesseur int not null,
      Objet int not null,
@@ -137,7 +137,7 @@ create table OBJET_INSTANCE (
 
 
 create table TRANSACTION (
-     TransactionId int not null,
+     TransactionId int not null AUTO_INCREMENT,
      DateMiseEnVente date not null,
      DateVente date not null,
      PrixVente float not null,
@@ -151,7 +151,7 @@ create table TRANSACTION (
 );
 
 create table ACHAT (
-     AchatId int not null,
+     AchatId int not null AUTO_INCREMENT,
      MontantTotal float not null,
      DateAchat date not null,
      Utilisateur int not null,
@@ -224,7 +224,7 @@ create table CATEGORIE_JEU (
 );
 
 create table AVIS (
-     AvisId int not null,
+     AvisId int not null AUTO_INCREMENT,
      Jeu int not null,
      Auteur int not null,
      Date date not null,
@@ -275,10 +275,10 @@ INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (98765432
 INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (456789123, 'Activisum', 'Description de l''entreprise Activisum', 'https://www.activisum.com');
 INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (496789124, 'Ae', 'Description de l''entreprise Ae', 'https://www.ae.com');
 
-INSERT INTO JEU (GameId, Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES (1, 'Jeu1', 'Description du jeu1', '2022-01-01', 59.99, FALSE,'987654312','987654312',null,FALSE, null );
-INSERT INTO JEU (GameId, Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES (2, 'DLCJeu1', 'Description du dlc du jeu2', '2022-02-01', 29.99, TRUE, '987654312','987654312',null,TRUE, 1);
-INSERT INTO JEU (GameId, Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES (3, 'Jeu3', 'Description du jeu3', '2022-03-01', 39.99, FALSE, '987654312','987654312',null,FALSE, null);
-INSERT INTO JEU (GameId, Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES (4, 'Jeu4', 'Description du jeu4', '2022-03-01', 59.99, FALSE, '987654312','987654312',null,FALSE, null);
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Jeu1', 'Description du jeu1', '2022-01-01', 59.99, FALSE,'987654312','987654312',null,FALSE, null );
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('DLCJeu1', 'Description du dlc du jeu2', '2022-02-01', 29.99, TRUE, '987654312','987654312',null,TRUE, 1);
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Jeu3', 'Description du jeu3', '2022-03-01', 39.99, FALSE, '987654312','987654312',null,FALSE, null);
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Jeu4', 'Description du jeu4', '2022-03-01', 59.99, FALSE, '987654312','987654312',null,FALSE, null);
 
 
 INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES ('https://example.com/image1.jpg', 'Image du jeu 1',1);
@@ -298,11 +298,13 @@ INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ("Français", 1);
 INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ("Anglais", 1);
 
 
-INSERT INTO OBJET (ObjetId, Nom, Description, Jeu) VALUES (1, 'Objet1', 'Description de l''objet1',1);
-INSERT INTO OBJET (ObjetId, Nom, Description, Jeu) VALUES (2, 'Objet2', 'Description de l''objet2',1);
-INSERT INTO OBJET (ObjetId, Nom, Description, Jeu) VALUES (3, 'Objet3', 'Description de l''objet3',1);
-INSERT INTO OBJET (ObjetId, Nom, Description, Jeu) VALUES (4, 'Objet4', 'Description de l''objet4',1);
-INSERT INTO OBJET (ObjetId, Nom, Description, Jeu) VALUES (5, 'Objet5', 'Description de l''objet5',1);
+INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet1', 'Description de l''objet1',1);
+INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet2', 'Description de l''objet2',1);
+INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet3', 'Description de l''objet3',1);
+INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet4', 'Description de l''objet4',1);
+INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet5', 'Description de l''objet5',1);
 
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("12", "Rue de la babouche", "Andenne", 5300, "Belgique");
 
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com","wéwéwé","2022-03-01","2000-06-06")
 
