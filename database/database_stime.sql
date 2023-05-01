@@ -11,29 +11,41 @@ create table ABONNEMENT (
      constraint ID_ABONNEMENT primary key (Type)
 );
 
-create TABLE UTILISATEUR_ABONNEMENT (
-    Utilisateur int not null,
-    Abonnement varchar(255) not null,
-    DateDebut date not null,
-    Duree int not null,
-    constraint ID_UTILISATEUR_ABONNEMENT primary key (Utilisateur, Abonnement, DateDebut),
-    constraint FK_UTILISATEUR foreign key (Utilisateur) references UTILISATEUR (UserId),
-    constraint FK_ABONNEMENT foreign key (Abonnement) references ABONNEMENT (Type)
-);
-
 create table PANIER (
      PanierId int not null,
      Montant float not null,
      constraint ID_PANIER primary key (PanierId)
 );
 
-create table PANIER_JEU (
-     Panier int not null,
-     Jeu int not null,
-     constraint ID_PANIER_JEU primary key (Panier, Jeu),
-     constraint FK_PANIER foreign key (Panier) references PANIER (PanierId),
-     constraint FK_JEU foreign key (Jeu) references JEU (GameId)
+
+create table CATEGORIE (
+     Nom varchar(255) not null,
+     Description varchar(255) not null,
+     constraint ID_CATEGORIE primary key (Nom)
 );
+
+create table LANGUE (
+     Langue varchar(255) not null,
+     Raccourci varchar(255) not null,
+     constraint ID_LANGUE primary key (Langue)
+);
+
+
+create table MOYEN_PAIEMENT (
+     MoyenPaiementId int not null,
+     Nom varchar(255) not null,
+     taxeDuMoyen int not null,
+     constraint ID_MOYEN_PAIEMENT primary key (MoyenPaiementId)
+);
+
+create table SOLDE (
+     SoldeId int not null,
+     TauxSolde int not null,
+     DateDebutSolde date not null,
+     DateFinSolde date not null,
+     constraint ID_SOLDE primary key (SoldeId)
+);
+
 
 create table ADRESSE (
      AdresseId int not null,
@@ -45,60 +57,23 @@ create table ADRESSE (
      constraint ID_ADRESSE primary key (AdresseId)
 );
 
-create table AVIS (
-     AvisId int not null,
-     Jeu int not null,
-     Auteur int not null,
-     Date date not null,
-     Note int not null,
-     Commentaire varchar(255) not null,
-     constraint ID_AVIS primary key (AvisId),
-     constraint FK_JEU foreign key (Jeu) references JEU (GameId),
-     constraint FK_AUTEUR foreign key (Auteur) references UTILISATEUR (UserId)
-);
-
-create table EVALUATION (
-     Utilisateur int not null,
-     Avis int not null,
-     Approuve BOOLEAN not null,
-     constraint ID_EVALUATION primary key (Utilisateur, Abonnement, DateDebut),
-     constraint FK_UTILISATEUR foreign key (Utilisateur) references UTILISATEUR (UserId),
-     constraint FK_AVIS foreign key (Avis) references AVIS (AvisId)
-)
-
-create table CATEGORIE (
+create table UTILISATEUR (
+     UserId varchar(255) not null,
+     Username varchar(255) not null,
+     Prenom varchar(255) not null,
      Nom varchar(255) not null,
-     Description varchar(255) not null,
-     constraint ID_CATEGORIE primary key (Nom)
+     Email varchar(255) not null,
+     MDP varchar(255) not null,
+     DateInscription date not null,
+     DateNaissance date not null,
+     Portefeuille float not null,
+     AdresseLivraison int not null,
+     AdresseFacturation int not null,
+     constraint ID_UTILISATEUR primary key (UserId),
+     constraint FK_ADRESSE_LIVRAISON foreign key (AdresseLivraison) references ADRESSE (AdresseId),
+     constraint FK_ADRESSE_FACTURATION foreign key (AdresseFacturation) references ADRESSE (AdresseId)
 );
 
-create table CATEGORIE_JEU (
-     Jeu int not null,
-     Categorie varchar(255) not null,
-     constraint ID_CATEGORIE_JEU primary key (Jeu, Categorie),
-     constraint FK_JEU foreign key (Jeu) references JEU (GameId),
-     constraint FK_CATEGORIE foreign key (Categorie) references CATEGORIE (Nom),
-);
-
-create table ACHAT (
-     AchatId int not null,
-     MontantTotal float not null,
-     DateAchat date not null,
-     Utilisateur int not null,
-     MoyenPaiement int not null,
-     Panier int not null,
-     constraint ID_ACHAT primary key (AchatId),
-     constraint FK_UTILISATEUR foreign key (Utilisateur) references UTILISATEUR (UserId),
-     constraint FK_MOYEN_PAIEMENT foreign key (MoyenPaiement) references MOYEN_PAIEMENT (MoyenPaiementId),
-     constraint FK_PANIER foreign key (Panier) references PANIER (PanierId)
-);
-
-create table MOYEN_PAIEMENT (
-     MoyenPaiementId int not null,
-     Nom varchar(255) not null,
-     taxeDuMoyen int not null,
-     constraint ID_MOYEN_PAIEMENT primary key (MoyenPaiementId)
-);
 
 create table ENTREPRISE (
      NumSiret varchar(255) not null,
@@ -118,13 +93,6 @@ create table ENTREPRISE_ADRESSE (
      constraint FK_ADRESSE foreign key (Adresse) references ADRESSE (AdresseId)
 );
 
-create table IMAGE_JEU (
-     URL_image varchar(255) not null,
-     Alt varchar(255) not null,
-     Jeu int not null,
-     constraint ID_IMAGE_JEU primary key (URL_image),
-     constraint FK_JEU foreign key (Jeu) references JEU (GameId)
-);
 
 create table JEU (
      GameId int not null,
@@ -145,27 +113,6 @@ create table JEU (
      constraint FK_DLC foreign key (DLC) references (JEU) GameId
 );
 
-create table LANGUE (
-     Langue varchar(255) not null,
-     Raccourci varchar(255) not null,
-     constraint ID_LANGUE primary key (Langue)
-);
-
-create table JEU_LANGUE_TEXTE (
-     Langue varchar(255) not null,
-     Jeu int not null,
-     constraint ID_JEU_LANGUE_TEXTE primary key (Langue, Jeu),
-     constraint FK_LANGUE foreign key (Langue) references LANGUE (Langue),
-     constraint FK_JEU foreign key (Jeu) references JEU (GameId)
-);
-
-create table JEU_LANGUE_AUDIO (
-     Langue varchar(255) not null,
-     Jeu int not null,
-     constraint ID_JEU_LANGUE_TEXTE primary key (Langue, Jeu),
-     constraint FK_LANGUE foreign key (Langue) references LANGUE (Langue),
-     constraint FK_JEU foreign key (Jeu) references JEU (GameId)
-);
 
 create table OBJET (
      ObjetId int not null,
@@ -188,13 +135,7 @@ create table OBJET_INSTANCE (
      constraint FK_OBJET foreign key (Objet) references (OBJET) ObjetId
 );
 
-create table SOLDE (
-     SoldeId int not null,
-     TauxSolde int not null,
-     DateDebutSolde date not null,
-     DateFinSolde date not null,
-     constraint ID_SOLDE primary key (SoldeId)
-);
+
 
 create table TRANSACTION (
      TransactionId int not null,
@@ -210,21 +151,27 @@ create table TRANSACTION (
      constraint FK_OBJET foreign key (Objet) references (OBJET_INSTANCE) Id
 );
 
-create table UTILISATEUR (
-     UserId varchar(255) not null,
-     Username varchar(255) not null,
-     Prenom varchar(255) not null,
-     Nom varchar(255) not null,
-     Email varchar(255) not null,
-     MDP varchar(255) not null,
-     DateInscription date not null,
-     DateNaissance date not null,
-     Portefeuille float not null,
-     AdresseLivraison int not null,
-     AdresseFacturation int not null,
-     constraint ID_UTILISATEUR primary key (UserId),
-     constraint FK_ADRESSE_LIVRAISON foreign key (AdresseLivraison) references ADRESSE (AdresseId),
-     constraint FK_ADRESSE_FACTURATION foreign key (AdresseFacturation) references ADRESSE (AdresseId)
+create table ACHAT (
+     AchatId int not null,
+     MontantTotal float not null,
+     DateAchat date not null,
+     Utilisateur int not null,
+     MoyenPaiement int not null,
+     Panier int not null,
+     constraint ID_ACHAT primary key (AchatId),
+     constraint FK_UTILISATEUR foreign key (Utilisateur) references UTILISATEUR (UserId),
+     constraint FK_MOYEN_PAIEMENT foreign key (MoyenPaiement) references MOYEN_PAIEMENT (MoyenPaiementId),
+     constraint FK_PANIER foreign key (Panier) references PANIER (PanierId)
+);
+
+create TABLE UTILISATEUR_ABONNEMENT (
+    Utilisateur int not null,
+    Abonnement varchar(255) not null,
+    DateDebut date not null,
+    Duree int not null,
+    constraint ID_UTILISATEUR_ABONNEMENT primary key (Utilisateur, Abonnement, DateDebut),
+    constraint FK_UTILISATEUR foreign key (Utilisateur) references UTILISATEUR (UserId),
+    constraint FK_ABONNEMENT foreign key (Abonnement) references ABONNEMENT (Type)
 );
 
 create table UTILISATEUR_JEU (
@@ -236,6 +183,67 @@ create table UTILISATEUR_JEU (
      constraint FK_JEU foreign key (Jeu) references JEU (GameId)
 );
 
+
+create table PANIER_JEU (
+     Panier int not null,
+     Jeu int not null,
+     constraint ID_PANIER_JEU primary key (Panier, Jeu),
+     constraint FK_PANIER foreign key (Panier) references PANIER (PanierId),
+     constraint FK_JEU foreign key (Jeu) references JEU (GameId)
+);
+
+create table JEU_LANGUE_TEXTE (
+     Langue varchar(255) not null,
+     Jeu int not null,
+     constraint ID_JEU_LANGUE_TEXTE primary key (Langue, Jeu),
+     constraint FK_LANGUE foreign key (Langue) references LANGUE (Langue),
+     constraint FK_JEU foreign key (Jeu) references JEU (GameId)
+);
+
+create table JEU_LANGUE_AUDIO (
+     Langue varchar(255) not null,
+     Jeu int not null,
+     constraint ID_JEU_LANGUE_TEXTE primary key (Langue, Jeu),
+     constraint FK_LANGUE foreign key (Langue) references LANGUE (Langue),
+     constraint FK_JEU foreign key (Jeu) references JEU (GameId)
+);
+
+create table IMAGE_JEU (
+     URL_image varchar(255) not null,
+     Alt varchar(255) not null,
+     Jeu int not null,
+     constraint ID_IMAGE_JEU primary key (URL_image),
+     constraint FK_JEU foreign key (Jeu) references JEU (GameId)
+);
+
+create table CATEGORIE_JEU (
+     Jeu int not null,
+     Categorie varchar(255) not null,
+     constraint ID_CATEGORIE_JEU primary key (Jeu, Categorie),
+     constraint FK_JEU foreign key (Jeu) references JEU (GameId),
+     constraint FK_CATEGORIE foreign key (Categorie) references CATEGORIE (Nom),
+);
+
+create table AVIS (
+     AvisId int not null,
+     Jeu int not null,
+     Auteur int not null,
+     Date date not null,
+     Note int not null,
+     Commentaire varchar(255) not null,
+     constraint ID_AVIS primary key (AvisId),
+     constraint FK_JEU foreign key (Jeu) references JEU (GameId),
+     constraint FK_AUTEUR foreign key (Auteur) references UTILISATEUR (UserId)
+);
+
+create table EVALUATION (
+     Utilisateur int not null,
+     Avis int not null,
+     Approuve BOOLEAN not null,
+     constraint ID_EVALUATION primary key (Utilisateur, Abonnement, DateDebut),
+     constraint FK_UTILISATEUR foreign key (Utilisateur) references UTILISATEUR (UserId),
+     constraint FK_AVIS foreign key (Avis) references AVIS (AvisId)
+)
 
 /***********************
 *       TRIGGER        *
