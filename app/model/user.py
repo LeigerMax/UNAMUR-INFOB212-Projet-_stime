@@ -1,4 +1,4 @@
-from app.database.connector import with_connection
+from app.database.connector import with_connection, get_cursor
 
 
 class User:
@@ -25,9 +25,8 @@ class User:
         :return: the user fetched
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM user WHERE UserId = %s"
@@ -44,9 +43,8 @@ class User:
         :return: the user fetched
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM UTILISATEUR WHERE Username = %s AND MDP = %s"
@@ -62,9 +60,8 @@ class User:
         :return: users fetched
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM user"
@@ -85,9 +82,8 @@ class User:
         :return: the user fetched
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Portefeuille) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
@@ -96,16 +92,15 @@ class User:
         return User(*cursor.fetchone())
 
     @classmethod
-    def update(cls, user):
+    def update(cls, user, **kwargs):
         """
         Update the user from the database
         :param user: the user to update
         :return: the user updated
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "UPDATE UTILISATEUR SET Username = %s, Prenom = %s, Nom = %s, Email = %s, DateNaissance = %s, PorteFeuille = %s, AdresseLivraison = %s, AdresseFacturation = %s WHERE UserId = %s"

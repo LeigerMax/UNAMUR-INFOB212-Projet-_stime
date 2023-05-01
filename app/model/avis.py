@@ -1,4 +1,4 @@
-from app.database.connector import with_connection
+from app.database.connector import with_connection, get_cursor
 
 
 class Avis:
@@ -13,9 +13,8 @@ class Avis:
     @classmethod
     @with_connection
     def select(cls,avisId, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM AVIS WHERE AvisId = %s "
@@ -32,9 +31,8 @@ class Avis:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM AVIS "
@@ -56,9 +54,8 @@ class Avis:
         :return: the avis inserted
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO AVIS (AvisId, Jeu,Auteur,Date,Note,Commentaire) VALUES (%s, %s, %s,%s, %s, %s)"
@@ -75,9 +72,8 @@ class Avis:
         :return: the avis updated
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "UPDATE AVIS SET Jeu = %s,Auteur = %s ,Date = %s ,Note = %s,Commentaire = %s WHERE AvisId = %s"
@@ -93,9 +89,8 @@ class Avis:
         :param: the id of the avis
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM AVIS WHERE AchatId = %s"

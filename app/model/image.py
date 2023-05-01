@@ -1,4 +1,4 @@
-from app.database.connector import with_connection
+from app.database.connector import with_connection, get_cursor
 
 
 class Image:
@@ -11,9 +11,8 @@ class Image:
     @classmethod
     @with_connection
     def select(cls,url, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM IMAGE_JEU WHERE URL_image = %s "
@@ -30,9 +29,8 @@ class Image:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM IMAGE_JEU "
@@ -54,9 +52,8 @@ class Image:
         :return: the image inserted
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO IMAGE_JEU (URL_image, Alt,Jeu) VALUES (%s, %s, %s)"
@@ -73,9 +70,8 @@ class Image:
         :return: the image updated
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "UPDATE IMAGE_JEU SET Alt = %s, Jeu = %s WHERE URL_image = %s"
@@ -92,9 +88,8 @@ class Image:
         :param: the id of the image
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM IMAGE_JEU WHERE URL_image = %s"

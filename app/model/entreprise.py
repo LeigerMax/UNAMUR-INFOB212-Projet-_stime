@@ -1,4 +1,4 @@
-from app.database.connector import with_connection
+from app.database.connector import with_connection, get_cursor
 
 
 class Entreprise:
@@ -14,9 +14,8 @@ class Entreprise:
     @classmethod
     @with_connection
     def select(cls,numSiret, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM ENTREPRISE WHERE NumSiret = %s "
@@ -33,9 +32,8 @@ class Entreprise:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM ENTREPRISE "
@@ -57,9 +55,8 @@ class Entreprise:
         :return: the entreprise inserted
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO ENTREPRISE (NumSiret, Nom, Description,AdresseWeb,EstBoiteDev,EstEditeur) VALUES (%s, %s, %s,%s, %s, %s)"
@@ -76,9 +73,8 @@ class Entreprise:
         :return: the entreprise updated
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "UPDATE ENTREPRISE SET Nom = %s ,Description = %s ,AdresseWeb = %s,EstBoiteDev = %s, EstEditeur = %s WHERE NumSiret = %s"
@@ -94,9 +90,8 @@ class Entreprise:
         :param: the id of the entreprise
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM ENTREPRISE WHERE NumSiret = %s"

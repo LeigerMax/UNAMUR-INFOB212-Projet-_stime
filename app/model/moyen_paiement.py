@@ -1,4 +1,5 @@
-from app.database.connector import with_connection
+from app.database.connector import with_connection, get_cursor
+
 
 class Moyen_paiement:
     def __init__(self, moyenPaiementId=None,nom=None,taxeDuMoyen=None):
@@ -10,9 +11,8 @@ class Moyen_paiement:
     @classmethod
     @with_connection
     def select(cls,moyenPaiementId, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM MOYEN_PAIEMENT WHERE MoyenPaiementId = %s "
@@ -29,9 +29,8 @@ class Moyen_paiement:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM MOYEN_PAIEMENT "
@@ -54,9 +53,8 @@ class Moyen_paiement:
         :return: the moyen de paiement inserted
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO MOYEN_PAIEMENT (MoyenPaiementId, Nom,TaxeDuMoyen) VALUES (%s, %s, %s)"

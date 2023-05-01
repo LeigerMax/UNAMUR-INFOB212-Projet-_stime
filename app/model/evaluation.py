@@ -1,4 +1,4 @@
-from app.database.connector import with_connection
+from app.database.connector import with_connection, get_cursor
 
 
 class Evaluation:
@@ -10,9 +10,8 @@ class Evaluation:
     @classmethod
     @with_connection
     def select(cls,utilisateur,avis, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM EVALUATION WHERE Utilisateur = %s AND Avis = %s "
@@ -29,9 +28,8 @@ class Evaluation:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM EVALUATION "
@@ -54,9 +52,8 @@ class Evaluation:
         :return: the evaluation inserted
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO EVALUATION (Utilisateur, Avis, Approuve) VALUES (%s, %s, %s)"
@@ -74,9 +71,8 @@ class Evaluation:
         :return: the evaluation updated
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "UPDATE EVALUATION SET Approuve = %s WHERE Utilisateur = %s AND Avis = %s"
@@ -93,9 +89,8 @@ class Evaluation:
         :param: the utilisateur,avis of the evaluation
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM EVALUATION WHERE Utilisateur = %s AND Avis = %s"

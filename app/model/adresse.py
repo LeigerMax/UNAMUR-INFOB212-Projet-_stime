@@ -1,4 +1,4 @@
-from app.database.connector import with_connection
+from app.database.connector import with_connection, get_cursor
 
 
 class Adresse:
@@ -13,9 +13,8 @@ class Adresse:
     @classmethod
     @with_connection
     def select(cls,adresseId, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM ADRESSE WHERE AdresseId = %s "
@@ -32,9 +31,8 @@ class Adresse:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM ADRESSE "
@@ -56,9 +54,8 @@ class Adresse:
         :return: the adresse inserted
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO ADRESSE (AdresseId, Numero,Rue,Ville,CodePostal,Pays) VALUES (%s, %s, %s,%s, %s, %s)"
@@ -75,9 +72,8 @@ class Adresse:
         :return: the adresse updated
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "UPDATE ADRESSE SET Numero = %s,Rue = %s ,Ville = %s ,CodePostal = %s,Pays = %s WHERE adresseId = %s"
@@ -93,9 +89,8 @@ class Adresse:
         :param: the id of the adresse
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM ADRESSE WHERE adresseId = %s"

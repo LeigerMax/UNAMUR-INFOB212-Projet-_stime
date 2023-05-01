@@ -1,4 +1,5 @@
-from app.database.connector import with_connection
+from app.database.connector import with_connection, get_cursor
+
 
 class Categorie:
     def __init__(self, nom=None, description=None):
@@ -14,9 +15,8 @@ class Categorie:
         :return: the categorie fetched
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
     
     @classmethod
     @with_connection
@@ -26,9 +26,8 @@ class Categorie:
         :return: users fetched
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM CATEGORIE"
@@ -50,9 +49,8 @@ class Categorie:
         :return: the categorie inserted
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO CATEGORIE (Nom, Description) VALUES (%s, %s)"
@@ -69,9 +67,8 @@ class Categorie:
         :return: the categorie updated
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "UPDATE CATEGORIE SET Description = %s WHERE Nom = %s"
@@ -87,9 +84,8 @@ class Categorie:
         :param: the id of the categorie
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM CATEGORIE WHERE Nom = %s"

@@ -1,4 +1,4 @@
-from app.database.connector import with_connection
+from app.database.connector import with_connection, get_cursor
 
 
 class Achat:
@@ -14,9 +14,9 @@ class Achat:
     @classmethod
     @with_connection
     def select(cls,achatId, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM ACHAT WHERE AchatId = %s "
@@ -33,9 +33,9 @@ class Achat:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM ACHAT "
@@ -57,9 +57,8 @@ class Achat:
         :return: the achat inserted
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO ACHAT (AchatId, MontantTotal,DateAchat,Utilisateur,MoyenPaiement,Panier) VALUES (%s, %s, %s,%s, %s, %s)"
@@ -76,9 +75,8 @@ class Achat:
         :return: the achat updated
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "UPDATE ACHAT SET MontantTotal = %s,DateAchat = %s ,Utilisateur = %s ,MoyenPaiement = %s,Panier = %s WHERE AchatId = %s"
@@ -94,9 +92,8 @@ class Achat:
         :param: the id of the achat
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM ACHAT WHERE AchatId = %s"

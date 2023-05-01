@@ -1,4 +1,5 @@
-from app.database.connector import with_connection
+from app.database.connector import with_connection, get_cursor
+
 
 class Solde:
     def __init__(self, soldeId=None,tauxSolde=None,dateDebutSolde=None,dateFinSolde=None):
@@ -10,9 +11,8 @@ class Solde:
     @classmethod
     @with_connection
     def select(cls,soldeId, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM SOLDE WHERE SoldeId = %s "
@@ -29,9 +29,8 @@ class Solde:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM SOLDE "
@@ -53,9 +52,8 @@ class Solde:
         :return: the solde inserted
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO SOLDE (SoldeId, TauxSolde, DateDebutSolde, DateFinSolde) VALUES (%s, %s, %s, %s)"
@@ -72,9 +70,8 @@ class Solde:
         :return: the solde updated
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "UPDATE SOLDE SET TauxSolde = %s,DateDebutSolde = %s,DateFinSolde = %s WHERE SoldeId = %s"
@@ -91,9 +88,8 @@ class Solde:
         :param: the id of the solde
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "DELETE FROM SOLDE WHERE SoldeId = %s"

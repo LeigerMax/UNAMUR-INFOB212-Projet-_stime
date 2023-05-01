@@ -1,4 +1,4 @@
-from app.database.connector import with_connection
+from app.database.connector import with_connection, get_cursor
 
 
 class Transaction:
@@ -14,9 +14,8 @@ class Transaction:
     @classmethod
     @with_connection
     def select(cls,transactionId, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM TRANSACTION WHERE TransactionId = %s "
@@ -33,9 +32,8 @@ class Transaction:
     @classmethod
     @with_connection
     def select_all(cls, **kwargs):
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "SELECT * FROM TRANSACTION "
@@ -57,9 +55,8 @@ class Transaction:
         :return: the transaction inserted
         """
 
-        # get connection and cursor
-        cnx = kwargs.pop("connection")
-        cursor = cnx.cursor()
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
 
         # execute query
         query = "INSERT INTO TRANSACTION (TransactionId, DateMiseEnVente, DateVente,PrixVente,Revendeur,Acheteur,Objet) VALUES (%s, %s, %s,%s, %s, %s, %s)"
