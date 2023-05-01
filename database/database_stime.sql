@@ -34,7 +34,7 @@ create table LANGUE (
 create table MOYEN_PAIEMENT (
      MoyenPaiementId int not null,
      Nom varchar(255) not null,
-     taxeDuMoyen int not null,
+     TaxeDuMoyen int not null,
      constraint ID_MOYEN_PAIEMENT primary key (MoyenPaiementId)
 );
 
@@ -67,8 +67,8 @@ create table UTILISATEUR (
      DateInscription date not null,
      DateNaissance date not null,
      Portefeuille float not null,
-     AdresseLivraison int not null,
-     AdresseFacturation int not null,
+     AdresseLivraison int,
+     AdresseFacturation int,
      constraint ID_UTILISATEUR primary key (UserId),
      constraint FK_ADRESSE_LIVRAISON foreign key (AdresseLivraison) references ADRESSE (AdresseId),
      constraint FK_ADRESSE_FACTURATION foreign key (AdresseFacturation) references ADRESSE (AdresseId)
@@ -139,7 +139,7 @@ create table OBJET_INSTANCE (
 create table TRANSACTION (
      TransactionId int not null,
      DateMiseEnVente date not null,
-     DateVente date not null,
+     DateVente date,
      PrixVente float not null,
      Revendeur int not null,
      Acheteur int,

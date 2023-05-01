@@ -2,14 +2,19 @@ from app.database.connector import with_connection
 
 
 class Game:
-    def __init__(self, gameId=None, nom=None, description=None, dateDeSortie=None, prix=None, estDLC=None, gamePass=None):
+    def __init__(self, gameId=None, nom=None, description=None, dateDeSortie=None, prix=None,gamePass=None, developpeur=None, editeur=None, solde=None, estDLC=None,dlc = None ):
         self.gameId = gameId
         self.nom = nom
         self.description = description
         self.dateDeSortie = dateDeSortie
         self.prix = prix
+        self.gamePass = gamePass
+        self.developpeur = developpeur
+        self.editeur = editeur
+        self.solde = solde
         self.estDLC = estDLC
         self.gamePass = gamePass
+        self.dlc = dlc
     
     @classmethod
     @with_connection
