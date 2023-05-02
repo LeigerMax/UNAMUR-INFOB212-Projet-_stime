@@ -59,7 +59,7 @@ class Objet:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "UPDATE GAME SET Nom, Description, Jeu WHERE ObjetId = %s"
+        query = "UPDATE GAME SET Nom = %s, Description = %s, Jeu = %s WHERE ObjetId = %s"
         cursor.execute(query, (objet.nom, objet.description, objet.objet_id))
 
         return objet
