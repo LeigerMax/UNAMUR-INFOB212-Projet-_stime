@@ -1,6 +1,6 @@
 from app.view.login_register import login_view
 from app.view.menu import main_menu_view
-from app.model.user import User
+from app.model.utilisateur import Utilisateur
 from app.view.console_utils.io import color_print
 from app.view.console_utils.colors import RED_BLD
 

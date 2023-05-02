@@ -129,7 +129,7 @@ class Entreprise:
         Remove an adresse to an entreprise
         :param entreprise: the exisiting entreprise (must contain an id)
         :param adresse: the existing adresse to remove from the entreprise (must contain an id)
-        :return: true if a row has been added, false otherwise
+        :return: true if a row has been deleted, false otherwise
         """
 
         # get cursor from connection in kwargs

@@ -1,4 +1,4 @@
-from app.model.game import Game
+from app.model.jeu import Jeu
 from app.model.langue import Langue
 from app.controller.shop_panier import shop_panier
 
@@ -7,7 +7,7 @@ from app.view.game_shop_page_details import game_shop_page_details_view,game_sho
 
 def game_shop_page_details(username,gameId):
 
-    game_list = Game.select(gameId)
+    game_list = Jeu.select(gameId)
     #languages = Language.select_language_of_game(gameNumber) #TODO: A remettre plus tard
     languages = Langue.select_language_all_games()
 

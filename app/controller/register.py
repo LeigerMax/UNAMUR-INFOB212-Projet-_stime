@@ -1,5 +1,5 @@
 from app.view.login_register import register_view
-from app.model.user import User
+from app.model.utilisateur import Utilisateur
 
 import datetime
 
@@ -41,7 +41,7 @@ def register():
 
     # Sauvegarde dans la BDD
     inscription_date = datetime.date.today()
-    User.insert_new_user(username, password, firstname, lastname, email,date_of_birth, inscription_date)
+    Utilisateur.insert_new_user(username, password, firstname, lastname, email, date_of_birth, inscription_date)
 
         
     return username

@@ -1,7 +1,7 @@
 from app.database.connector import with_connection, get_cursor
 
 
-class Game:
+class Jeu:
     def __init__(self, game_id=None, nom=None, description=None, date_de_sortie=None, prix=None, game_pass=None, developpeur=None, editeur=None, solde=None, est_dlc=None, dlc=None):
         self.game_id = game_id
         self.nom = nom
@@ -25,7 +25,7 @@ class Game:
         query = "SELECT * FROM JEU WHERE GameId = %s"
         cursor.execute(query, (gameId,))
 
-        return Game(*cursor.fetchone())
+        return Jeu(*cursor.fetchone())
     
     @classmethod
     @with_connection
@@ -40,7 +40,7 @@ class Game:
         # instantiate all games from cursor
         games = []
         for game in cursor.fetchall():
-            games.append(Game(*game))
+            games.append(Jeu(*game))
 
         return games
 
