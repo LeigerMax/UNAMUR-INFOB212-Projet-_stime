@@ -1,6 +1,6 @@
 from app.view.login_register import login_view
 from app.view.menu import main_menu_view
-from app.model.user import User
+from app.model.utilisateur import Utilisateur
 from app.view.console_utils.io import color_print
 from app.view.console_utils.colors import RED_BLD
 
@@ -17,7 +17,7 @@ def login():
         username = credentials["username"]
         password = credentials["password"]
         
-        check_user = User.check_user_login(username, password)
+        check_user = Utilisateur.check_user_login(username, password)
         if check_user is not None:
             credentials_ok = True
             main_menu_view(username)

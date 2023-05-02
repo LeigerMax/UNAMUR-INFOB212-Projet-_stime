@@ -1,6 +1,7 @@
 from app.view.login_register import register_view
-from app.model.user import User
-from datetime import date
+from app.model.utilisateur import Utilisateur
+import datetime
+
 
 def register():
     fields_ok = False
@@ -39,7 +40,7 @@ def register():
                 "lastname" :lastname,
                 "email" :email,
                 "date_of_birth" :date_of_birth,
-                "inscription_date" : date.today()
+                "inscription_date" : datetime.date.today()
             }
         except ValueError as e:
             print(f"Error: {e}")
@@ -47,7 +48,7 @@ def register():
         first_try = False
 
     # Sauvegarde dans la BDD
-    User.create(myUser)
+    inscription_date = datetime.date.today()
+    Utilisateur.insert(username, password, firstname, lastname, email, date_of_birth, inscription_date)
 
-        
     return username

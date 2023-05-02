@@ -1,6 +1,6 @@
 from app.view.console_utils.colors import BLUE,GREEN
 from app.view.console_utils.io import color_print, clear_console
-from app.model.language import Language
+from app.model.langue import Langue
 from app.exceptions import UserInputNotAnIntegerException, InputNumberNotInRangeException
 from app.view.console_utils.io import int_input
 

@@ -34,7 +34,7 @@ create table LANGUE (
 create table MOYEN_PAIEMENT (
      MoyenPaiementId int not null AUTO_INCREMENT,
      Nom varchar(255) not null,
-     taxeDuMoyen int not null,
+     TaxeDuMoyen int not null,
      constraint ID_MOYEN_PAIEMENT primary key (MoyenPaiementId)
 );
 
@@ -139,7 +139,7 @@ create table OBJET_INSTANCE (
 create table TRANSACTION (
      TransactionId int not null AUTO_INCREMENT,
      DateMiseEnVente date not null,
-     DateVente date not null,
+     DateVente date,
      PrixVente float not null,
      Revendeur int not null,
      Acheteur int,
@@ -306,8 +306,8 @@ INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet5', 'Description de l''o
 
 INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("12", "Rue de la babouche", "Andenne", 5300, "Belgique");
 
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com","wéwéwé","2022-03-01","2000-06-06");
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("test", "test", "test", "test@test.be","test","2022-03-01","2000-04-02");
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com", "b98f9643a856719a5944672f84cf13da694a1576c11fb9f3d57b7b71c9588981", "2022-03-01", "2000-06-06"); -- mdp: wéwéwé
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("test", "test", "test", "test@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02"); -- mdp: test
 
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,1, FALSE);
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,2, FALSE);

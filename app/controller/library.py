@@ -1,4 +1,4 @@
-from app.model.game import Game
+from app.model.jeu import Jeu
 
 from app.view.library import library_view
 
@@ -6,7 +6,7 @@ from app.view.library import library_view
 def library(username):
 
     
-    game_list = Game().select_all_games_shop_page()
+    game_list = Jeu.select_all()
 
     library_view(game_list)
 

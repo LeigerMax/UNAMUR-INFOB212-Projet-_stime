@@ -46,3 +46,14 @@ def with_connection(f):
         return result
 
     return with_connection_
+
+
+def get_cursor(kwargs):
+    """
+    Return the cursor of an open connection given a dictionary (kwargs) containing a connection.
+    :param kwargs: the dictionary containing a connection named "connection"
+    :return: the cursor of the connection
+    """
+
+    cnx = kwargs.pop("connection")
+    return cnx.cursor()
