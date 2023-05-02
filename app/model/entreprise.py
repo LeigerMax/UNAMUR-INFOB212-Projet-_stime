@@ -1,4 +1,5 @@
 from app.database.connector import with_connection, get_cursor
+from app.model.adresse import Adresse
 
 
 class Entreprise:
@@ -72,5 +73,70 @@ class Entreprise:
         # execute query
         query = "DELETE FROM ENTREPRISE WHERE NumSiret = %s"
         cursor.execute(query, (entreprise))
+
+        return cursor.rowcount > 0
+
+    ################################
+    # Entreprise-Adresse functions #
+    ################################
+
+    @classmethod
+    @with_connection
+    def get_adresses(cls, entreprise, **kwargs):
+        """
+        Get all adresses from an entreprise
+        :param entreprise: the entreprise linked to the adresses (must have an id)
+        :return: the adresses of the entreprise
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT a.* FROM ADRESSE as a, ENTREPRISE_ADRESSE as ea WHERE a.AdresseId = ea.Adresse AND ea.Entreprise = %s"
+        cursor.execute(query, (entreprise.num_siret))
+
+        # instantiate all adresses from cursor
+        adresses = []
+        for adresse in cursor.fetchall():
+            adresses.append(Adresse(*adresse))
+
+        return adresses
+
+    @classmethod
+    @with_connection
+    def add_adresse(cls, entreprise, adresse, **kwargs):
+        """
+        Add an adresse to an entreprise
+        :param entreprise: the exisiting entreprise (must contain an id)
+        :param adresse: the existing adresse to link to entreprise (must contain an id)
+        :return: true if a row has been added, false otherwise
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "INSERT INTO ENTREPRISE_ADRESSE (Entreprise, Adresse) values (%s, %s)"
+        cursor.execute(query, (entreprise.num_siret, adresse.adresse_id))
+
+        return cursor.rowcount > 0
+
+    @classmethod
+    @with_connection
+    def remove_adresse(cls, entreprise, adresse, **kwargs):
+        """
+        Remove an adresse to an entreprise
+        :param entreprise: the exisiting entreprise (must contain an id)
+        :param adresse: the existing adresse to remove from the entreprise (must contain an id)
+        :return: true if a row has been added, false otherwise
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "DELETE FROM ENTREPRISE_ADRESSE WHERE Entreprise = %s AND Adresse = %s"
+        cursor.execute(query, (entreprise.num_siret, adresse.adresse_id))
 
         return cursor.rowcount > 0
