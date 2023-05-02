@@ -1,5 +1,6 @@
 from app.database.connector import with_connection, get_cursor
 from app.model.jeu import Jeu
+from app.model.objet_instance import ObjetInstance
 
 
 class Panier:
@@ -15,7 +16,7 @@ class Panier:
 
         # execute query
         query = "SELECT * FROM PANIER WHERE PanierId = %s"
-        cursor.execute(query, (panier_id,))
+        cursor.execute(query, (panier_id))
 
         return Panier(*cursor.fetchone())
 
@@ -136,3 +137,30 @@ class Panier:
         cursor.execute(query, (panier.panier_id, jeu.game_id))
 
         return cursor.rowcount > 0
+
+    ###########################
+    # ObjetInstance functions #
+    ###########################
+
+    @classmethod
+    @with_connection
+    def get_objet_instances(cls, panier, **kwargs):
+        """
+        Get all objet instances from a panier
+        :param panier: the panier linked to objet instances (must have an id)
+        :return: the objet instance linked to the panier
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT * FROM OBJET_INSTANCE WHERE Panier = %s"
+        cursor.execute(query, (panier.panier_id))
+
+        # instantiate all jeux from cursor
+        objet_instances = []
+        for objet_instance in cursor.fetchall():
+            objet_instances.append(ObjetInstance(*objet_instance))
+
+        return objet_instances
