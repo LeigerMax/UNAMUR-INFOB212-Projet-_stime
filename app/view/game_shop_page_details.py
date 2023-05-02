@@ -5,29 +5,41 @@ from app.exceptions import UserInputNotAnIntegerException, InputNumberNotInRange
 from app.view.console_utils.io import int_input
 
 
-def game_shop_page_details_view(gameNumber,languages,avisList):
+def game_shop_page_details_view(information_game,avisList):
+
+    gameNumber = information_game[0]
+    languages_text = information_game[1]
+    languages_audio = information_game[2]
+    images_game = information_game[3]
+
+
     clear_console()
-    color_print(f"[DETAILS PAGE OF {gameNumber[1]} ]", BLUE)
+    color_print(f"[DETAILS PAGE OF {gameNumber.nom} ]", BLUE)
 
     # Affichage des détails du jeu
-    print(f"Game Title: {gameNumber[1]}") 
+    print(f"Game Title: {gameNumber.nom}") 
     print("Genre: <Genre du jeu>")
     print("Developer: <Développeur du jeu>")
     print("Publisher: <Éditeur du jeu>")
-    print(f"Release Date: {gameNumber[3]}")
-    print(f"Price: {gameNumber[4]} €")
-    print(f"Description: {gameNumber[2]}")
-    print("Game picture: <Image du jeu")
+    print(f"Release Date: {gameNumber.date_de_sortie}")
+    print(f"Price: {gameNumber.prix} €")
+    print(f"Description: {gameNumber.description}")
+    for image in images_game:
+        print(f"Game picture: {image.alt}")
 
     
-    print("Languages support :")
-    for language in languages:
-        print(f" - {language[0]} ( {language[1]} ) ")
+    print("Languages support text :")
+    for language in languages_text:
+        print(f" - {language.langue}  ") #TOTO: Mettre les raccourcis ( {language.raccourci} )
 
-    if(gameNumber[6] == True):
+    print("Languages support audio :")
+    for language in languages_audio:
+        print(f" - {language.langue}  ") #TOTO: Mettre les raccourcis ( {language.raccourci })
+
+    if(gameNumber.game_pass == True):
         color_print("Available in GamePass !", GREEN)
 
-    if(gameNumber[5] == True):
+    if(gameNumber.est_DLC == True):
         print("This is a DLC of <DLC GAME>, so you must own the original game in order to purchase this product.")
 
     #TODO: créer les avis

@@ -24,8 +24,23 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM user WHERE UserId = %s"
+        query = "SELECT * FROM UTILISATEUR WHERE UserId = %s"
         cursor.execute(query, (user_id,))
+
+        try:
+            return Utilisateur(*cursor.fetchone())
+        except TypeError:
+            return None
+        
+    @classmethod
+    @with_connection
+    def select_userid(cls, username, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT UserId FROM UTILISATEUR WHERE username = %s"
+        cursor.execute(query, (username,))
 
         try:
             return Utilisateur(*cursor.fetchone())
@@ -39,7 +54,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM user"
+        query = "SELECT * FROM UTILISATEUR"
         cursor.execute(query)
 
         # instantiate all users from cursor
@@ -120,8 +135,8 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT g.* FROM GAME as g, UTILISATEUR_JEU as ug WHERE g.GameId = ug.Jeu AND ug.Utilisateur = %s"
-        cursor.execute(query, (utilisateur.UserId))
+        query = "SELECT g.* FROM JEU as g, UTILISATEUR_JEU as ug WHERE g.GameId = ug.Jeu AND ug.Utilisateur = %s"
+        cursor.execute(query, (utilisateur.user_id,))
 
         # instantiate all jeux from cursor
         jeux = []

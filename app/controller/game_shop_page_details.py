@@ -1,5 +1,9 @@
 from app.model.jeu import Jeu
 from app.model.langue import Langue
+from app.model.jeu_langue_texte import JeuLangueTexte
+from app.model.jeu_langue_audio import JeuLangueAudio
+from app.model.image import Image
+from app.model.utilisateur import Utilisateur
 from app.controller.shop_panier import shop_panier
 
 from app.view.game_shop_page_details import game_shop_page_details_view,game_shop_page_details_in_library_view,game_shop_page_details_buy_sub_view,game_shop_page_details_buy_view,take_game_free_sucess_view
@@ -8,16 +12,29 @@ from app.view.game_shop_page_details import game_shop_page_details_view,game_sho
 def game_shop_page_details(username,gameId):
 
     game_list = Jeu.select(gameId)
-    #languages = Language.select_language_of_game(gameNumber) #TODO: A remettre plus tard
-    languages = Langue.select_language_all_games()
+    languages_text = JeuLangueTexte.select_langue_with_gameID(gameId) 
+    languages_audio = JeuLangueAudio.select_langue_with_gameID(gameId) 
+    images_game = Image.select_with_gameID(gameId) 
+
+
 
     #TODO: Récuperer les avis du jeu.
     #TODO: Check si jeu déjà acheter.
-    acheterCheck = False
+    utilisateur = Utilisateur.select_userid(username)
+    games_user = Utilisateur.get_games(utilisateur)
+    for game in games_user:
+        if game.game_id == gameId:
+            acheterCheck = True
+            break
+        else:
+            acheterCheck = False
+
     #TODO: Check si abonnement GamePass.
     abonnementCheck = True
 
-    game_shop_page_details_view(game_list,languages,avisList=None) #TODO: Modifier None
+    information_game = [game_list, languages_text, languages_audio, images_game]
+
+    game_shop_page_details_view(information_game,avisList=None) #TODO: Modifier None
 
     if(acheterCheck):
         game_shop_page_details_in_library_view()
