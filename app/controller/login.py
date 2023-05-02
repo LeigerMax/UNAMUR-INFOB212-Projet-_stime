@@ -17,16 +17,12 @@ def login():
         username = credentials["username"]
         password = credentials["password"]
         
-#        check_user = User.check_user_login(username, password)
-#        if check_user is not None:
-#            credentials_ok = True
-#            main_menu_view(username)
-#        else:
-#            color_print("Error: Incorrect username or password. Please try again.", RED_BLD)
-#            first_try = False
-#            credentials = login_view()
-
-       #TODO delete after
-        credentials_ok = True    
+        check_user = Utilisateur.check_user_login(username, password)
+        if check_user is not None:
+            credentials_ok = True
+            main_menu_view(username)
+        else:
+            first_try = False
+            credentials = login_view()   
 
     return username

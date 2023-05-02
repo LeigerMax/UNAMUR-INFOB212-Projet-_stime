@@ -42,3 +42,4 @@ def main_menu(username):
             main_menu(username)
         case 6:
             exit_stime()
+            exit_stime() #TODO: remove duplicate and fix the bug !!
