@@ -7,6 +7,7 @@ from getpass import getpass
 
 from app.exceptions import InputNumberNotInRangeException, UserInputNotAnIntegerException, \
     InputStringNotInRangeException, InputNotAnEmailException
+from app.settings import Password
 from app.view.console_utils.colors import color_text
 
 
@@ -111,11 +112,11 @@ def password_input(placeholder=None):
         return hashlib.pbkdf2_hmac(
             'sha256',                           # The hash digest algorithm
             unhashed_password.encode('utf-8'),  # Convert the password to bytes
-            os.urandom(32),                     # Provide the salt
+            Password.SALT,                      # Provide the salt
             100_000                             # 100000 iterations
-        )
+        ).hex()
     else:
-        raise InputStringNotInRangeException(password, 1, sys.maxsize)
+        raise InputStringNotInRangeException(unhashed_password, 1, sys.maxsize)
 
 
 def email_input(placeholder=None):
