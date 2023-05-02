@@ -21,7 +21,10 @@ class Transaction:
         query = "SELECT * FROM TRANSACTION WHERE TransactionId = %s"
         cursor.execute(query, (transaction_id))
 
-        return Transaction(*cursor.fetchone())
+        try:
+            return Transaction(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

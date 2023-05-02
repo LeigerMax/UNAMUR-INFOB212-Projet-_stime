@@ -21,7 +21,10 @@ class Entreprise:
         query = "SELECT * FROM ENTREPRISE WHERE NumSiret = %s "
         cursor.execute(query, (num_siret))
 
-        return Entreprise(*cursor.fetchone())
+        try:
+            return Entreprise(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

@@ -17,7 +17,10 @@ class Evaluation:
         query = "SELECT * FROM EVALUATION WHERE Utilisateur = %s AND Avis = %s"
         cursor.execute(query, (utilisateur, avis))
 
-        return Evaluation(*cursor.fetchone())
+        try:
+            return Evaluation(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

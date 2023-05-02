@@ -25,7 +25,10 @@ class Jeu:
         query = "SELECT * FROM JEU WHERE GameId = %s"
         cursor.execute(query, (gameId,))
 
-        return Jeu(*cursor.fetchone())
+        try:
+            return Jeu(*cursor.fetchone())
+        except TypeError:
+            return None
     
     @classmethod
     @with_connection

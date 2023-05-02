@@ -17,7 +17,10 @@ class MoyenPaiement:
         query = "SELECT * FROM MOYEN_PAIEMENT WHERE MoyenPaiementId = %s"
         cursor.execute(query, (moyen_paiement_id))
 
-        return MoyenPaiement(*cursor.fetchone())
+        try:
+            return MoyenPaiement(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

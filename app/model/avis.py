@@ -20,7 +20,10 @@ class Avis:
         query = "SELECT * FROM AVIS WHERE AvisId = %s"
         cursor.execute(query, (avis_id))
 
-        return Avis(*cursor.fetchone())
+        try:
+            return Avis(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

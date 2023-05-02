@@ -17,7 +17,10 @@ class Image:
         query = "SELECT * FROM IMAGE_JEU WHERE URL_image = %s"
         cursor.execute(query, (url))
 
-        return Image(*cursor.fetchone())
+        try:
+            return Image(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

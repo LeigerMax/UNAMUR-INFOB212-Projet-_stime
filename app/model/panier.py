@@ -18,7 +18,10 @@ class Panier:
         query = "SELECT * FROM PANIER WHERE PanierId = %s"
         cursor.execute(query, (panier_id))
 
-        return Panier(*cursor.fetchone())
+        try:
+            return Panier(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

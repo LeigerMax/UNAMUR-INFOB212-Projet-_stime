@@ -19,7 +19,10 @@ class ObjetInstance:
         query = "SELECT * FROM OBJET_INSTANCE WHERE Id = %s"
         cursor.execute(query, (objet_instance_id))
 
-        return ObjetInstance(*cursor.fetchone())
+        try:
+            return ObjetInstance(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

@@ -18,7 +18,10 @@ class Objet:
         query = "SELECT * FROM OBJET WHERE ObjetId = %s"
         cursor.execute(query, (objet_id))
 
-        return Objet(*cursor.fetchone())
+        try:
+            return Objet(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

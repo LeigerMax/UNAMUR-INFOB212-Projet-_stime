@@ -20,7 +20,10 @@ class Achat:
         query = "SELECT * FROM ACHAT WHERE AchatId = %s"
         cursor.execute(query, (achat_id))
 
-        return Achat(*cursor.fetchone())
+        try:
+            return Achat(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection
@@ -38,7 +41,7 @@ class Achat:
             achats.append(Achat(*achat))
 
         return achats
-    
+
     @classmethod
     @with_connection
     def insert(cls, achat, **kwargs):
@@ -53,7 +56,7 @@ class Achat:
         achat.achat_id = cursor.lastrowid
 
         return achat
-    
+
     @classmethod
     @with_connection
     def update(cls, achat, **kwargs):
@@ -65,7 +68,7 @@ class Achat:
         cursor.execute(query, (achat.montant_total, achat.date_achat, achat.utilisateur, achat.moyen_paiement, achat.panier, achat.achat_id))
 
         return achat
-    
+
     @classmethod
     @with_connection
     def delete(cls, achat, **kwargs):

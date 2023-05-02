@@ -16,7 +16,10 @@ class Langue:
         query = "SELECT * FROM LANGUE WHERE Langue = %s"
         cursor.execute(query, (langue))
 
-        return Langue(*cursor.fetchone())
+        try:
+            return Langue(*cursor.fetchone())
+        except TypeError:
+            return None
     
     @classmethod
     @with_connection

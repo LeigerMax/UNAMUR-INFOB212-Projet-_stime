@@ -18,7 +18,10 @@ class Solde:
         query = "SELECT * FROM SOLDE WHERE SoldeId = %s "
         cursor.execute(query, (solde_id,))
 
-        return Solde(*cursor.fetchone())
+        try:
+            return Solde(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

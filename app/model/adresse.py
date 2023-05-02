@@ -20,7 +20,10 @@ class Adresse:
         query = "SELECT * FROM ADRESSE WHERE AdresseId = %s"
         cursor.execute(query, (adresse_id))
 
-        return Adresse(*cursor.fetchone())
+        try:
+            return Adresse(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

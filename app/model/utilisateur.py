@@ -27,7 +27,10 @@ class Utilisateur:
         query = "SELECT * FROM user WHERE UserId = %s"
         cursor.execute(query, (user_id,))
 
-        return Utilisateur(*cursor.fetchone())
+        try:
+            return Utilisateur(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection
@@ -95,7 +98,10 @@ class Utilisateur:
         query = "SELECT * FROM UTILISATEUR WHERE Username = %s AND MDP = %s"
         cursor.execute(query, (username, password))
 
-        return Utilisateur(*cursor.fetchone())
+        try:
+            return Utilisateur(*cursor.fetchone())
+        except TypeError:
+            return None
 
     #############################
     # Utilisateur-Jeu functions #

@@ -16,7 +16,10 @@ class Categorie:
         query = "SELECT * FROM CATEGORIE WHERE Nom = %s"
         cursor.execute(query, (nom))
 
-        return Categorie(*cursor.fetchone())
+        try:
+            return Categorie(*cursor.fetchone())
+        except TypeError:
+            return None
     
     @classmethod
     @with_connection
