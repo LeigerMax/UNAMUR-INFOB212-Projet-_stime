@@ -1,4 +1,5 @@
 from app.database.connector import with_connection, get_cursor
+from app.model.jeu import Jeu
 
 
 class Panier:
@@ -68,5 +69,70 @@ class Panier:
         # execute query
         query = "DELETE FROM PANIER WHERE PanierId = %s"
         cursor.execute(query, (panier_id))
+
+        return cursor.rowcount > 0
+
+    ########################
+    # Panier-Jeu functions #
+    ########################
+
+    @classmethod
+    @with_connection
+    def get_jeux(cls, panier, **kwargs):
+        """
+        Get all jeux from a panier
+        :param panier: the panier linked to the jeux (must have an id)
+        :return: the jeux contained in the panier
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT j.* FROM JEU as j, PANIER_JEU as pn WHERE j.GameId = pn.Jeu AND pn.Panier = %s"
+        cursor.execute(query, (panier.panier_id))
+
+        # instantiate all jeux from cursor
+        jeux = []
+        for jeu in cursor.fetchall():
+            jeux.append(Jeu(*jeu))
+
+        return jeux
+
+    @classmethod
+    @with_connection
+    def add_jeu(cls, panier, jeu, **kwargs):
+        """
+        Add a jeu to a panier
+        :param panier: the exisiting panier (must contain an id)
+        :param jeu: the existing jeu to link to panier (must contain an id)
+        :return: true if a row has been added, false otherwise
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "INSERT INTO PANIER_JEU (Panier, Jeu) values (%s, %s)"
+        cursor.execute(query, (panier.panier_id, jeu.game_id))
+
+        return cursor.rowcount > 0
+
+    @classmethod
+    @with_connection
+    def remove_jeu(cls, panier, jeu, **kwargs):
+        """
+        Remove a jeu to a panier
+        :param panier: the exisiting panier (must contain an id)
+        :param jeu: the existing jeu to remove from the panier (must contain an id)
+        :return: true if a row has been deleted, false otherwise
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "DELETE FROM PANIER_JEU WHERE Panier = %s AND Jeu = %s"
+        cursor.execute(query, (panier.panier_id, jeu.game_id))
 
         return cursor.rowcount > 0
