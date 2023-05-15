@@ -32,10 +32,11 @@ def card_view(panier,means_of_payment_data):
     print("What means of payment?")
     for i in range(len(means_of_payment_data)):
         means_of_payment = means_of_payment_data[i]
+        i += 1
         print(i,". ", means_of_payment.nom, " avec ", means_of_payment.taxe_du_moyen, "€ de taxe")
 
     try:
-        choice = int_input(0, len(means_of_payment_data)-1, placeholder="Choice: ")
+        choice = int_input(0, len(means_of_payment_data), placeholder="Choice: ")
     except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
             return card_view(panier,means_of_payment_data)
     

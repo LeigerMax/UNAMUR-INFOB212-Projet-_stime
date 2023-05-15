@@ -19,7 +19,7 @@ def shop_panier(username):
      #Récupère les données des jeux
      for game_id in game_ids:
           jeu = Jeu.select(game_id)
-          data_game_in_panier.append((jeu.nom, jeu.prix))
+          data_game_in_panier.append((jeu.game_id,jeu.nom, jeu.prix))
 
 
      data_user_choice = shop_panier_view(username,data_game_in_panier)

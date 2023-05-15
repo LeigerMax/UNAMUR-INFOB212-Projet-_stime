@@ -18,10 +18,11 @@ def game_shop_page_details(username,gameId):
     images_game = Image.select_with_gameID(gameId) 
 
 
+    utilisateurId = Utilisateur.select_userid(username)
 
     #TODO: Récuperer les avis du jeu.
-    #TODO: Check si jeu déjà acheter.
-    utilisateurId = Utilisateur.select_userid(username)
+
+    # Check si jeu déjà acheter.
     acheterCheck = False
 
     games_user = Utilisateur.get_games(utilisateurId)
@@ -31,6 +32,7 @@ def game_shop_page_details(username,gameId):
             break
         else:
             acheterCheck = False
+
 
     #TODO: Check si abonnement GamePass.
     abonnementCheck = True
@@ -46,7 +48,7 @@ def game_shop_page_details(username,gameId):
         user_choice = game_shop_page_details_buy_sub_view()
         match user_choice:
             case 1:
-                #TODO: ADD library 
+                Utilisateur.add_jeu(Utilisateur(utilisateurId.user_id), Jeu(gameId), True)
                 take_game_free_sucess_view()
                 input()
                 return
