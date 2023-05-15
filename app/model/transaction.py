@@ -19,7 +19,7 @@ class Transaction:
 
         # execute query
         query = "SELECT * FROM TRANSACTION WHERE TransactionId = %s"
-        cursor.execute(query, (transaction_id))
+        cursor.execute(query, (transaction_id,))
 
         try:
             return Transaction(*cursor.fetchone())
@@ -78,6 +78,6 @@ class Transaction:
 
         # execute query
         query = "DELETE FROM TRANSACTION WHERE TransactionId = %s"
-        cursor.execute(query, (transaction_id))
+        cursor.execute(query, (transaction_id,))
 
         return cursor.rowcount > 0

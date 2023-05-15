@@ -1,10 +1,11 @@
 from app.database.connector import with_connection, get_cursor
+from app.model.abonnement import Abonnement
 from app.model.jeu import Jeu
 
 
 class Utilisateur:
     def __init__(self, user_id=None, username=None, firstname=None, lastname=None, email=None, password=None,
-                 inscription_date=None, date_of_birth=None, wallet=None, bill_address=None, delivery_address=None):
+                 inscription_date=None, date_of_birth=None, wallet=None, bill_address=None, delivery_address=None, panier=None):
         self.user_id = user_id
         self.username = username
         self.firstname = firstname
@@ -16,6 +17,7 @@ class Utilisateur:
         self.wallet = wallet
         self.bill_address = bill_address
         self.delivery_address = delivery_address
+        self.panier = panier
 
     @classmethod
     @with_connection
@@ -24,7 +26,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM user WHERE UserId = %s"
+        query = "SELECT * FROM UTILISATEUR WHERE UserId = %s"
         cursor.execute(query, (user_id,))
 
         try:
@@ -39,7 +41,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM user"
+        query = "SELECT * FROM UTILISATEUR"
         cursor.execute(query)
 
         # instantiate all users from cursor
@@ -83,8 +85,8 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "DELETE FROM USER WHERE UserId = %s"
-        cursor.execute(query, (user_id))
+        query = "DELETE FROM UTILISATEUR WHERE UserId = %s"
+        cursor.execute(query, (user_id,))
 
         return cursor.rowcount > 0
 
@@ -121,7 +123,7 @@ class Utilisateur:
 
         # execute query
         query = "SELECT g.* FROM GAME as g, UTILISATEUR_JEU as ug WHERE g.GameId = ug.Jeu AND ug.Utilisateur = %s"
-        cursor.execute(query, (utilisateur.UserId))
+        cursor.execute(query, (utilisateur.UserId,))
 
         # instantiate all jeux from cursor
         jeux = []
@@ -168,3 +170,28 @@ class Utilisateur:
         cursor.execute(query, (utilisateur.user_id, jeu.game_id))
 
         return cursor.rowcount > 0
+
+    ####################################
+    # Utilisateur-Abonnement functions #
+    ####################################
+
+    @classmethod
+    @with_connection
+    def get_current_abonnement(cls, utilisateur, **kwargs):
+        """
+        Get the abonnement of an utilisateur with the most recent date
+        :param utilisateur: the utilisateur
+        :return: the most recent abonnement of the user
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT a.* FROM ABONNEMENT AS a, UTILISATEUR_ABONNEMENT AS ua WHERE a.Type = ua.Abonnement AND ua.Utilisateur = %s AND ua.DateDebut = (SELECT MAX(DateDebut) from UTILISATEUR_ABONNEMENT)"
+        cursor.execute(query, (utilisateur.UserId,))
+
+        try:
+            return Abonnement(*cursor.fetchone())
+        except TypeError:
+            return None

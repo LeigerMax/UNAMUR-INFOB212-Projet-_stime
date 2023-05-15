@@ -15,7 +15,7 @@ class Image:
 
         # execute query
         query = "SELECT * FROM IMAGE_JEU WHERE URL_image = %s"
-        cursor.execute(query, (url))
+        cursor.execute(query, (url,))
 
         try:
             return Image(*cursor.fetchone())
@@ -71,6 +71,6 @@ class Image:
 
         # execute query
         query = "DELETE FROM IMAGE_JEU WHERE URL_image = %s"
-        cursor.execute(query, (url))
+        cursor.execute(query, (url,))
 
         return cursor.rowcount > 0

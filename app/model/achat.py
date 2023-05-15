@@ -18,7 +18,7 @@ class Achat:
 
         # execute query
         query = "SELECT * FROM ACHAT WHERE AchatId = %s"
-        cursor.execute(query, (achat_id))
+        cursor.execute(query, (achat_id,))
 
         try:
             return Achat(*cursor.fetchone())
@@ -77,6 +77,6 @@ class Achat:
 
         # execute query
         query = "DELETE FROM ACHAT WHERE AchatId = %s"
-        cursor.execute(query, (achat))
+        cursor.execute(query, (achat,))
 
         return cursor.rowcount > 0

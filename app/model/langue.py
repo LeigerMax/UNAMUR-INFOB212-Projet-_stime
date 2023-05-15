@@ -14,7 +14,7 @@ class Langue:
 
         # execute query
         query = "SELECT * FROM LANGUE WHERE Langue = %s"
-        cursor.execute(query, (langue))
+        cursor.execute(query, (langue,))
 
         try:
             return Langue(*cursor.fetchone())
@@ -69,6 +69,6 @@ class Langue:
 
         # execute query
         query = "DELETE FROM LANGUE WHERE Langue = %s"
-        cursor.execute(query, (langue))
+        cursor.execute(query, (langue,))
 
         return cursor.rowcount > 0
