@@ -1,4 +1,5 @@
 from app.database.connector import with_connection, get_cursor
+from app.model.categorie import Categorie
 
 
 class Jeu:
@@ -85,3 +86,30 @@ class Jeu:
         cursor.execute(query, (game_id))
 
         return cursor.rowcount > 0
+
+    #############################
+    #  Jeu-Categorie functions  #
+    #############################
+
+    @classmethod
+    @with_connection
+    def get_categories(cls, jeu, **kwargs):
+        """
+        Get all categories of a game
+        :param jeu: the jeu
+        :return: the categories of the game
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT c.* FROM CATEGORIE as c, CATEGORIE_JEU as cj WHERE c.Nom = cj.Categorie AND cj.Jeu = %s"
+        cursor.execute(query, (jeu.game_id))
+
+        # instantiate all categories from cursor
+        categories = []
+        for categorie in cursor.fetchall():
+            categories.append(Categorie(*categorie))
+
+        return categories
