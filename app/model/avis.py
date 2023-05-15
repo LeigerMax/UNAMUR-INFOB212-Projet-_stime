@@ -18,7 +18,7 @@ class Avis:
 
         # execute query
         query = "SELECT * FROM AVIS WHERE AvisId = %s"
-        cursor.execute(query, (avis_id))
+        cursor.execute(query, (avis_id,))
 
         try:
             return Avis(*cursor.fetchone())
@@ -77,7 +77,7 @@ class Avis:
 
         # execute query
         query = "DELETE FROM AVIS WHERE AchatId = %s"
-        cursor.execute(query, (avis))
+        cursor.execute(query, (avis,))
 
         return cursor.rowcount > 0
 
@@ -99,7 +99,7 @@ class Avis:
 
         # execute query
         query = "SELECT * FROM EVALUATION WHERE Avis = %s"
-        cursor.execute(query, (avis.avis_id))
+        cursor.execute(query, (avis.avis_id,))
 
         # instantiate all avis from cursor
         avis_list = []

@@ -86,7 +86,7 @@ class Utilisateur:
 
         # execute query
         query = "DELETE FROM UTILISATEUR WHERE UserId = %s"
-        cursor.execute(query, (user_id))
+        cursor.execute(query, (user_id,))
 
         return cursor.rowcount > 0
 
@@ -123,7 +123,7 @@ class Utilisateur:
 
         # execute query
         query = "SELECT g.* FROM GAME as g, UTILISATEUR_JEU as ug WHERE g.GameId = ug.Jeu AND ug.Utilisateur = %s"
-        cursor.execute(query, (utilisateur.UserId))
+        cursor.execute(query, (utilisateur.UserId,))
 
         # instantiate all jeux from cursor
         jeux = []
@@ -189,7 +189,7 @@ class Utilisateur:
 
         # execute query
         query = "SELECT a.* FROM ABONNEMENT AS a, UTILISATEUR_ABONNEMENT AS ua WHERE a.Type = ua.Abonnement AND ua.Utilisateur = %s AND ua.DateDebut = (SELECT MAX(DateDebut) from UTILISATEUR_ABONNEMENT)"
-        cursor.execute(query, (utilisateur.UserId))
+        cursor.execute(query, (utilisateur.UserId,))
 
         try:
             return Abonnement(*cursor.fetchone())

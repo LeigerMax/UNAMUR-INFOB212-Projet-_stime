@@ -18,7 +18,7 @@ class Adresse:
 
         # execute query
         query = "SELECT * FROM ADRESSE WHERE AdresseId = %s"
-        cursor.execute(query, (adresse_id))
+        cursor.execute(query, (adresse_id,))
 
         try:
             return Adresse(*cursor.fetchone())
@@ -77,6 +77,6 @@ class Adresse:
 
         # execute query
         query = "DELETE FROM ADRESSE WHERE adresseId = %s"
-        cursor.execute(query, (adresse))
+        cursor.execute(query, (adresse,))
 
         return cursor.rowcount > 0

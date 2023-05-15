@@ -15,7 +15,7 @@ class MoyenPaiement:
 
         # execute query
         query = "SELECT * FROM MOYEN_PAIEMENT WHERE MoyenPaiementId = %s"
-        cursor.execute(query, (moyen_paiement_id))
+        cursor.execute(query, (moyen_paiement_id,))
 
         try:
             return MoyenPaiement(*cursor.fetchone())
@@ -74,6 +74,6 @@ class MoyenPaiement:
 
         # execute query
         query = "DELETE FROM MOYEN_PAIEMENT WHERE MoyenPaiementId = %s"
-        cursor.execute(query, (moyen_paiement_id))
+        cursor.execute(query, (moyen_paiement_id,))
 
         return cursor.rowcount > 0

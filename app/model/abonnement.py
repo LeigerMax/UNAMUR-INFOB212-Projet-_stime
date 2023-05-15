@@ -70,6 +70,6 @@ class Abonnement:
 
         # execute query
         query = "DELETE FROM ABONNEMENT WHERE Type = %s"
-        cursor.execute(query, (type))
+        cursor.execute(query, (type,))
 
         return cursor.rowcount > 0

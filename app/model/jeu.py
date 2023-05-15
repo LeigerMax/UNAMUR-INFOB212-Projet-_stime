@@ -84,7 +84,7 @@ class Jeu:
 
         # execute query
         query = "DELETE FROM GAME WHERE GameId = %s"
-        cursor.execute(query, (game_id))
+        cursor.execute(query, (game_id,))
 
         return cursor.rowcount > 0
 
@@ -106,7 +106,7 @@ class Jeu:
 
         # execute query
         query = "SELECT c.* FROM CATEGORIE as c, CATEGORIE_JEU as cj WHERE c.Nom = cj.Categorie AND cj.Jeu = %s"
-        cursor.execute(query, (jeu.game_id))
+        cursor.execute(query, (jeu.game_id,))
 
         # instantiate all categories from cursor
         categories = []
@@ -133,7 +133,7 @@ class Jeu:
 
         # execute query
         query = "SELECT l.* FROM LANGUE as l, JEU_LANGUE_TEXTE as jlt WHERE l.Langue = jlt.Langue AND jlt.Jeu = %s"
-        cursor.execute(query, (jeu.game_id))
+        cursor.execute(query, (jeu.game_id,))
 
         # instantiate all langues from cursor
         langues = []
@@ -156,7 +156,7 @@ class Jeu:
 
         # execute query
         query = "SELECT l.* FROM LANGUE as l, JEU_LANGUE_AUDIO as jla WHERE l.Langue = jla.Langue AND jla.Jeu = %s"
-        cursor.execute(query, (jeu.game_id))
+        cursor.execute(query, (jeu.game_id,))
 
         # instantiate all langues from cursor
         langues = []
