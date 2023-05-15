@@ -1,4 +1,5 @@
 from app.database.connector import with_connection, get_cursor
+from app.model.abonnement import Abonnement
 from app.model.jeu import Jeu
 
 
@@ -168,3 +169,28 @@ class Utilisateur:
         cursor.execute(query, (utilisateur.user_id, jeu.game_id))
 
         return cursor.rowcount > 0
+
+    ####################################
+    # Utilisateur-Abonnement functions #
+    ####################################
+
+    @classmethod
+    @with_connection
+    def get_current_abonnement(cls, utilisateur, **kwargs):
+        """
+        Get the abonnement of an utilisateur with the most recent date
+        :param utilisateur: the utilisateur
+        :return: the most recent abonnement of the user
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT a.* FROM ABONNEMENT AS a, UTILISATEUR_ABONNEMENT AS ua WHERE a.Type = ua.Abonnement AND ua.Utilisateur = %s AND ua.DateDebut = (SELECT MAX(DateDebut) from UTILISATEUR_ABONNEMENT)"
+        cursor.execute(query, (utilisateur.UserId))
+
+        try:
+            return Abonnement(*cursor.fetchone())
+        except TypeError:
+            return None
