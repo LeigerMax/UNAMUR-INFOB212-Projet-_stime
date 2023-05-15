@@ -25,14 +25,14 @@ def library_view(games):
                 return chaine[:longueur_max-3] + "..."
 
         # Déterminer la largeur maximale de la colonne "Jeu"
-        largeur_max_jeu = max(len(jeu[0]) for jeu in games)
+        largeur_max_jeu = max(len(jeu.nom) for jeu in games)
 
         # Afficher les données dans la table formatée avec un numéro devant chaque jeu
         print("| {:<4} | {:<{}} | {:<100} |".format("Num", "Jeu", largeur_max_jeu, "Description"))
         print("+{}+{}+{}+".format("-"*6, "-"*(largeur_max_jeu+2), "-"*102))
         for i, jeu in enumerate(games, start=1):
-            jeu_tronque = tronquer_chaine(jeu[0], largeur_max_jeu)
-            description_tronquee = tronquer_chaine(jeu[1], 100)
+            jeu_tronque = tronquer_chaine(jeu.nom, largeur_max_jeu)
+            description_tronquee = tronquer_chaine(jeu.description, 100)
             print("| {:<4} | {:<{}} | {:<100} |".format(i, jeu_tronque, largeur_max_jeu, description_tronquee))
 
 

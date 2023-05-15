@@ -33,6 +33,21 @@ class Utilisateur:
             return Utilisateur(*cursor.fetchone())
         except TypeError:
             return None
+        
+    @classmethod
+    @with_connection
+    def select_userid(cls, username, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT UserId FROM UTILISATEUR WHERE username = %s"
+        cursor.execute(query, (username,))
+
+        try:
+            return Utilisateur(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection
@@ -124,6 +139,7 @@ class Utilisateur:
         # execute query
         query = "SELECT g.* FROM GAME as g, UTILISATEUR_JEU as ug WHERE g.GameId = ug.Jeu AND ug.Utilisateur = %s"
         cursor.execute(query, (utilisateur.UserId,))
+
 
         # instantiate all jeux from cursor
         jeux = []

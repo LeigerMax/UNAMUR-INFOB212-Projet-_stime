@@ -21,6 +21,25 @@ class Image:
             return Image(*cursor.fetchone())
         except TypeError:
             return None
+        
+    @classmethod
+    @with_connection
+    def select_with_gameID(cls, gameId, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT * FROM IMAGE_JEU WHERE Jeu = %s"
+        cursor.execute(query, (gameId,))
+
+        # instantiate all images from cursor
+        images = []
+        for image in cursor.fetchall():
+            images.append(Image(*image))
+
+        return images
+        
+
 
     @classmethod
     @with_connection
