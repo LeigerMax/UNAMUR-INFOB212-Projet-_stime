@@ -24,7 +24,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM user WHERE UserId = %s"
+        query = "SELECT * FROM UTILISATEUR WHERE UserId = %s"
         cursor.execute(query, (user_id,))
 
         try:
@@ -39,7 +39,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM user"
+        query = "SELECT * FROM UTILISATEUR"
         cursor.execute(query)
 
         # instantiate all users from cursor
@@ -83,7 +83,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "DELETE FROM USER WHERE UserId = %s"
+        query = "DELETE FROM UTILISATEUR WHERE UserId = %s"
         cursor.execute(query, (user_id))
 
         return cursor.rowcount > 0
