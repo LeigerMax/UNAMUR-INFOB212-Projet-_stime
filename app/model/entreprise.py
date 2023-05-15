@@ -19,7 +19,7 @@ class Entreprise:
 
         # execute query
         query = "SELECT * FROM ENTREPRISE WHERE NumSiret = %s "
-        cursor.execute(query, (num_siret))
+        cursor.execute(query, (num_siret,))
 
         try:
             return Entreprise(*cursor.fetchone())
@@ -75,7 +75,7 @@ class Entreprise:
 
         # execute query
         query = "DELETE FROM ENTREPRISE WHERE NumSiret = %s"
-        cursor.execute(query, (entreprise))
+        cursor.execute(query, (entreprise,))
 
         return cursor.rowcount > 0
 
@@ -97,7 +97,7 @@ class Entreprise:
 
         # execute query
         query = "SELECT a.* FROM ADRESSE as a, ENTREPRISE_ADRESSE as ea WHERE a.AdresseId = ea.Adresse AND ea.Entreprise = %s"
-        cursor.execute(query, (entreprise.num_siret))
+        cursor.execute(query, (entreprise.num_siret,))
 
         # instantiate all adresses from cursor
         adresses = []

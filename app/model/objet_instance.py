@@ -17,7 +17,7 @@ class ObjetInstance:
 
         # execute query
         query = "SELECT * FROM OBJET_INSTANCE WHERE Id = %s"
-        cursor.execute(query, (objet_instance_id))
+        cursor.execute(query, (objet_instance_id,))
 
         try:
             return ObjetInstance(*cursor.fetchone())
@@ -76,6 +76,6 @@ class ObjetInstance:
 
         # execute query
         query = "DELETE FROM OBJET_INSTANCE WHERE Id = %s"
-        cursor.execute(query, (objet_instance_id))
+        cursor.execute(query, (objet_instance_id,))
 
         return cursor.rowcount > 0

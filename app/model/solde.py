@@ -75,6 +75,6 @@ class Solde:
 
         # execute query
         query = "DELETE FROM SOLDE WHERE SoldeId = %s"
-        cursor.execute(query, (solde_id))
+        cursor.execute(query, (solde_id,))
 
         return cursor.rowcount > 0

@@ -159,7 +159,7 @@ class Panier:
 
         # execute query
         query = "SELECT * FROM OBJET_INSTANCE WHERE Panier = %s"
-        cursor.execute(query, (panier.panier_id))
+        cursor.execute(query, (panier.panier_id,))
 
         # instantiate all jeux from cursor
         objet_instances = []
