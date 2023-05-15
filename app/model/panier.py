@@ -16,7 +16,7 @@ class Panier:
 
         # execute query
         query = "SELECT * FROM PANIER WHERE PanierId = %s"
-        cursor.execute(query, (panier_id))
+        cursor.execute(query, (panier_id,))
 
         try:
             return Panier(*cursor.fetchone())
@@ -48,7 +48,7 @@ class Panier:
 
         # execute query
         query = "INSERT INTO PANIER (Montant) VALUES (%s, %s)"
-        cursor.execute(query, (panier.montant))
+        cursor.execute(query, (panier.montant,))
 
         return panier 
 
@@ -72,7 +72,7 @@ class Panier:
 
         # execute query
         query = "DELETE FROM PANIER WHERE PanierId = %s"
-        cursor.execute(query, (panier_id))
+        cursor.execute(query, (panier_id,))
 
         return cursor.rowcount > 0
 
@@ -94,7 +94,7 @@ class Panier:
 
         # execute query
         query = "SELECT j.* FROM JEU as j, PANIER_JEU as pn WHERE j.GameId = pn.Jeu AND pn.Panier = %s"
-        cursor.execute(query, (panier.panier_id))
+        cursor.execute(query, (panier.panier_id,))
 
         # instantiate all jeux from cursor
         jeux = []
@@ -159,7 +159,7 @@ class Panier:
 
         # execute query
         query = "SELECT * FROM OBJET_INSTANCE WHERE Panier = %s"
-        cursor.execute(query, (panier.panier_id))
+        cursor.execute(query, (panier.panier_id,))
 
         # instantiate all jeux from cursor
         objet_instances = []

@@ -67,11 +67,13 @@ create table UTILISATEUR (
      DateInscription date not null,
      DateNaissance date not null,
      Portefeuille float default 00.00 not null,
-     AdresseLivraison int null,
-     AdresseFacturation int null,
+     AdresseLivraison int,
+     AdresseFacturation int,
+     Panier int not null,
      constraint ID_UTILISATEUR primary key (UserId),
      constraint FK_ADRESSE_LIVRAISON foreign key (AdresseLivraison) references ADRESSE (AdresseId),
-     constraint FK_ADRESSE_FACTURATION foreign key (AdresseFacturation) references ADRESSE (AdresseId)
+     constraint FK_ADRESSE_FACTURATION foreign key (AdresseFacturation) references ADRESSE (AdresseId),
+     constraint FK_PANIER foreign key (Panier) references PANIER (PanierId)
 );
 
 

@@ -14,7 +14,7 @@ class Categorie:
 
         # execute query
         query = "SELECT * FROM CATEGORIE WHERE Nom = %s"
-        cursor.execute(query, (nom))
+        cursor.execute(query, (nom,))
 
         try:
             return Categorie(*cursor.fetchone())
@@ -70,6 +70,6 @@ class Categorie:
 
         # execute query
         query = "DELETE FROM CATEGORIE WHERE Nom = %s"
-        cursor.execute(query, (nom))
+        cursor.execute(query, (nom,))
 
         return cursor.rowcount > 0
