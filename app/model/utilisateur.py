@@ -5,7 +5,7 @@ from app.model.jeu import Jeu
 
 class Utilisateur:
     def __init__(self, user_id=None, username=None, firstname=None, lastname=None, email=None, password=None,
-                 inscription_date=None, date_of_birth=None, wallet=None, bill_address=None, delivery_address=None):
+                 inscription_date=None, date_of_birth=None, wallet=None, bill_address=None, delivery_address=None, panier=None):
         self.user_id = user_id
         self.username = username
         self.firstname = firstname
@@ -17,6 +17,7 @@ class Utilisateur:
         self.wallet = wallet
         self.bill_address = bill_address
         self.delivery_address = delivery_address
+        self.panier = panier
 
     @classmethod
     @with_connection
