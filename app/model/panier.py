@@ -47,7 +47,7 @@ class Panier:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO PANIER (Montant) VALUES (%s, %s)"
+        query = "INSERT INTO PANIER (Montant) VALUES (%s)"
         cursor.execute(query, (panier.montant,))
 
         return panier 
@@ -60,7 +60,7 @@ class Panier:
 
         # execute query
         query = "UPDATE PANIER SET Montant = %s WHERE PanierId = %s"
-        cursor.execute(query, (panier.motant, panier.panier_id))
+        cursor.execute(query, (panier.montant, panier.panier_id,))
 
         return panier
 
@@ -137,7 +137,7 @@ class Panier:
 
         # execute query
         query = "DELETE FROM PANIER_JEU WHERE Panier = %s AND Jeu = %s"
-        cursor.execute(query, (panier.panier_id, jeu.game_id))
+        cursor.execute(query, (panier.panier_id, jeu.game_id,))
 
         return cursor.rowcount > 0
 

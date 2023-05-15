@@ -4,7 +4,7 @@ from app.exceptions import UserInputNotAnIntegerException, InputNumberNotInRange
 
 def shop_panier_view(username,panier):
     clear_console()
-    color_print("[PANIER]", BLUE)
+    color_print("[CAST]", BLUE)
 
     total_price = 0
 
@@ -14,7 +14,7 @@ def shop_panier_view(username,panier):
     else:
         print("Games in the cart:")
         for i, jeu in enumerate(panier):
-            nom_jeu, prix_jeu = jeu
+            game_id,nom_jeu, prix_jeu = jeu
             total_price += prix_jeu
             print(f"{i + 1}. Game name: {nom_jeu} | Price: {prix_jeu} €")
         print(f"Total: {total_price} €")
@@ -42,24 +42,19 @@ def shop_panier_delete_elem_view(panier):
         print("The cart is empty.")
     else:
         print("Games in the cart:")
-        jeu_total = 0
         for i, jeu in enumerate(panier):
-            jeu_total = jeu_total +1
-            nom_jeu, prix_jeu = jeu
+            game_id, nom_jeu, prix_jeu = jeu
             print(f"{i + 1}. Game name: {nom_jeu} | Price: {prix_jeu} €")
 
         print("Enter the number of the game you want to remove (0 to cancel): ")
         try:
-            return int_input(0, jeu_total, placeholder="Choice: ") #TODO: jeu_total not working
+            choice = int_input(0, len(panier), placeholder="Choice: ")
+            if(choice == 0):
+                return None #Return sans rien delete
+            else:
+                return panier[choice - 1][0]  # Return the game_id
         except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
             return shop_panier_delete_elem_view(panier)
+
         
-        #index = int_input()
-        #if index == 0:
-        #    return
-        #elif index < 1 or index > len(panier):
-        #    print("Invalid input.")
-        #else:
-        #    nom_jeu, prix_jeu = panier[index - 1]
-        #    panier.pop(index - 1)
-        #    print(f"{nom_jeu} has been removed from the cart.")
+

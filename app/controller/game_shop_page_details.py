@@ -4,6 +4,7 @@ from app.model.jeu_langue_texte import JeuLangueTexte
 from app.model.jeu_langue_audio import JeuLangueAudio
 from app.model.image import Image
 from app.model.utilisateur import Utilisateur
+from app.model.panier import Panier
 from app.controller.shop_panier import shop_panier
 
 from app.view.game_shop_page_details import game_shop_page_details_view,game_shop_page_details_in_library_view,game_shop_page_details_buy_sub_view,game_shop_page_details_buy_view,take_game_free_sucess_view
@@ -17,17 +18,21 @@ def game_shop_page_details(username,gameId):
     images_game = Image.select_with_gameID(gameId) 
 
 
+    utilisateurId = Utilisateur.select_userid(username)
 
     #TODO: Récuperer les avis du jeu.
-    #TODO: Check si jeu déjà acheter.
-    utilisateur = Utilisateur.select_userid(username)
-    games_user = Utilisateur.get_games(utilisateur)
+
+    # Check si jeu déjà acheter.
+    acheterCheck = False
+
+    games_user = Utilisateur.get_games(utilisateurId)
     for game in games_user:
         if game.game_id == gameId:
             acheterCheck = True
             break
         else:
             acheterCheck = False
+
 
     #TODO: Check si abonnement GamePass.
     abonnementCheck = True
@@ -38,15 +43,18 @@ def game_shop_page_details(username,gameId):
 
     if(acheterCheck):
         game_shop_page_details_in_library_view()
+        input();
     elif(not acheterCheck and abonnementCheck):
         user_choice = game_shop_page_details_buy_sub_view()
         match user_choice:
             case 1:
-                #TODO: ADD library 
+                Utilisateur.add_jeu(Utilisateur(utilisateurId.user_id), Jeu(gameId), True)
                 take_game_free_sucess_view()
                 input()
                 return
             case 2:
+                panier_id = utilisateurId.user_id
+                Panier.add_jeu(Panier(panier_id), Jeu(gameId))
                 shop_panier(username)
             case 3:
                 return

@@ -48,6 +48,7 @@ def game_shop_page_details_view(information_game,avisList):
     
 def game_shop_page_details_in_library_view():
     print("You already have the product in your library")
+    print("Press enter to continue")
 
 def game_shop_page_details_buy_sub_view():
     print("Do you want purchase or take this product ? (Free your during your subscription)")

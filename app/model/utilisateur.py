@@ -73,8 +73,8 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Portefeuille) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0))
+        query = "INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Portefeuille, AdresseLivraison, AdresseFacturation,Panier) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0, user.delivery_address, user.bill_address , user.panier, ))
 
         # store new id
         user.user_id = cursor.lastrowid
@@ -137,8 +137,8 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT g.* FROM GAME as g, UTILISATEUR_JEU as ug WHERE g.GameId = ug.Jeu AND ug.Utilisateur = %s"
-        cursor.execute(query, (utilisateur.UserId,))
+        query = "SELECT g.* FROM JEU as g, UTILISATEUR_JEU as ug WHERE g.GameId = ug.Jeu AND ug.Utilisateur = %s"
+        cursor.execute(query, (utilisateur.user_id,))
 
 
         # instantiate all jeux from cursor
@@ -164,7 +164,7 @@ class Utilisateur:
 
         # execute query
         query = "INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) values (%s, %s, %s)"
-        cursor.execute(query, (utilisateur.user_id, jeu.game_id, with_gamepass))
+        cursor.execute(query, (utilisateur.user_id, jeu.game_id, with_gamepass,))
 
         return cursor.rowcount > 0
 

@@ -1,6 +1,8 @@
 from app.view.login_register import register_view
 from app.model.utilisateur import Utilisateur
+from app.model.panier import Panier
 import datetime
+
 
 
 def register():
@@ -49,6 +51,9 @@ def register():
 
     # Sauvegarde dans la BDD
     inscription_date = datetime.date.today()
-    Utilisateur.insert(username, password, firstname, lastname, email, date_of_birth, inscription_date)
+    #TODO Créer le panier, puis donner son id à l'user
+
+    Utilisateur.insert(Utilisateur(username, firstname, lastname, email, password, inscription_date, date_of_birth))
+    Panier.insert(Panier(montant=0))
 
     return username

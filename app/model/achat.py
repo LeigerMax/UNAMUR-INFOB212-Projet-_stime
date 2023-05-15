@@ -49,7 +49,7 @@ class Achat:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO ACHAT (MontantTotal, DateAchat, Utilisateur, MoyenPaiement, Panier) VALUES (%s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO ACHAT (MontantTotal, DateAchat, Utilisateur, MoyenPaiement, Panier) VALUES (%s, %s, %s, %s, %s)"
         cursor.execute(query, (achat.montant_total, achat.date_achat, achat.utilisateur, achat.moyen_paiement, achat.panier))
 
         # store new id
