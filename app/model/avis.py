@@ -80,3 +80,30 @@ class Avis:
         cursor.execute(query, (avis))
 
         return cursor.rowcount > 0
+
+    ##########################
+    #  Evaluation functions  #
+    ##########################
+
+    @classmethod
+    @with_connection
+    def get_evaluations(cls, avis, **kwargs):
+        """
+        Get all evaluations of an avis
+        :param avis: the avis having all evaluations
+        :return: the evaluations of an avis
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT * FROM EVALUATION WHERE Avis = %s"
+        cursor.execute(query, (avis.avis_id))
+
+        # instantiate all avis from cursor
+        avis_list = []
+        for avis in cursor.fetchall():
+            avis_list.append(Avis(*avis))
+
+        return avis_list
