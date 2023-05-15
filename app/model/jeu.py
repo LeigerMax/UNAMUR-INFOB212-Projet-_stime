@@ -1,5 +1,6 @@
 from app.database.connector import with_connection, get_cursor
 from app.model.categorie import Categorie
+from app.model.langue import Langue
 
 
 class Jeu:
@@ -113,3 +114,53 @@ class Jeu:
             categories.append(Categorie(*categorie))
 
         return categories
+
+    ##########################
+    #  Jeu-Langue functions  #
+    ##########################
+
+    @classmethod
+    @with_connection
+    def get_langue_text(cls, jeu, **kwargs):
+        """
+        Get all langues for the text of a game
+        :param jeu: the jeu
+        :return: all langues of the game used in text
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT l.* FROM LANGUE as l, JEU_LANGUE_TEXTE as jlt WHERE l.Langue = jlt.Langue AND jlt.Jeu = %s"
+        cursor.execute(query, (jeu.game_id))
+
+        # instantiate all langues from cursor
+        langues = []
+        for langue in cursor.fetchall():
+            langues.append(Langue(*langue))
+
+        return langues
+
+    @classmethod
+    @with_connection
+    def get_langue_audio(cls, jeu, **kwargs):
+        """
+        Get all langues for the audio of a game
+        :param jeu: the jeu
+        :return: all langues of the game used in audio
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT l.* FROM LANGUE as l, JEU_LANGUE_AUDIO as jla WHERE l.Langue = jla.Langue AND jla.Jeu = %s"
+        cursor.execute(query, (jeu.game_id))
+
+        # instantiate all langues from cursor
+        langues = []
+        for langue in cursor.fetchall():
+            langues.append(Langue(*langue))
+
+        return langues
