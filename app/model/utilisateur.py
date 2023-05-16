@@ -74,7 +74,7 @@ class Utilisateur:
 
         # execute query
         query = "INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Portefeuille, AdresseLivraison, AdresseFacturation,Panier) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0, user.delivery_address, user.bill_address , user.panier, ))
+        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0, user.delivery_address, user.bill_address , user.panier ))
 
         # store new id
         user.user_id = cursor.lastrowid
@@ -88,8 +88,21 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "UPDATE UTILISATEUR SET Username = %s, Prenom = %s, Nom = %s, Email = %s, DateNaissance = %s, PorteFeuille = %s, AdresseLivraison = %s, AdresseFacturation = %s WHERE UserId = %s"
-        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0))
+        query = "UPDATE UTILISATEUR SET Username = %s, Prenom = %s, Nom = %s, Email = %s, MDP = %s, DateNaissance = %s, PorteFeuille = %s, AdresseLivraison = %s, AdresseFacturation = %s WHERE UserId = %s"
+        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.date_of_birth, user.wallet, user.delivery_address, user.bill_address , user.user_id,))
+
+        return user
+    
+
+    @classmethod
+    @with_connection
+    def update_wallet(cls, user, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "UPDATE UTILISATEUR SET  PorteFeuille = %s WHERE UserId = %s"
+        cursor.execute(query, (user.wallet, user.user_id,))
 
         return user
 
@@ -205,7 +218,7 @@ class Utilisateur:
 
         # execute query
         query = "SELECT a.* FROM ABONNEMENT AS a, UTILISATEUR_ABONNEMENT AS ua WHERE a.Type = ua.Abonnement AND ua.Utilisateur = %s AND ua.DateDebut = (SELECT MAX(DateDebut) from UTILISATEUR_ABONNEMENT)"
-        cursor.execute(query, (utilisateur.UserId,))
+        cursor.execute(query, (utilisateur.user_id,))
 
         try:
             return Abonnement(*cursor.fetchone())

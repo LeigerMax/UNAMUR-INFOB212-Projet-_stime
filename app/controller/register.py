@@ -39,9 +39,9 @@ def register():
                 "username" : username,
                 "password" : password,
                 "firstname" : firstname,
-                "lastname" :lastname,
-                "email" :email,
-                "date_of_birth" :date_of_birth,
+                "lastname" : lastname,
+                "email" : email,
+                "date_of_birth" : date_of_birth,
                 "inscription_date" : datetime.date.today()
             }
         except ValueError as e:
@@ -51,9 +51,8 @@ def register():
 
     # Sauvegarde dans la BDD
     inscription_date = datetime.date.today()
-    #TODO Créer le panier, puis donner son id à l'user
-
-    Utilisateur.insert(Utilisateur(username, firstname, lastname, email, password, inscription_date, date_of_birth))
-    Panier.insert(Panier(montant=0))
+    new_panier = Panier.insert(Panier(montant=0))
+    #TODO : Fix date_of_birth 
+    Utilisateur.insert(Utilisateur(username, lastname, firstname, email, password, inscription_date, date_of_birth, 10, None, None, new_panier))
 
     return username

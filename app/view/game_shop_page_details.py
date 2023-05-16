@@ -11,6 +11,7 @@ def game_shop_page_details_view(information_game,avisList):
     languages_text = information_game[1]
     languages_audio = information_game[2]
     images_game = information_game[3]
+    game_name_dlc = information_game[4]
 
 
     clear_console()
@@ -40,7 +41,7 @@ def game_shop_page_details_view(information_game,avisList):
         color_print("Available in GamePass !", GREEN)
 
     if(gameNumber.est_DLC == True):
-        print("This is a DLC of <DLC GAME>, so you must own the original game in order to purchase this product.")
+        print(f"This is a DLC of {game_name_dlc.nom}, so you must own the original game in order to purchase this product.")
 
     #TODO: créer les avis
     print("\nReview game")
