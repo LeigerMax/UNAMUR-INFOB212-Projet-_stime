@@ -24,30 +24,33 @@ def shop_panier_bought_card(username,panier,total_price):
     means_of_payment_data = MoyenPaiement.select_all()
     
     choice = card_view(panier,means_of_payment_data)
-    means_of_payment_choice = MoyenPaiement.select(int(choice))
-     
+    if (choice == 0):
+        return
+    else:
+        means_of_payment_choice = MoyenPaiement.select(int(choice))
+        
 
-    #Ajoute la taxe au prix à payer 
-    total_price += means_of_payment_choice.taxe_du_moyen
-    utilisateur = Utilisateur.select_userid(username)
-    data_user = Utilisateur.select(utilisateur.user_id)
-    panier_id = utilisateur.user_id
-    Panier.update(Panier(total_price,panier_id))
+        #Ajoute la taxe au prix à payer 
+        total_price += means_of_payment_choice.taxe_du_moyen
+        utilisateur = Utilisateur.select_userid(username)
+        data_user = Utilisateur.select(utilisateur.user_id)
+        panier_id = utilisateur.user_id
+        Panier.update(Panier(total_price,panier_id))
 
-    #Sauvegarde l'achat
-    achat = Achat(montant_total=total_price, date_achat=datetime.date.today(), utilisateur=utilisateur.user_id, moyen_paiement=means_of_payment_choice.moyen_paiement_id, panier=panier_id)
-    Achat.insert(achat)
+        #Sauvegarde l'achat
+        achat = Achat(montant_total=total_price, date_achat=datetime.date.today(), utilisateur=utilisateur.user_id, moyen_paiement=means_of_payment_choice.moyen_paiement_id, panier=panier_id)
+        Achat.insert(achat)
 
-    #Sauvegarde les produits sur le compte de l'user
-    for game_id, _, _ in panier:
-        Utilisateur.add_jeu(Utilisateur(utilisateur.user_id), Jeu(game_id), False)
+        #Sauvegarde les produits sur le compte de l'user
+        for game_id, _, _ in panier:
+            Utilisateur.add_jeu(Utilisateur(utilisateur.user_id), Jeu(game_id), False)
 
-    #Vide le panier
-    for game_id, _, _ in panier:
-        Panier.remove_jeu(Panier(panier_id), Jeu(game_id))
+        #Vide le panier
+        for game_id, _, _ in panier:
+            Panier.remove_jeu(Panier(panier_id), Jeu(game_id))
 
-    
-    shop_panier_bought_sucess_view(total_price)
+        
+        shop_panier_bought_sucess_view(total_price)
 
 
 def shop_panier_bought_wallet(username,panier,total_price):   
@@ -59,11 +62,13 @@ def shop_panier_bought_wallet(username,panier,total_price):
 
     wallet_view(panier,wallet_ok)
     if wallet_ok:
-        #TODO Soustraire le portefeuille avec total_price (Select portefeuill, puis soustraire et update)
-        Utilisateur.update()
+
+        #Update wallet
+        data_user.wallet = 50.3
+        Utilisateur.update_wallet(Utilisateur(data_user.wallet,data_user.user_id))
 
         #Sauvegarde l'achat
-        achat = Achat(montant_total=total_price, date_achat=datetime.date.today(), utilisateur=utilisateur.user_id, moyen_paiement=means_of_payment_choice.moyen_paiement_id, panier=panier_id)
+        achat = Achat(montant_total=total_price, date_achat=datetime.date.today(), utilisateur=utilisateur.user_id, moyen_paiement=0, panier=panier_id)
         Achat.insert(achat)
 
         #Sauvegarde les produits sur le compte de l'user
