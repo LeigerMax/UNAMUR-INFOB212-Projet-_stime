@@ -316,7 +316,6 @@ create table EVALUATION (
 --
 --DELIMITER ;
 
-
 /***********************
 *        VIEW          *
 ***********************/
@@ -408,17 +407,19 @@ INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("77", "Avenue
 INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("55", "Chemin du Sourire", "Enjoué", 2718, "Belgique");
 INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("21", "Place des Jeux de Mots", "Amusement", 5050, "Belgique");
 
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com", "b98f9643a856719a5944672f84cf13da694a1576c11fb9f3d57b7b71c9588981", "2022-03-01", "2000-06-06"); -- mdp: wéwéwé
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("test", "test", "test", "test@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02"); -- mdp: test
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("max", "max", "max", "max@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02"); -- mdp: test
+
+INSERT INTO PANIER (Montant) VALUES (0);
+INSERT INTO PANIER (Montant) VALUES (0);
+INSERT INTO PANIER (Montant) VALUES (0);
+
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com", "b98f9643a856719a5944672f84cf13da694a1576c11fb9f3d57b7b71c9588981", "2022-03-01", "2000-06-06",1); -- mdp: wéwéwé
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("test", "test", "test", "test@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02",2); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("max", "max", "max", "max@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02",3); -- mdp: test
 
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,1, FALSE);
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,2, FALSE);
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,3, FALSE);
 
-INSERT INTO PANIER (Montant) VALUES (0);
-INSERT INTO PANIER (Montant) VALUES (0);
-INSERT INTO PANIER (Montant) VALUES (0);
 
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Wallet", 0);
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Paypal", 5);

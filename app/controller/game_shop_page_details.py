@@ -20,31 +20,39 @@ def game_shop_page_details(username,gameId):
 
     utilisateurId = Utilisateur.select_userid(username)
 
+
     #TODO: Récuperer les avis du jeu.
+    #avisList =
 
     # Check si jeu déjà acheter.
-    acheterCheck = False
+    acheter_check = False
 
     games_user = Utilisateur.get_games(utilisateurId)
     for game in games_user:
         if game.game_id == gameId:
-            acheterCheck = True
+            acheter_check = True
             break
         else:
-            acheterCheck = False
+            acheter_check = False
+
+    # Si DLC
+    if(game_list.dlc is not None ):
+        dlc_game_name = Jeu.select(game_list.dlc) 
+    else:
+        dlc_game_name = None
 
 
-    #TODO: Check si abonnement GamePass.
-    abonnementCheck = True
 
-    information_game = [game_list, languages_text, languages_audio, images_game]
+    abonnementCheck = abonnementCheck = Utilisateur.get_current_abonnement(utilisateurId)
 
-    game_shop_page_details_view(information_game,avisList=None) #TODO: Modifier None
+    information_game = [game_list, languages_text, languages_audio, images_game, dlc_game_name]
 
-    if(acheterCheck):
+    game_shop_page_details_view(information_game,avisList=None) #TODO: Modifier None 
+
+    if(acheter_check):
         game_shop_page_details_in_library_view()
         input();
-    elif(not acheterCheck and abonnementCheck):
+    elif(not acheter_check and abonnementCheck):
         user_choice = game_shop_page_details_buy_sub_view()
         match user_choice:
             case 1:
@@ -59,10 +67,12 @@ def game_shop_page_details(username,gameId):
             case 3:
                 return
 
-    elif(not acheterCheck):
+    elif(not acheter_check):
         user_choice = game_shop_page_details_buy_view()
         match user_choice:
             case 1:
+                panier_id = utilisateurId.user_id
+                Panier.add_jeu(Panier(panier_id), Jeu(gameId))
                 shop_panier(username)
             case 2:
                 return
