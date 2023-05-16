@@ -347,7 +347,10 @@ INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Ed
 INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('DLCJeu1', 'Description du dlc du jeu2', '2022-02-01', 29.99, TRUE, '987654312','987654312',null,TRUE, 1);
 INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Jeu3', 'Description du jeu3', '2022-03-01', 39.99, FALSE, '987654312','987654312',null,FALSE, null);
 INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Jeu4', 'Description du jeu4', '2022-03-01', 59.99, FALSE, '987654312','987654312',null,FALSE, null);
-
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Super Aventure', 'Un jeu d action épique rempli de rebondissements et de défis passionnants.', '2022-04-15', 49.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Course Folle', 'Plongez dans l univers de la vitesse avec ce jeu de course palpitant.', '2022-05-20', 29.99, FALSE, '987654321', '987654321', NULL, FALSE, NULL);
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('RPG Magique', 'Explorez un monde fantastique et devenez le héros dans ce jeu de rôle captivant.', '2022-06-10', 39.99, FALSE, '987654321', '987654321', NULL, FALSE, NULL);
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Stratégie Totale', 'Testez vos compétences tactiques dans ce jeu de stratégie complexe et engageant.', '2022-07-05', 59.99, FALSE, '496789124', '496789124', NULL, FALSE, NULL);
 
 INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES ('https://example.com/image1.jpg', 'Image du jeu 1',1);
 INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES ('https://example.com/image2.jpg', 'Image du jeu 2',2);
@@ -373,6 +376,17 @@ INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet4', 'Description de l''o
 INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet5', 'Description de l''objet5',1);
 
 INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("12", "Rue de la babouche", "Andenne", 5300, "Belgique");
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("69", "Rue du Funny Number", "Marrant", 6969, "Belgique");
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("3", "Rue du Cheval de Troie", "Blagounette", 3300, "Belgique");
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("42", "Avenue de la Sagesse", "Sérénité", 1234, "Belgique");
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("7", "Chemin des Étoiles", "Constellation", 5678, "Belgique");
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("13", "Place du Rire", "Bonheur", 9876, "Belgique");
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("18", "Boulevard de la Fantaisie", "Joyeux", 2468, "Belgique");
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("9", "Allée des Farces", "Rigolade", 1357, "Belgique");
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("23", "Rue de la Plaisanterie", "Amusant", 8642, "Belgique");
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("77", "Avenue de la Comédie", "Drôle", 3141, "Belgique");
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("55", "Chemin du Sourire", "Enjoué", 2718, "Belgique");
+INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("21", "Place des Jeux de Mots", "Amusement", 5050, "Belgique");
 
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com", "b98f9643a856719a5944672f84cf13da694a1576c11fb9f3d57b7b71c9588981", "2022-03-01", "2000-06-06"); -- mdp: wéwéwé
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance) VALUES ("test", "test", "test", "test@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02"); -- mdp: test
@@ -386,5 +400,6 @@ INSERT INTO PANIER (Montant) VALUES (0);
 INSERT INTO PANIER (Montant) VALUES (0);
 INSERT INTO PANIER (Montant) VALUES (0);
 
+INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Wallet", 0);
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Paypal", 5);
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Bank", 10);
