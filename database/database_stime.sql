@@ -249,72 +249,7 @@ create table EVALUATION (
 /***********************
 *       TRIGGER        *
 ***********************/
---DELIMITER //
---
---CREATE TRIGGER note_trop_petite_trop_grande
---BEFORE INSERT ON AVIS
---FOR EACH ROW
---BEGIN
---     IF NEW.Note < 0 THEN
---          signal sqlstate '45000' set message_text = "Plus petit que 0";
---     END IF;
---     IF NEW.Note > 10 THEN
---          signal sqlstate '45000' set message_text = "Plus grand que 10";
---     END IF;
---END //
---
---CREATE TRIGGER portefeuille_vide_ou_trop_rempli
---BEFORE INSERT ON UTILISATEUR
---FOR EACH ROW
---BEGIN
---     IF (NEW.Portefeuille < 0) THEN
---          signal sqlstate '45000' set message_text = "Plus petit que 0";
---     END IF;
---     IF (NEW.Portefeuille > 2000) THEN
---          signal sqlstate '45000' set message_text = "Plus grand que 2000";
---     END IF;
---END //
---
---CREATE TRIGGER nouveau_proprietaire
---BEFORE UPDATE ON TRANSACTION
---FOR EACH ROW
---BEGIN
---     IF (OLD.Acheteur != NEW.Acheteur) THEN
---          UPDATE OBJET_INSTANCE
---          SET Possesseur = New.Acheteur
---          WHERE Id = OLD.Objet;
---     END IF;
---END //
---
---CREATE TRIGGER on_peut_pas_racheter_ce_quon_vend
---BEFORE UPDATE ON TRANSACTION
---FOR EACH ROW
---BEGIN
---     IF (OLD.Revendeur = NEW.Acheteur) THEN
---          signal sqlstate '45000' set message_text = "On ne peut racheter ce que l'on vend";
---     END IF;
---END //
---
---CREATE TRIGGER pas_acheter_dlc_sans_avoir_jeu
---AFTER UPDATE ON UTILISATEUR_JEU
---FOR EACH ROW
---BEGIN
---   DECLARE isNotDLC BOOLEAN;
---   DECLARE jeuDeBase INT;
---   DECLARE jeuDeBaseAchete INT;
---
---   SET isNotDLC = (SELECT ISNULL(DLC) FROM JEU WHERE GameId = NEW.Jeu);
---
---   IF (NOT isNotDLC) THEN
---      SET jeuDeBase = (SELECT DLC FROM JEU WHERE GameId = NEW.Jeu);
---      SET jeuDeBaseAchete = (SELECT Count(Jeu) FROM UTILISATEUR_JEU WHERE Utilisateur = NEW.Utilisateur AND Jeu = jeuDeBase);
---      IF (jeuDeBaseAchete = 0) THEN
---          signal sqlstate '45000' set message_text = "On ne peut pas acheter un DLC sans avoir acheté le jeu de base";
---      END IF;
---   END IF;
---END //
---
---DELIMITER ;
+
 
 /***********************
 *        VIEW          *
@@ -415,10 +350,19 @@ INSERT INTO PANIER (Montant) VALUES (0);
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com", "b98f9643a856719a5944672f84cf13da694a1576c11fb9f3d57b7b71c9588981", "2022-03-01", "2000-06-06",1); -- mdp: wéwéwé
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("test", "test", "test", "test@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02",2); -- mdp: test
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("max", "max", "max", "max@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02",3); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("BenAOrdure", "Benjamin", "Pans", "ben@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-11-29",3); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("PtitLouis", "Louis", "Cavrenne", "louis@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1999-07-28",3); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("MomoRiche", "Mohamed", "Ait Hassou", "momo@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1987-09-11",3); -- mdp: test
+
+INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (4,Basique, 2022-03-01, 30);
+INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (5,Premium, 2022-03-01, 30);
+INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (6,Ultimate, 2022-03-01, 30);
 
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,1, FALSE);
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,2, FALSE);
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,3, FALSE);
+
+
 
 
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Wallet", 0);
