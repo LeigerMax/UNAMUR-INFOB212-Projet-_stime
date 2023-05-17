@@ -5,7 +5,7 @@ from app.model.jeu import Jeu
 
 class Utilisateur:
     def __init__(self, user_id=None, username=None, firstname=None, lastname=None, email=None, password=None,
-                 inscription_date=None, date_of_birth=None, wallet=None, bill_address=None, delivery_address=None, panier=None):
+                 inscription_date=None, date_of_birth=None, wallet=None, delivery_address=None, bill_address=None, panier=None):
         self.user_id = user_id
         self.username = username
         self.firstname = firstname
@@ -15,8 +15,8 @@ class Utilisateur:
         self.inscription_date = inscription_date
         self.date_of_birth = date_of_birth
         self.wallet = wallet
-        self.bill_address = bill_address
         self.delivery_address = delivery_address
+        self.bill_address = bill_address
         self.panier = panier
 
     @classmethod
@@ -73,7 +73,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Portefeuille, AdresseLivraison, AdresseFacturation,Panier) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Portefeuille,AdresseLivraison, AdresseFacturation,Panier) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0, user.delivery_address, user.bill_address , user.panier ))
 
         # store new id
@@ -88,7 +88,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "UPDATE UTILISATEUR SET Username = %s, Prenom = %s, Nom = %s, Email = %s, MDP = %s, DateNaissance = %s, PorteFeuille = %s, AdresseLivraison = %s, AdresseFacturation = %s WHERE UserId = %s"
+        query = "UPDATE UTILISATEUR SET Username = %s,  Nom = %s, Prenom = %s, Email = %s, MDP = %s, DateNaissance = %s, PorteFeuille = %s, AdresseLivraison = %s, AdresseFacturation = %s WHERE UserId = %s"
         cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.date_of_birth, user.wallet, user.delivery_address, user.bill_address , user.user_id,))
 
         return user

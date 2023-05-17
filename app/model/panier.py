@@ -50,12 +50,10 @@ class Panier:
         query = "INSERT INTO PANIER (Montant) VALUES (%s)"
         cursor.execute(query, (panier.montant,))
 
-        panier_id = cursor.lastrowid
+        panier.panier_id = cursor.lastrowid
 
-        # set the panier_id attribute of the panier object
-        panier.panier_id = panier_id
 
-        return panier_id
+        return panier.panier_id
 
     @classmethod
     @with_connection

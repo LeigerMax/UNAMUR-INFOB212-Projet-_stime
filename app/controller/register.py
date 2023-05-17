@@ -52,7 +52,6 @@ def register():
     # Sauvegarde dans la BDD
     inscription_date = datetime.date.today()
     new_panier = Panier.insert(Panier(montant=0))
-    #TODO : Fix date_of_birth 
-    Utilisateur.insert(Utilisateur(username, lastname, firstname, email, password, inscription_date, date_of_birth, 10, None, None, new_panier))
+    Utilisateur.insert(Utilisateur(None,username, lastname, firstname, email, password, inscription_date, date_of_birth, 10, None, None, new_panier))
 
     return username
