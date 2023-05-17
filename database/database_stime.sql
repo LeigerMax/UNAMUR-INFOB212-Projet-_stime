@@ -254,8 +254,22 @@ create table EVALUATION (
 /***********************
 *        VIEW          *
 ***********************/
+CREATE VIEW vue_entreprise_jeux
+     AS SELECT E.Nom, E.Description, E.AdresseWeb, G.Nom as NomJeu
+     FROM ENTREPRISE E
+     JOIN JEU G ON G.Developpeur = E.NumSiret AND G.Editeur = E.NumSiret;
 
+CREATE VIEW vue_jeux_langues 
+AS SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, L.Langue
+FROM JEU J
+JOIN JEU_LANGUE_TEXTE JLT ON J.GameId = JLT.Jeu
+JOIN LANGUE L ON JLT.Langue = L.Langue;
 
+CREATE VIEW vue_jeux_categories AS
+SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, C.Nom AS Categorie
+FROM JEU J
+JOIN CATEGORIE_JEU CJ ON J.GameId = CJ.Jeu
+JOIN CATEGORIE C ON CJ.Categorie = C.Nom;
 /***********************
 *       INSERT         *
 ***********************/
@@ -358,12 +372,14 @@ INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, Dat
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("PtitLouis", "Louis", "Cavrenne", "louis@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1999-07-28",5); -- mdp: test
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("MomoRiche", "Mohamed", "Ait Hassou", "momo@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1987-09-11",6); -- mdp: test
 
+
 INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (1,'Basique', "2022-03-01", 30);
 INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (2,'Basique', "2022-03-01", 30);
 INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (3,'Basique', "2022-03-01", 30);
 INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (4,'Basique', "2022-03-01", 30);
 INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (5,'Premium', "2022-03-01", 30);
 INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (6,'Ultimate', "2022-03-01", 30);
+
 
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,1, FALSE);
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,2, FALSE);
@@ -373,3 +389,4 @@ INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,3, FALSE);
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Wallet", 0);
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Paypal", 5);
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Bank", 10);
+
