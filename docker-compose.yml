@@ -1,28 +1,40 @@
 version: '3.7'
 
 services:
-  mysql:
-    container_name: stimedb
-    image: mysql:latest
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: "supersecretpassword123"
-      MYSQL_DATABASE: "dbstime"
-      MYSQL_USER: "user01"
-      MYSQL_PASSWORD: "secretpassword123"
-    volumes:
-      - "./database/database_stime.sql:/docker-entrypoint-initdb.d/init.sql"
-    healthcheck:
-      test: mysql --user=$$MYSQL_USER --password=$$MYSQL_PASSWORD -e 'SHOW DATABASES;'
-      interval: 10s
-      timeout: 5s
-      retries: 5
-  adminer:
-      image: adminer:latest
-      ports:
-        - 8000:8080
-      depends_on:
-        - mysql
-      environment:
-        ADMINER_DEFAULT_SERVER: mysql
+    mysql:
+        image: mysql:latest
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: "supersecretpassword123"
+            MYSQL_DATABASE: "dbstime"
+            MYSQL_USER: "user01"
+            MYSQL_PASSWORD: "secretpassword123"
+            log_bin_trust_function_creators: "1"
+        volumes:
+            - "./database/database_stime.sql:/docker-entrypoint-initdb.d/init.sql"
+        healthcheck:
+            test:  mysql --user=user01 --password=secretpassword123 -e 'use dbstime;'
+            interval: 5s
+            timeout: 5s
+            retries: 5
+
+    mysql_triggers_dml:
+        image: mysql:latest
+        depends_on:
+            mysql:
+              condition: service_healthy
+        restart: "no"
+        volumes:
+            - "./database/triggers_dml.sql:/trigger_dml.sql"
+        entrypoint: [ "bash", "-c", "mysql -h mysql -P 3306 -u user01 -p'secretpassword123' -D dbstime --protocol=tcp < /trigger_dml.sql" ]
+
+    adminer:
+        image: adminer:latest
+        ports:
+            - 8000:8080
+        depends_on:
+            mysql:
+              condition: service_healthy
+        environment:
+            ADMINER_DEFAULT_SERVER: mysql
