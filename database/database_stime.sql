@@ -254,8 +254,22 @@ create table EVALUATION (
 /***********************
 *        VIEW          *
 ***********************/
+CREATE VIEW vue_entreprise_jeux
+     AS SELECT E.Nom, E.Description, E.AdresseWeb, G.Nom as NomJeu
+     FROM ENTREPRISE E
+     JOIN JEU G ON G.Developpeur = E.NumSiret AND G.Editeur = E.NumSiret;
 
+CREATE VIEW vue_jeux_langues 
+AS SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, L.Langue
+FROM JEU J
+JOIN JEU_LANGUE_TEXTE JLT ON J.GameId = JLT.Jeu
+JOIN LANGUE L ON JLT.Langue = L.Langue;
 
+CREATE VIEW vue_jeux_categories AS
+SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, C.Nom AS Categorie
+FROM JEU J
+JOIN CATEGORIE_JEU CJ ON J.GameId = CJ.Jeu
+JOIN CATEGORIE C ON CJ.Categorie = C.Nom;
 /***********************
 *       INSERT         *
 ***********************/
@@ -373,3 +387,4 @@ INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,3, FALSE);
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Wallet", 0);
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Paypal", 5);
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Bank", 10);
+
