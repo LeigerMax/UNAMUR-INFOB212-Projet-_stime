@@ -2,11 +2,12 @@ from app.database.connector import with_connection, get_cursor
 
 
 class Objet:
-    def __init__(self, objet_id=None, nom=None, description=None, game_id=None):
+    def __init__(self, objet_id=None, nom=None, description=None, game_id=None, price=None):
         self.objet_id = objet_id
         self.nom = nom
         self.description = description
         self.game_id = game_id
+        self.price = price
         
     @classmethod
     @with_connection

@@ -7,8 +7,7 @@ from app.controller.game_shop_page_details import game_shop_page_details
 
 def game_shop(username):
 
-    game_list = Jeu.select_all()
-    
+    game_list = Jeu.select_all() 
 
     user_choice = game_shop_view(game_list)
 
@@ -17,5 +16,3 @@ def game_shop(username):
     else:
         game_shop_page_details(username,user_choice)
 
-
-    #input()
