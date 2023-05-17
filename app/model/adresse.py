@@ -49,13 +49,14 @@ class Adresse:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES (%s, %s, %s,%s, %s, %s)"
+        query = "INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES (%s, %s, %s,%s, %s)"
         cursor.execute(query, (adresse.numero, adresse.rue, adresse.ville, adresse.code_postal, adresse.pays))
 
         # store new id
         adresse.achat_id = cursor.lastrowid
 
-        return adresse
+        return adresse.achat_id
+        
     
     @classmethod
     @with_connection
