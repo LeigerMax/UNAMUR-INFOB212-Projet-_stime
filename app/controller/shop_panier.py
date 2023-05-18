@@ -41,7 +41,7 @@ def shop_panier(username):
           case 1:
                shop_panier_bought(username,data_game_in_panier,total_price) 
           case 2:
-               user_choice_del_elem = shop_panier_delete_elem_view(data_game_in_panier)
+               user_choice_del_elem = shop_panier_delete_elem_view(data_game_in_panier,data_objet_in_panier)
                if user_choice == 0:
                     shop_panier(username)
                else:

@@ -38,20 +38,20 @@ def shop_panier_view(username,jeu, objets):
         return shop_panier_view(jeu)
 
 
-def shop_panier_delete_elem_view(panier):
+def shop_panier_delete_elem_view(panier,objets):
     clear_console()
     color_print("[DELETE ELEM PANIER]", BLUE)
     
-    if len(panier) == 0:
+    if len(panier) == 0 and len(objets) == 0:
         print("The cart is empty.")
     else:
-        print("Games in the cart:")
+        print("Games or items in the cart:")
         for i, jeu in enumerate(panier):
             game_id, nom_jeu, prix_jeu = jeu
             print(f"{i + 1}. Game name: {nom_jeu} | Price: {prix_jeu} €")
         for j, objets in enumerate(objets):
             nom_objet, descr_objet, prix_objet = objets
-            print(f"{j + 1 + len(jeu)}. Item name: {nom_objet} | Price: {prix_objet} €")
+            print(f"{j + 1 + len(panier)}. Item name: {nom_objet} | Price: {prix_objet} €")
 
         print("Enter the number of the game or item you want to remove (0 to cancel): ")
         try:
