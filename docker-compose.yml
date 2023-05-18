@@ -12,20 +12,20 @@ services:
         volumes:
             - "./database/database_stime.sql:/docker-entrypoint-initdb.d/init.sql"
         healthcheck:
-            test: mysql --user=op01 --password=pa55w0rd -e 'use dbstime;'
+            test: mysql --user=root --password=supersecretpassword123 -e 'use dbstime;'
             start_period: 15s
             interval: 5s
             timeout: 5s
             retries: 5
 
-    mysql_triggers_dml:
+    mysql_triggers:
         image: mysql:latest
         depends_on:
             mysql:
               condition: service_healthy
         volumes:
             - "./database/triggers_dml.sql:/triggers_dml.sql"
-        entrypoint: [ "bash", "-c", "mysql -h mysql -P 3306 -u op01 -p'pa55w0rd' -D dbstime --protocol=tcp < /triggers_dml.sql" ]
+        entrypoint: [ "bash", "-c", "mysql -h mysql -P 3306 -u root -p'supersecretpassword123' -D dbstime --protocol=tcp < /triggers_dml.sql" ]
 
     adminer:
         image: adminer:latest
