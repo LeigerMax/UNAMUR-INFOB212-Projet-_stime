@@ -6,8 +6,8 @@ class PyVersion:
 
 # Database
 class Database:
-    USER = "user01"
-    PASSWORD = "secretpassword123"  # QoL: store password in environment variables
+    USER = "root"
+    PASSWORD = "supersecretpassword123"  # QoL: store password in environment variables
     HOST = "127.0.0.1"
     PORT = "3306"
     NAME = "dbstime"
