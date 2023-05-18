@@ -5,7 +5,7 @@ from app.model.jeu import Jeu
 
 class Utilisateur:
     def __init__(self, user_id=None, username=None, firstname=None, lastname=None, email=None, password=None,
-                 inscription_date=None, date_of_birth=None, wallet=None, delivery_address=None, bill_address=None, panier=None):
+                 inscription_date=None, date_of_birth=None, wallet=None, delivery_address=None, bill_address=None, panier=None, role=None):
         self.user_id = user_id
         self.username = username
         self.firstname = firstname
@@ -18,6 +18,7 @@ class Utilisateur:
         self.delivery_address = delivery_address
         self.bill_address = bill_address
         self.panier = panier
+        self.role = role
 
     @classmethod
     @with_connection
@@ -73,8 +74,8 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Portefeuille,AdresseLivraison, AdresseFacturation,Panier) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0, user.delivery_address, user.bill_address , user.panier ))
+        query = "INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Portefeuille,AdresseLivraison, AdresseFacturation, Panier, Role) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0, user.delivery_address, user.bill_address, user.panier, user.role))
 
         # store new id
         user.user_id = cursor.lastrowid
@@ -88,11 +89,10 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "UPDATE UTILISATEUR SET Username = %s,  Nom = %s, Prenom = %s, Email = %s, MDP = %s, DateNaissance = %s, PorteFeuille = %s, AdresseLivraison = %s, AdresseFacturation = %s WHERE UserId = %s"
-        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.date_of_birth, user.wallet, user.delivery_address, user.bill_address , user.user_id,))
+        query = "UPDATE UTILISATEUR SET Username = %s, Nom = %s, Prenom = %s, Email = %s, MDP = %s, DateNaissance = %s, PorteFeuille = %s, AdresseLivraison = %s, AdresseFacturation = %s, Panier = %s, Role = %s WHERE UserId = %s"
+        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.date_of_birth, user.wallet, user.delivery_address, user.bill_address, user.user_id, user.panier, user.role))
 
         return user
-    
 
     @classmethod
     @with_connection
@@ -101,7 +101,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "UPDATE UTILISATEUR SET  PorteFeuille = %s WHERE UserId = %s"
+        query = "UPDATE UTILISATEUR SET PorteFeuille = %s WHERE UserId = %s"
         cursor.execute(query, (user.wallet, user.user_id,))
 
         return user
@@ -152,7 +152,6 @@ class Utilisateur:
         # execute query
         query = "SELECT g.* FROM JEU as g, UTILISATEUR_JEU as ug WHERE g.GameId = ug.Jeu AND ug.Utilisateur = %s"
         cursor.execute(query, (utilisateur.user_id,))
-
 
         # instantiate all jeux from cursor
         jeux = []

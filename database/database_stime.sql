@@ -70,6 +70,7 @@ create table UTILISATEUR (
      AdresseLivraison int,
      AdresseFacturation int,
      Panier int not null,
+     Role int not null,
      constraint ID_UTILISATEUR primary key (UserId),
      constraint FK_ADRESSE_LIVRAISON foreign key (AdresseLivraison) references ADRESSE (AdresseId),
      constraint FK_ADRESSE_FACTURATION foreign key (AdresseFacturation) references ADRESSE (AdresseId),
