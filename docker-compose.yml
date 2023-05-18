@@ -24,8 +24,8 @@ services:
             mysql:
               condition: service_healthy
         volumes:
-            - "./database/triggers_dml.sql:/triggers_dml.sql"
-        entrypoint: [ "bash", "-c", "mysql -h mysql -P 3306 -u root -p'supersecretpassword123' -D dbstime --protocol=tcp < /triggers_dml.sql" ]
+            - "./database/triggers.sql:/triggers.sql"
+        entrypoint: [ "bash", "-c", "mysql -h mysql -P 3306 -u root -p'supersecretpassword123' -D dbstime --protocol=tcp < /triggers.sql" ]
 
     adminer:
         image: adminer:latest
