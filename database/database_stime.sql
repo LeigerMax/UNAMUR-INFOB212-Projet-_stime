@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS dbstime;
 CREATE DATABASE IF NOT EXISTS dbstime;
 use dbstime;
 
@@ -326,23 +327,23 @@ GRANT SELECT, INSERT ON dbstime.EVALUATION to 'UTILISATEUR';
 GRANT SELECT, INSERT ON dbstime.UTILISATEUR to 'NON_CONNECTE';
 
 
-CREATE USER 'op01' IDENTIFIED BY 'pa55w0rd';
+CREATE USER 'op01'@'%' IDENTIFIED BY 'pa55w0rd';
 GRANT 'OPERATEUR' TO 'op01';
 
-CREATE USER 'maxou_admin' IDENTIFIED BY 'pa55w0rd';
-CREATE USER 'louca_admin' IDENTIFIED BY 'pa55w0rd';
+CREATE USER 'maxou_admin'@'%' IDENTIFIED BY 'pa55w0rd';
+CREATE USER 'louca_admin'@'%' IDENTIFIED BY 'pa55w0rd';
 GRANT 'ADMIN' TO 'maxou_admin';
 GRANT 'ADMIN' TO 'louca_admin';
 
-CREATE USER 'entreprise01' IDENTIFIED BY 'pa55w0rd';
-CREATE USER 'entreprise02' IDENTIFIED BY 'pa55w0rd';
-CREATE USER 'entreprise03' IDENTIFIED BY 'pa55w0rd';
+CREATE USER 'entreprise01'@'%' IDENTIFIED BY 'pa55w0rd';
+CREATE USER 'entreprise02'@'%' IDENTIFIED BY 'pa55w0rd';
+CREATE USER 'entreprise03'@'%' IDENTIFIED BY 'pa55w0rd';
 GRANT 'ENTREPRISE' TO 'entreprise01';
 GRANT 'ENTREPRISE' TO 'entreprise02';
 GRANT 'ENTREPRISE' TO 'entreprise03';
 
-CREATE USER 'momo_compta' IDENTIFIED BY 'pa55w0rd';
+CREATE USER 'momo_compta'@'%' IDENTIFIED BY 'pa55w0rd';
 GRANT 'COMPTABILITE' TO 'momo_compta';
 
-CREATE USER 'nobody' IDENTIFIED BY 'no_password';
+CREATE USER 'nobody'@'%' IDENTIFIED BY 'no_password';
 GRANT 'NON_CONNECTE' TO 'nobody';
