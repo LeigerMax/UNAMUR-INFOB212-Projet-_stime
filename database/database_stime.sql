@@ -120,23 +120,22 @@ create table OBJET (
      Nom varchar(255) not null,
      Description varchar(255) not null,
      Jeu int not null,
+     prix float,
      constraint ID_OBJET primary key (ObjetId),
      constraint FK_JEU_OBJET foreign key (Jeu) references JEU (GameId)
 );
 
 create table OBJET_INSTANCE (
      Id int not null AUTO_INCREMENT,
-     DateObtention date not null,
-     Possesseur int not null,
+     DateObtention date,
+     Possesseur int,
      Objet int not null,
-     Panier int not null,
+     Panier int ,
      constraint ID_OBJET_INSTANCE primary key (ID),
      constraint FK_POSSESSEUR foreign key (Possesseur) references UTILISATEUR (UserId),
      constraint FK_PANIER_OBJETI foreign key (Panier) references PANIER (PanierId),
      constraint FK_OBJET foreign key (Objet) references OBJET (ObjetId)
 );
-
-
 
 create table TRANSACTION (
      TransactionId int not null AUTO_INCREMENT,
@@ -338,11 +337,11 @@ INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ("Français", 1);
 INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ("Anglais", 1);
 
 
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet1', 'Description de l''objet1',1);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet2', 'Description de l''objet2',1);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet3', 'Description de l''objet3',1);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet4', 'Description de l''objet4',1);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet5', 'Description de l''objet5',1);
+INSERT INTO OBJET (Nom, Description, Jeu, prix) VALUES ('Objet1', 'Description de l''objet1',1, 1.00);
+INSERT INTO OBJET (Nom, Description, Jeu, prix) VALUES ('Objet2', 'Description de l''objet2',1, 1.00);
+INSERT INTO OBJET (Nom, Description, Jeu, prix) VALUES ('Objet3', 'Description de l''objet3',1, 1.00);
+INSERT INTO OBJET (Nom, Description, Jeu, prix) VALUES ('Objet4', 'Description de l''objet4',1, 1.00);
+INSERT INTO OBJET (Nom, Description, Jeu, prix) VALUES ('Objet5', 'Description de l''objet5',1, 1.00);
 
 INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("12", "Rue de la babouche", "Andenne", 5300, "Belgique");
 INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("69", "Rue du Funny Number", "Marrant", 6969, "Belgique");
@@ -380,11 +379,19 @@ INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) V
 INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (5,'Premium', "2022-03-01", 30);
 INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (6,'Ultimate', "2022-03-01", 30);
 
+INSERT INTO OBJET_INSTANCE (Objet) VALUES (1);
+INSERT INTO OBJET_INSTANCE (Objet) VALUES (2);
+INSERT INTO OBJET_INSTANCE (DateObtention, Possesseur, Objet) VALUES ('2022-06-06', 1 , 1);
+
+INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (4,"Basique", "2022-03-01", 30);
+INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (5,"Premium", "2022-03-01", 30);
+INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (6,"Ultimate", "2022-03-01", 30);
+
+INSERT INTO TRANSACTION (DateMiseEnVente, PrixVente, Revendeur, Objet) VALUES ("2022-05-06", 10, 1, 1);
 
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,1, FALSE);
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,2, FALSE);
 INSERT INTO UTILISATEUR_JEU (Utilisateur, Jeu, GamePass) VALUES (2,3, FALSE);
-
 
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Wallet", 0);
 INSERT INTO MOYEN_PAIEMENT(Nom,TaxeDuMoyen) VALUES ("Paypal", 5);
