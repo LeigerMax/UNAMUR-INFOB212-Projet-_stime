@@ -247,14 +247,11 @@ create table EVALUATION (
      constraint FK_AVIS foreign key (Avis) references AVIS (AvisId)
 );
 
-/***********************
-*       TRIGGER        *
-***********************/
-
 
 /***********************
 *        VIEW          *
 ***********************/
+
 CREATE VIEW vue_entreprise_jeux
      AS SELECT E.Nom, E.Description, E.AdresseWeb, G.Nom as NomJeu
      FROM ENTREPRISE E
@@ -271,6 +268,85 @@ SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Dev
 FROM JEU J
 JOIN CATEGORIE_JEU CJ ON J.GameId = CJ.Jeu
 JOIN CATEGORIE C ON CJ.Categorie = C.Nom;
+
+CREATE VIEW CA_VENTE AS
+SELECT YEAR(DateAchat) as Annee, SUM(MontantTotal) AS MontantAnnuel
+FROM ACHAT
+GROUP BY YEAR(DateAchat);
+
+CREATE VIEW CA_VENTE_MENSUEL AS
+SELECT MONTH(DateAchat) as Mois, SUM(MontantTotal) AS MontantMensuel
+FROM ACHAT
+GROUP BY MONTH(DateAchat);
+
+
+/***********************
+*        ROLE          *
+***********************/
+
+CREATE ROLE 'OPERATEUR', 'ADMIN', 'ENTREPRISE', 'COMPTABILITE', 'UTILISATEUR', 'NON_CONNECTE';
+
+GRANT ALL PRIVILEGES ON *.* TO 'OPERATEUR';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.* TO 'ADMIN';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.JEU TO 'ENTREPRISE';
+GRANT SELECT, UPDATE ON dbstime.ENTREPRISE to 'ENTREPRISE';
+
+GRANT SELECT ON dbstime.CA_VENTE to 'COMPTABILITE';
+GRANT SELECT ON dbstime.CA_VENTE_MENSUEL to 'COMPTABILITE';
+
+GRANT SELECT ON dbstime.ABONNEMENT to 'UTILISATEUR';
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.PANIER to 'UTILISATEUR';
+GRANT SELECT ON dbstime.CATEGORIE to 'UTILISATEUR';
+GRANT SELECT ON dbstime.LANGUE to 'UTILISATEUR';
+GRANT SELECT ON dbstime.MOYEN_PAIEMENT to 'UTILISATEUR';
+GRANT SELECT ON dbstime.CATEGORIE to 'UTILISATEUR';
+GRANT SELECT ON dbstime.SOLDE to 'UTILISATEUR';
+GRANT SELECT ON dbstime.CATEGORIE to 'UTILISATEUR';
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.ADRESSE to 'UTILISATEUR';
+GRANT SELECT, INSERT, UPDATE ON dbstime.UTILISATEUR to 'UTILISATEUR';
+GRANT SELECT ON dbstime.ENTREPRISE to 'UTILISATEUR';
+GRANT SELECT ON dbstime.ENTREPRISE_ADRESSE to 'UTILISATEUR';
+GRANT SELECT ON dbstime.JEU to 'UTILISATEUR';
+GRANT SELECT ON dbstime.OBJET to 'UTILISATEUR';
+GRANT SELECT, INSERT, UPDATE ON dbstime.OBJET_INSTANCE to 'UTILISATEUR';
+GRANT SELECT, INSERT, UPDATE ON dbstime.TRANSACTION to 'UTILISATEUR';
+GRANT SELECT, INSERT, UPDATE ON dbstime.CATEGORIE to 'UTILISATEUR';
+GRANT SELECT, INSERT, UPDATE ON dbstime.UTILISATEUR_ABONNEMENT to 'UTILISATEUR';
+GRANT SELECT, INSERT, UPDATE ON dbstime.UTILISATEUR_JEU to 'UTILISATEUR';
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.PANIER_JEU to 'UTILISATEUR';
+GRANT SELECT ON dbstime.JEU_LANGUE_TEXTE to 'UTILISATEUR';
+GRANT SELECT ON dbstime.JEU_LANGUE_AUDIO to 'UTILISATEUR';
+GRANT SELECT ON dbstime.IMAGE_JEU to 'UTILISATEUR';
+GRANT SELECT ON dbstime.CATEGORIE_JEU to 'UTILISATEUR';
+GRANT SELECT, INSERT ON dbstime.AVIS to 'UTILISATEUR';
+GRANT SELECT, INSERT ON dbstime.EVALUATION to 'UTILISATEUR';
+
+GRANT SELECT, INSERT ON dbstime.UTILISATEUR to 'NON_CONNECTE';
+
+
+CREATE USER 'op01' IDENTIFIED BY 'pa55w0rd';
+GRANT 'OPERATEUR' TO 'op01';
+
+CREATE USER 'maxou_admin' IDENTIFIED BY 'pa$$w0rd';
+CREATE USER 'louca_admin' IDENTIFIED BY 'pa$$w0rd';
+GRANT 'ADMIN' TO 'maxou_admin';
+GRANT 'ADMIN' TO 'louca_admin';
+
+CREATE USER 'entreprise01' IDENTIFIED BY 'pa$$w0rd';
+CREATE USER 'entreprise02' IDENTIFIED BY 'pa$$w0rd';
+CREATE USER 'entreprise03' IDENTIFIED BY 'pa$$w0rd';
+GRANT 'ENTREPRISE' TO 'entreprise01';
+GRANT 'ENTREPRISE' TO 'entreprise02';
+GRANT 'ENTREPRISE' TO 'entreprise03';
+
+CREATE USER 'momo_compta' IDENTIFIED BY 'pa$$w0rd';
+GRANT 'COMPTABILITE' TO 'momo_compta';
+
+CREATE USER 'nobody' IDENTIFIED BY 'no_password';
+GRANT 'NON_CONNECTE' TO 'nobody';
+
 /***********************
 *       INSERT         *
 ***********************/
@@ -366,12 +442,12 @@ INSERT INTO PANIER (Montant) VALUES (0);
 INSERT INTO PANIER (Montant) VALUES (0);
 INSERT INTO PANIER (Montant) VALUES (0);
 
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com", "b98f9643a856719a5944672f84cf13da694a1576c11fb9f3d57b7b71c9588981", "2022-03-01", "2000-06-06",1); -- mdp: wéwéwé
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("test", "test", "test", "test@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02",2); -- mdp: test
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("max", "max", "max", "max@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02",3); -- mdp: test
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("BenAOrdure", "Benjamin", "Pans", "ben@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-11-29",4); -- mdp: test
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("PtitLouis", "Louis", "Cavrenne", "louis@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1999-07-28",5); -- mdp: test
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("MomoRiche", "Mohamed", "Ait Hassou", "momo@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1987-09-11",6); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com", "b98f9643a856719a5944672f84cf13da694a1576c11fb9f3d57b7b71c9588981", "2022-03-01", "2000-06-06", 1, 1); -- mdp: wéwéwé
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES ("test", "test", "test", "test@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02", 2, 1); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES ("max", "max", "max", "max@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02", 3, 1); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES ("BenAOrdure", "Benjamin", "Pans", "ben@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-11-29", 4, 1); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES ("PtitLouis", "Louis", "Cavrenne", "louis@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1999-07-28", 5, 1); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES ("MomoRiche", "Mohamed", "Ait Hassou", "momo@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1987-09-11", 6, 1); -- mdp: test
 
 
 INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (1,'Basique', "2022-03-01", 30);
