@@ -22,6 +22,7 @@ def game_shop_page_details(username,gameId):
 
 
     utilisateurId = Utilisateur.select_userid(username)
+    abonnementCheck = Utilisateur.get_current_abonnement(utilisateurId)
 
     avisList = Avis.select_with_gameID(gameId)
 
@@ -45,7 +46,7 @@ def game_shop_page_details(username,gameId):
 
 
 
-    abonnementCheck = abonnementCheck = Utilisateur.get_current_abonnement(utilisateurId)
+    
 
     information_game = [game_list, languages_text, languages_audio, images_game, dlc_game_name]
 
@@ -85,12 +86,13 @@ def game_shop_page_details(username,gameId):
         
     
     # Si jeu pas acheter
-    elif(not acheter_check and abonnementCheck):
+    elif(not acheter_check and game_list.game_pass == True and (abonnementCheck.type == "Premium" or abonnementCheck.type == "Ultimate" )):
         user_choice = game_shop_page_details_buy_sub_view()
 
         match user_choice:
             case 1:
-                Utilisateur.add_jeu(Utilisateur(utilisateurId.user_id), Jeu(gameId), True)
+                Utilisateur.add_jeu(Utilisateur(utilisateurId.user_id), Jeu(gameId), 1)
+
                 take_game_free_sucess_view()
                 input()
                 return

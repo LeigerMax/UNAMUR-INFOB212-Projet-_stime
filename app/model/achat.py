@@ -41,6 +41,7 @@ class Achat:
             achats.append(Achat(*achat))
 
         return achats
+    
 
     @classmethod
     @with_connection
