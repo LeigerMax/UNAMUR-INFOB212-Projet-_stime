@@ -8,7 +8,7 @@ class PyVersion:
 class Database:
     USER = "nobody"
     PASSWORD = "no_password"
-    HOST = "127.0.0.1"
+    HOST = "localhost"
     PORT = "3306"
     NAME = "dbstime"
 

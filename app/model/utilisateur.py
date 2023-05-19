@@ -125,7 +125,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM UTILISATEUR WHERE Username = %s AND MDP = %s"
+        query = "SELECT * FROM USERS_PASSWORDS WHERE Username = %s AND MDP = %s"
         cursor.execute(query, (username, password))
 
         try:
