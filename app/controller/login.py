@@ -22,14 +22,14 @@ def login():
             credentials_ok = True
 
             # update DB username and password
-            update_user_password(credentials["username"], credentials["password"])
+            update_user_password(credentials["username"], credentials["password_clear"])
 
             # check if abonnement has expired and delete GamePass games if so
             delete = False
             utilisateur_id = Utilisateur.select_userid(username)
             abonnement_check = Utilisateur.get_current_abonnement(utilisateur_id)
 
-            if abonnement_check.type == "Basique":
+            if abonnement_check is not None and abonnement_check.type == "Basique":
                 games_user = Utilisateur.get_games(utilisateur_id)
                 for game in games_user:
                     if (Utilisateur.check_take_gamepass(utilisateur_id, Jeu(game.game_id)) is not None) and (abonnement_check.type == "Basique"):

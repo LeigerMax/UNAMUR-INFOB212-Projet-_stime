@@ -99,22 +99,28 @@ def string_input(min_size=1, max_size=200, placeholder=None):
         raise InputStringNotInRangeException(user_input, min_size, max_size)
 
 
-def password_input(placeholder=None):
+def password_input(placeholder=None, with_clear=False):
     """
     Read a secret input in console and return a hashed string.
     :param placeholder: placeholder to print in console
+    :param with_clear: if true, also return the password in clear
     :return: user input (a string not visible when entering input)
     """
 
     unhashed_password = getpass(prompt=placeholder)
 
     if len(unhashed_password) > 0:
-        return hashlib.pbkdf2_hmac(
+        hashed_password = hashlib.pbkdf2_hmac(
             'sha256',                           # The hash digest algorithm
             unhashed_password.encode('utf-8'),  # Convert the password to bytes
             Password.SALT,                      # Provide the salt
             100_000                             # 100000 iterations
         ).hex()
+
+        if with_clear:
+            return hashed_password, unhashed_password
+        else:
+            hashed_password
     else:
         raise InputStringNotInRangeException(unhashed_password, 1, sys.maxsize)
 

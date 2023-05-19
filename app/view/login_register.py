@@ -14,13 +14,14 @@ def login_view(error_message=None):
 
     try:
         username = string_input(placeholder="Username: ")
-        password = password_input(placeholder="Password: ")
+        password = password_input(placeholder="Password: ", with_clear=True)
     except InputStringNotInRangeException:
         return login_view("Username or password does not respect size limit")
 
     return {
         "username": username,
-        "password": password
+        "password": password[0],
+        "password_clear": password[1]
     }
 
 
