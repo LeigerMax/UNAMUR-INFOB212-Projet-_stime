@@ -14,7 +14,7 @@ create table ABONNEMENT (
 
 
 create table PANIER (
-     PanierId int not null,
+     PanierId int not null AUTO_INCREMENT,
      Montant float not null,
      constraint ID_PANIER primary key (PanierId)
 );
@@ -35,7 +35,7 @@ create table LANGUE (
 
 
 create table MOYEN_PAIEMENT (
-     MoyenPaiementId int not null,
+     MoyenPaiementId int not null AUTO_INCREMENT,
      Nom varchar(255) not null,
      TaxeDuMoyen int not null,
      constraint ID_MOYEN_PAIEMENT primary key (MoyenPaiementId)
@@ -43,7 +43,7 @@ create table MOYEN_PAIEMENT (
 
 
 create table SOLDE (
-     SoldeId int not null,
+     SoldeId int not null AUTO_INCREMENT,
      TauxSolde int not null,
      DateDebutSolde date not null,
      DateFinSolde date not null,
@@ -52,7 +52,7 @@ create table SOLDE (
 
 
 create table ADRESSE (
-     AdresseId int not null,
+     AdresseId int not null AUTO_INCREMENT,
      Numero varchar(10) not null,
      Rue varchar(255) not null,
      Ville varchar(255) not null,
@@ -63,7 +63,7 @@ create table ADRESSE (
 
 
 create table UTILISATEUR (
-     UserId int not null,
+     UserId int not null AUTO_INCREMENT,
      Username varchar(255) not null,
      Prenom varchar(255) not null,
      Nom varchar(255) not null,
@@ -75,7 +75,7 @@ create table UTILISATEUR (
      AdresseLivraison int,
      AdresseFacturation int,
      Panier int not null,
-     Role int not null,
+     Role int default 1 not null,
      constraint ID_UTILISATEUR primary key (UserId),
      constraint FK_ADRESSE_LIVRAISON foreign key (AdresseLivraison) references ADRESSE (AdresseId),
      constraint FK_ADRESSE_FACTURATION foreign key (AdresseFacturation) references ADRESSE (AdresseId),
@@ -104,7 +104,7 @@ create table ENTREPRISE_ADRESSE (
 
 
 create table JEU (
-     GameId int not null,
+     GameId int not null AUTO_INCREMENT,
      Nom varchar(255) not null,
      Description varchar(255) not null,
      DateDeSortie date not null,
@@ -124,7 +124,7 @@ create table JEU (
 
 
 create table OBJET (
-     ObjetId int not null,
+     ObjetId int not null AUTO_INCREMENT,
      Nom varchar(255) not null,
      Description varchar(255) not null,
      Jeu int not null,
@@ -135,7 +135,7 @@ create table OBJET (
 
 
 create table OBJET_INSTANCE (
-     Id int not null,
+     Id int not null AUTO_INCREMENT,
      DateObtention date,
      Possesseur int,
      Objet int not null,
@@ -148,7 +148,7 @@ create table OBJET_INSTANCE (
 
 
 create table TRANSACTION (
-     TransactionId int not null,
+     TransactionId int not null AUTO_INCREMENT,
      DateMiseEnVente date not null,
      DateVente date,
      PrixVente float not null,
@@ -163,7 +163,7 @@ create table TRANSACTION (
 
 
 create table ACHAT (
-     AchatId int not null,
+     AchatId int not null AUTO_INCREMENT,
      MontantTotal float not null,
      DateAchat date not null,
      Utilisateur int not null,
@@ -209,7 +209,7 @@ create table PANIER_OBJET_INSTANCE(
      Panier int not null,
      Objet int not null,
      constraint ID_PANIER_OBJET primary key (Panier, Objet),
-     constraint FK_PANIER foreign key (Panier) references PANIER (PanierId),
+     constraint FK_PANIER_ foreign key (Panier) references PANIER (PanierId),
      constraint FK_JEU_PANIER_OBJET foreign key (Objet) references OBJET_INSTANCE (Id)
 );
 
@@ -251,7 +251,7 @@ create table CATEGORIE_JEU (
 
 
 create table AVIS (
-     AvisId int not null,
+     AvisId int not null AUTO_INCREMENT,
      Jeu int not null,
      Auteur int not null,
      Date date not null,
@@ -362,13 +362,13 @@ GRANT SELECT ON dbstime.USERS_PASSWORDS to 'NON_CONNECTE';
 GRANT SELECT ON dbstime.UTILISATEUR to 'NON_CONNECTE';
 
 
+-- DO NOT CHANGE PASSWORDS --
+
 CREATE USER 'op01'@'%' IDENTIFIED BY 'pa55w0rd';
 GRANT 'OPERATEUR' TO 'op01';
 
-CREATE USER 'maxou_admin'@'%' IDENTIFIED BY 'pa55w0rd';
-CREATE USER 'louca_admin'@'%' IDENTIFIED BY 'pa55w0rd';
-GRANT 'ADMIN' TO 'maxou_admin';
-GRANT 'ADMIN' TO 'louca_admin';
+CREATE USER 'admin01'@'%' IDENTIFIED BY 'pa55w0rd';
+GRANT 'ADMIN' TO 'admin01';
 
 CREATE USER 'entreprise01'@'%' IDENTIFIED BY 'pa55w0rd';
 CREATE USER 'entreprise02'@'%' IDENTIFIED BY 'pa55w0rd';
@@ -377,8 +377,8 @@ GRANT 'ENTREPRISE' TO 'entreprise01';
 GRANT 'ENTREPRISE' TO 'entreprise02';
 GRANT 'ENTREPRISE' TO 'entreprise03';
 
-CREATE USER 'momo_compta'@'%' IDENTIFIED BY 'pa55w0rd';
-GRANT 'COMPTABILITE' TO 'momo_compta';
+CREATE USER 'compta01'@'%' IDENTIFIED BY 'pa55w0rd';
+GRANT 'COMPTABILITE' TO 'compta01';
 
 CREATE USER 'nobody'@'%' IDENTIFIED BY 'no_password';
 GRANT 'NON_CONNECTE' TO 'nobody';

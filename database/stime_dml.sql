@@ -96,12 +96,26 @@ INSERT INTO PANIER (Montant) VALUES (0);
 INSERT INTO PANIER (Montant) VALUES (0);
 INSERT INTO PANIER (Montant) VALUES (0);
 
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com", "b98f9643a856719a5944672f84cf13da694a1576c11fb9f3d57b7b71c9588981", "2022-03-01", "2000-06-06", 1, 1); -- mdp: wéwéwé
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role, Portefeuille) VALUES ("test", "test", "test", "test@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02", 2, 1, 100); -- mdp: test
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES ("max", "max", "max", "max@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02", 3, 1); -- mdp: test
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES ("BenAOrdure", "Benjamin", "Pans", "ben@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-11-29", 4, 1); -- mdp: test
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES ("PtitLouis", "Louis", "Cavrenne", "louis@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1999-07-28", 5, 1); -- mdp: test
-INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES ("MomoRiche", "Mohamed", "Ait Hassou", "momo@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1987-09-11", 6, 1); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com", "b98f9643a856719a5944672f84cf13da694a1576c11fb9f3d57b7b71c9588981", "2022-03-01", "2000-06-06", 1); -- mdp: wéwéwé
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Portefeuille) VALUES ("test", "test", "test", "test@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02", 2, 100); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("max", "max", "max", "max@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02", 3); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("BenAOrdure", "Benjamin", "Pans", "ben@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-11-29", 4); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("PtitLouis", "Louis", "Cavrenne", "louis@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1999-07-28", 5); -- mdp: test
+INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("MomoRiche", "Mohamed", "Ait Hassou", "momo@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1987-09-11", 6); -- mdp: test
+
+-- special users
+INSERT INTO PANIER (Montant) VALUES (0);
+INSERT INTO PANIER (Montant) VALUES (0);
+INSERT INTO PANIER (Montant) VALUES (0);
+INSERT INTO PANIER (Montant) VALUES (0);
+INSERT INTO PANIER (Montant) VALUES (0);
+INSERT INTO PANIER (Montant) VALUES (0);
+INSERT INTO UTILISATEUR (Panier, Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES (7, "op01", "Op01", "STIME", "op01@stime.com", "d6ee29f44d3458963c2329f6589db4c46f3c25ecdc9ebc78c53390ec34b0c951", "2022-03-01", "2000-06-06", 5); -- mdp: pa55w0rd
+INSERT INTO UTILISATEUR (Panier, Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES (8, "admin01", "Admin01", "STIME", "admin01@stime.com", "d6ee29f44d3458963c2329f6589db4c46f3c25ecdc9ebc78c53390ec34b0c951", "2022-03-01", "2000-06-06", 4); -- mdp: pa55w0rd
+INSERT INTO UTILISATEUR (Panier, Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES (9, "entreprise01", "Stime", "STIME", "stime@stime.com", "d6ee29f44d3458963c2329f6589db4c46f3c25ecdc9ebc78c53390ec34b0c951", "2022-03-01", "2000-06-06", 3); -- mdp: pa55w0rd
+INSERT INTO UTILISATEUR (Panier, Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES (10, "entreprise02", "EpicJeu", "STIME", "stime@epicjeu.com", "d6ee29f44d3458963c2329f6589db4c46f3c25ecdc9ebc78c53390ec34b0c951", "2022-03-01", "2000-06-06", 3); -- mdp: pa55w0rd
+INSERT INTO UTILISATEUR (Panier, Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES (11, "entreprise03", "Ae", "STIME", "stime@ae.com", "d6ee29f44d3458963c2329f6589db4c46f3c25ecdc9ebc78c53390ec34b0c951", "2022-03-01", "2000-06-06", 3); -- mdp: pa55w0rd
+INSERT INTO UTILISATEUR (Panier, Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Role) VALUES (12, "compta01", "Compta01", "STIME", "compta01@stime.com", "d6ee29f44d3458963c2329f6589db4c46f3c25ecdc9ebc78c53390ec34b0c951", "2022-03-01", "2000-06-06", 2); -- mdp: pa55w0rd
 
 
 INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (1,'Basique', "2022-03-01", 30);
