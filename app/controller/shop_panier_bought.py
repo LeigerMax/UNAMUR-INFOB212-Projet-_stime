@@ -1,6 +1,6 @@
 import datetime
 from pickle import FALSE
-from app.view.shop_panier_bought import shop_panier_bought_view,wallet_view,card_view,shop_panier_bought_sucess_view
+from app.view.shop_panier_bought import  shop_panier_bought_view,wallet_view,card_view,shop_panier_bought_sucess_view
 from app.model.moyen_paiement import MoyenPaiement
 from app.model.utilisateur import Utilisateur
 from app.model.panier import Panier
@@ -8,6 +8,7 @@ from app.model.achat import Achat
 from app.model.jeu import Jeu
 
 def shop_panier_bought(username,panier,total_price):
+    
 
     user_choice = shop_panier_bought_view(panier)
     means_of_payment = user_choice
@@ -43,7 +44,7 @@ def shop_panier_bought_card(username,panier,total_price):
 
         #Sauvegarde les produits sur le compte de l'user
         for game_id, _, _ in panier:
-            Utilisateur.add_jeu(Utilisateur(utilisateur.user_id), Jeu(game_id), False)
+            Utilisateur.add_jeu(Utilisateur(utilisateur.user_id), Jeu(game_id), 0)
 
         #Vide le panier
         for game_id, _, _ in panier:
@@ -64,7 +65,7 @@ def shop_panier_bought_wallet(username,panier,total_price):
     if wallet_ok:
 
         #Update wallet
-        data_user.wallet = 50.3
+        data_user.wallet = argent_dispo - total_price
         Utilisateur.update_wallet(Utilisateur(data_user.wallet,data_user.user_id))
 
         #Sauvegarde l'achat
@@ -73,7 +74,7 @@ def shop_panier_bought_wallet(username,panier,total_price):
 
         #Sauvegarde les produits sur le compte de l'user
         for game_id, _, _ in panier:
-            Utilisateur.add_jeu(Utilisateur(utilisateur.user_id), Jeu(game_id), False)
+            Utilisateur.add_jeu(Utilisateur(utilisateur.user_id), Jeu(game_id), 0)
 
         #Vide le panier
         for game_id, _, _ in panier:

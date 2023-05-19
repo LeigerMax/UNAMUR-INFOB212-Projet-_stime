@@ -2,10 +2,11 @@ from app.database.connector import with_connection, get_cursor
 
 
 class Evaluation:
-    def __init__(self, utilisateur=None, avis=None, approuve=None):
+    def __init__(self, utilisateur=None, avis=None, approuve=None, username=None):
         self.utilisateur = utilisateur
         self.avis = avis
         self.approuve = approuve
+        self.username = username
     
     @classmethod
     @with_connection
@@ -21,6 +22,24 @@ class Evaluation:
             return Evaluation(*cursor.fetchone())
         except TypeError:
             return None
+        
+
+    @classmethod
+    @with_connection
+    def select_with_avisID(cls, avis, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT E.*, U.username FROM EVALUATION E JOIN UTILISATEUR U ON E.utilisateur = U.UserId  WHERE Avis = %s"
+        cursor.execute(query, (avis,))
+
+        # instantiate all evaluations from cursor
+        evaluations = []
+        for evaluation in cursor.fetchall():
+            evaluations.append(Evaluation(*evaluation))
+
+        return evaluations
 
     @classmethod
     @with_connection

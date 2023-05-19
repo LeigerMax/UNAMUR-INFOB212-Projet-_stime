@@ -139,6 +139,26 @@ class Utilisateur:
 
     @classmethod
     @with_connection
+    def check_take_gamepass(cls, utilisateur,jeu, **kwargs):
+        """
+        Check is game take with game pass
+        :param utilisateur: the utilisateur owning the jeux
+        :return: boolean
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT * FROM UTILISATEUR_JEU where Utilisateur =  %s and Jeu = %s and GamePass = 1"
+        cursor.execute(query, (utilisateur.user_id, jeu.game_id))
+
+        # check if the game is taken with GamePass
+        return cursor.fetchone()
+
+
+    @classmethod
+    @with_connection
     def get_games(cls, utilisateur, **kwargs):
         """
         Get all jeux of an utilisateur
