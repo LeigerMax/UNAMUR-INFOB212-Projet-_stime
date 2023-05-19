@@ -12,8 +12,9 @@ create table ABONNEMENT (
      constraint ID_ABONNEMENT primary key (Type)
 );
 
+
 create table PANIER (
-     PanierId int not null AUTO_INCREMENT ,
+     PanierId int not null,
      Montant float not null,
      constraint ID_PANIER primary key (PanierId)
 );
@@ -25,6 +26,7 @@ create table CATEGORIE (
      constraint ID_CATEGORIE primary key (Nom)
 );
 
+
 create table LANGUE (
      Langue varchar(255) not null,
      Raccourci varchar(255) not null,
@@ -33,14 +35,15 @@ create table LANGUE (
 
 
 create table MOYEN_PAIEMENT (
-     MoyenPaiementId int not null AUTO_INCREMENT,
+     MoyenPaiementId int not null,
      Nom varchar(255) not null,
      TaxeDuMoyen int not null,
      constraint ID_MOYEN_PAIEMENT primary key (MoyenPaiementId)
 );
 
+
 create table SOLDE (
-     SoldeId int not null AUTO_INCREMENT,
+     SoldeId int not null,
      TauxSolde int not null,
      DateDebutSolde date not null,
      DateFinSolde date not null,
@@ -49,7 +52,7 @@ create table SOLDE (
 
 
 create table ADRESSE (
-     AdresseId int not null AUTO_INCREMENT,
+     AdresseId int not null,
      Numero varchar(10) not null,
      Rue varchar(255) not null,
      Ville varchar(255) not null,
@@ -58,8 +61,9 @@ create table ADRESSE (
      constraint ID_ADRESSE primary key (AdresseId)
 );
 
+
 create table UTILISATEUR (
-     UserId int not null AUTO_INCREMENT,
+     UserId int not null,
      Username varchar(255) not null,
      Prenom varchar(255) not null,
      Nom varchar(255) not null,
@@ -89,6 +93,7 @@ create table ENTREPRISE (
      constraint IDENTREPRISE primary key (NumSiret)
 );
 
+
 create table ENTREPRISE_ADRESSE (
      Entreprise varchar(255) not null,
      Adresse int not null,
@@ -99,7 +104,7 @@ create table ENTREPRISE_ADRESSE (
 
 
 create table JEU (
-     GameId int not null AUTO_INCREMENT,
+     GameId int not null,
      Nom varchar(255) not null,
      Description varchar(255) not null,
      DateDeSortie date not null,
@@ -117,31 +122,33 @@ create table JEU (
      constraint FK_DLC foreign key (DLC) references JEU (GameId)
 );
 
+
 create table OBJET (
-     ObjetId int not null AUTO_INCREMENT,
+     ObjetId int not null,
      Nom varchar(255) not null,
      Description varchar(255) not null,
      Jeu int not null,
+     prix float,
      constraint ID_OBJET primary key (ObjetId),
      constraint FK_JEU_OBJET foreign key (Jeu) references JEU (GameId)
 );
 
+
 create table OBJET_INSTANCE (
-     Id int not null AUTO_INCREMENT,
-     DateObtention date not null,
-     Possesseur int not null,
+     Id int not null,
+     DateObtention date,
+     Possesseur int,
      Objet int not null,
-     Panier int not null,
+     Panier int,
      constraint ID_OBJET_INSTANCE primary key (ID),
      constraint FK_POSSESSEUR foreign key (Possesseur) references UTILISATEUR (UserId),
-     constraint FK_PANIER_OBJETI foreign key (Panier) references PANIER (PanierId),
+     constraint FK_PANIER_OBJET foreign key (Panier) references PANIER (PanierId),
      constraint FK_OBJET foreign key (Objet) references OBJET (ObjetId)
 );
 
 
-
 create table TRANSACTION (
-     TransactionId int not null AUTO_INCREMENT,
+     TransactionId int not null,
      DateMiseEnVente date not null,
      DateVente date,
      PrixVente float not null,
@@ -154,8 +161,9 @@ create table TRANSACTION (
      constraint FK_OBJET_INSTANCE foreign key (Objet) references OBJET_INSTANCE (Id)
 );
 
+
 create table ACHAT (
-     AchatId int not null AUTO_INCREMENT,
+     AchatId int not null,
      MontantTotal float not null,
      DateAchat date not null,
      Utilisateur int not null,
@@ -167,6 +175,7 @@ create table ACHAT (
      constraint FK_PANIER_ACHAT foreign key (Panier) references PANIER (PanierId)
 );
 
+
 create TABLE UTILISATEUR_ABONNEMENT (
     Utilisateur int not null,
     Abonnement varchar(255) not null,
@@ -176,6 +185,7 @@ create TABLE UTILISATEUR_ABONNEMENT (
     constraint FK_UTILISATEUR_UTIL_ABO foreign key (Utilisateur) references UTILISATEUR (UserId),
     constraint FK_ABONNEMENT foreign key (Abonnement) references ABONNEMENT (Type)
 );
+
 
 create table UTILISATEUR_JEU (
      Utilisateur int not null,
@@ -195,6 +205,15 @@ create table PANIER_JEU (
      constraint FK_JEU_PANIER_JEU foreign key (Jeu) references JEU (GameId)
 );
 
+create table PANIER_OBJET_INSTANCE(
+     Panier int not null,
+     Objet int not null,
+     constraint ID_PANIER_OBJET primary key (Panier, Objet),
+     constraint FK_PANIER foreign key (Panier) references PANIER (PanierId),
+     constraint FK_JEU_PANIER_OBJET foreign key (Objet) references OBJET_INSTANCE (Id)
+);
+
+
 create table JEU_LANGUE_TEXTE (
      Langue varchar(255) not null,
      Jeu int not null,
@@ -202,6 +221,7 @@ create table JEU_LANGUE_TEXTE (
      constraint FK_LANGUE_TEXTE foreign key (Langue) references LANGUE (Langue),
      constraint FK_JEU_LANGUE_TEXTE foreign key (Jeu) references JEU (GameId)
 );
+
 
 create table JEU_LANGUE_AUDIO (
      Langue varchar(255) not null,
@@ -211,6 +231,7 @@ create table JEU_LANGUE_AUDIO (
      constraint FK_JEU_LANGUE_AUDIO foreign key (Jeu) references JEU (GameId)
 );
 
+
 create table IMAGE_JEU (
      URL_image varchar(255) not null,
      Alt varchar(255) not null,
@@ -218,6 +239,7 @@ create table IMAGE_JEU (
      constraint ID_IMAGE_JEU primary key (URL_image),
      constraint FK_JEU_IMAGE foreign key (Jeu) references JEU (GameId)
 );
+
 
 create table CATEGORIE_JEU (
      Jeu int not null,
@@ -227,8 +249,9 @@ create table CATEGORIE_JEU (
      constraint FK_CATEGORIE foreign key (Categorie) references CATEGORIE (Nom)
 );
 
+
 create table AVIS (
-     AvisId int not null AUTO_INCREMENT,
+     AvisId int not null,
      Jeu int not null,
      Auteur int not null,
      Date date not null,
@@ -238,6 +261,7 @@ create table AVIS (
      constraint FK_JEU_AVIS foreign key (Jeu) references JEU (GameId),
      constraint FK_AUTEUR foreign key (Auteur) references UTILISATEUR (UserId)
 );
+
 
 create table EVALUATION (
      Utilisateur int not null,
