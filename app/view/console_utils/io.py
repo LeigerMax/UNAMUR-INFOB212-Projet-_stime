@@ -36,7 +36,6 @@ def clear_console():
 def exit_stime():
     """ Exit safely the program. """
 
-    # TODO: close db connection
     clear_console()
     print("Leaving the Stime platform...")
 

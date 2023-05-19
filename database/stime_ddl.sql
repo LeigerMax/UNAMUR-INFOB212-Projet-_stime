@@ -278,7 +278,7 @@ create table EVALUATION (
 ***********************/
 
 CREATE VIEW USERS_PASSWORDS AS
-    SELECT Username, MDP
+    SELECT UserId, Username, MDP
     FROM UTILISATEUR;
 
 CREATE VIEW vue_entreprise_jeux AS
@@ -300,7 +300,7 @@ CREATE VIEW vue_jeux_categories AS
 
 CREATE VIEW CA_VENTE AS
 SELECT * FROM (
-    SELECT YEAR(DateAchat) as Annee, SUM(MontantTotal) AS MontantAnnuel
+    SELECT SUM(MontantTotal) AS MontantAnnuel, YEAR(DateAchat) as Annee
     FROM ACHAT
     GROUP BY YEAR(DateAchat)
 ) AS v
@@ -308,7 +308,7 @@ ORDER BY v.Annee DESC;
 
 CREATE VIEW CA_VENTE_MENSUEL AS
 SELECT * FROM (
-    SELECT YEAR(DateAchat) as Annee, MONTH(DateAchat) as Mois, SUM(MontantTotal) AS MontantMensuel
+    SELECT SUM(MontantTotal) AS MontantMensuel, YEAR(DateAchat) as Annee, MONTH(DateAchat) as Mois
     FROM ACHAT
     GROUP BY MONTH(DateAchat), YEAR(DateAchat)
 ) AS v
@@ -327,9 +327,11 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.* TO 'ADMIN';
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.JEU TO 'ENTREPRISE';
 GRANT SELECT, UPDATE ON dbstime.ENTREPRISE to 'ENTREPRISE';
+GRANT SELECT ON dbstime.UTILISATEUR to 'ENTREPRISE';
 
 GRANT SELECT ON dbstime.CA_VENTE to 'COMPTABILITE';
 GRANT SELECT ON dbstime.CA_VENTE_MENSUEL to 'COMPTABILITE';
+GRANT SELECT ON dbstime.UTILISATEUR to 'COMPTABILITE';
 
 GRANT SELECT ON dbstime.ABONNEMENT to 'UTILISATEUR';
 GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.PANIER to 'UTILISATEUR';
