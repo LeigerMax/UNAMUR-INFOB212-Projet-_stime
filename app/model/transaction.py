@@ -25,6 +25,21 @@ class Transaction:
             return Transaction(*cursor.fetchone())
         except TypeError:
             return None
+        
+    @classmethod
+    @with_connection
+    def selectByObjInst(cls, ObjetInstance_id, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT * FROM TRANSACTION WHERE Objet = %s"
+        cursor.execute(query, (ObjetInstance_id,))
+
+        try:
+            return Transaction(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection
@@ -34,6 +49,23 @@ class Transaction:
 
         # execute query
         query = "SELECT * FROM TRANSACTION"
+        cursor.execute(query)
+
+        # instantiate all transactions from cursor
+        transactions = []
+        for transaction in cursor.fetchall():
+            transactions.append(Transaction(*transaction))
+
+        return transactions
+    
+    @classmethod
+    @with_connection
+    def select_all_no_buy(cls, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT * FROM TRANSACTION WHERE ACHETEUR IS NULL"
         cursor.execute(query)
 
         # instantiate all transactions from cursor
