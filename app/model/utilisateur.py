@@ -80,6 +80,10 @@ class Utilisateur:
         # store new id
         user.user_id = cursor.lastrowid
 
+        # also register user in mysql.user
+        query = "CREATE USER '%s'@'%' IDENTIFIED BY '%s'"
+        cursor.execute(query, (user.username, kwargs["password_clear"]))
+
         return user
 
     @classmethod

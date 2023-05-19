@@ -41,7 +41,7 @@ def register_view(error_message=None):
 
     try:
         username = string_input(placeholder="New username: ")
-        password = password_input(placeholder="Your password: ")
+        password = password_input(placeholder="Your password: ", with_clear=True)
         password_confirm = password_input(placeholder="Confirm password: ")
         firstname = string_input(placeholder="Your firstname: ")
         lastname = string_input(placeholder="Your lastname: ")
@@ -54,8 +54,9 @@ def register_view(error_message=None):
 
     return {
         "username": username,
-        "password": password,
+        "password": password[0],
         "confirm_password": password_confirm,
+        "password_clear": password[1],
         "firstname": firstname,
         "lastname": lastname,
         "email": email,
