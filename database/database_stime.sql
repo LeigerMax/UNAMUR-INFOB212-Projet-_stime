@@ -394,9 +394,6 @@ INSERT INTO OBJET_INSTANCE (DateObtention, Possesseur, Objet) VALUES ('2022-06-0
 INSERT INTO OBJET_INSTANCE (DateObtention, Possesseur, Objet) VALUES ('2022-06-06', 2 , 3);
 INSERT INTO OBJET_INSTANCE (DateObtention, Possesseur, Objet) VALUES ('2022-06-06', 2 , 4);
 
-INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (4,"Basique", "2022-03-01", 30);
-INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (5,"Premium", "2022-03-01", 30);
-INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (6,"Ultimate", "2022-03-01", 30);
 
 INSERT INTO TRANSACTION (DateMiseEnVente, PrixVente, Revendeur, Objet) VALUES ("2022-05-06", 10, 1, 1);
 INSERT INTO TRANSACTION (DateMiseEnVente, PrixVente, Revendeur, Objet) VALUES ("2022-05-06", 20, 1, 2);

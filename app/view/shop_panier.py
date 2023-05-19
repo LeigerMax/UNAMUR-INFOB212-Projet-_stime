@@ -11,6 +11,9 @@ def shop_panier_view(username,jeu, objets):
     #afficher la liste de jeu dans le panier
     if len(jeu) == 0 and len(objets) == 0:
         print("The cart is empty.")
+        print("Cart empty, please add items and come back here")
+        input()
+        return 3,total_price
     else:
         print("Games in the cart:")
         for i, jeu in enumerate(jeu):
@@ -23,19 +26,20 @@ def shop_panier_view(username,jeu, objets):
             print(f"{j + 1 + len(jeu)}. Item name: {nom_objet} | Price: {prix_objet} €")
         print(f"Total: {total_price} €")
 
-    #Option
-    options = """
-    What do you want to do ?
-    1.  Buy cart
-    2.  Delete a element
-    3.  Leave
-        """
+        #Option
+        options = """
+        What do you want to do ?
+        1.  Buy cart
+        2.  Delete a element
+        3.  Leave
+            """
 
-    print(options)
-    try:
-        return int_input(1, 3, placeholder="Choice: "),total_price
-    except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
-        return shop_panier_view(jeu)
+        print(options)
+        try:
+            return int_input(1, 3, placeholder="Choice: "),total_price
+        except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
+            return shop_panier_view(panier)
+
 
 
 def shop_panier_delete_elem_view(panier,objets):
