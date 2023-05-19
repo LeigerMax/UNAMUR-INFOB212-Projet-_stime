@@ -5,6 +5,7 @@ services:
         image: mysql:latest
         command:
             - --log-bin-trust-function-creators=1
+            - --activate-all-roles-on-login=ON
         ports:
             - "3306:3306"
         environment:
