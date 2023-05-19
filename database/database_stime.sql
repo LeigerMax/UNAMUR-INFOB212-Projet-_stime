@@ -271,14 +271,20 @@ JOIN CATEGORIE_JEU CJ ON J.GameId = CJ.Jeu
 JOIN CATEGORIE C ON CJ.Categorie = C.Nom;
 
 CREATE VIEW CA_VENTE AS
-SELECT YEAR(DateAchat) as Annee, SUM(MontantTotal) AS MontantAnnuel
-FROM ACHAT
-GROUP BY YEAR(DateAchat);
+SELECT * FROM (
+    SELECT YEAR(DateAchat) as Annee, SUM(MontantTotal) AS MontantAnnuel
+    FROM ACHAT
+    GROUP BY YEAR(DateAchat)
+) AS v
+ORDER BY v.Annee DESC;
 
 CREATE VIEW CA_VENTE_MENSUEL AS
-SELECT YEAR(DateAchat) as Annee,MONTH(DateAchat) as Mois, SUM(MontantTotal) AS MontantMensuel
-FROM ACHAT
-GROUP BY MONTH(DateAchat),YEAR(DateAchat);
+SELECT * FROM (
+    SELECT YEAR(DateAchat) as Annee, MONTH(DateAchat) as Mois, SUM(MontantTotal) AS MontantMensuel
+    FROM ACHAT
+    GROUP BY MONTH(DateAchat), YEAR(DateAchat)
+) AS v
+ORDER BY v.Annee DESC, v.Mois DESC;
 
 
 /***********************
