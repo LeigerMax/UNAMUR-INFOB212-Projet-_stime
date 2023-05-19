@@ -1,3 +1,6 @@
+START TRANSACTION;
+
+
 /***********************
 *       INSERT         *
 ***********************/
@@ -142,3 +145,6 @@ INSERT INTO ACHAT(MontantTotal, DateAchat, Utilisateur, MoyenPaiement, Panier) V
 INSERT INTO ACHAT(MontantTotal, DateAchat, Utilisateur, MoyenPaiement, Panier) VALUES (84, "2023/06/12", 4, 1, 4);
 INSERT INTO ACHAT(MontantTotal, DateAchat, Utilisateur, MoyenPaiement, Panier) VALUES (54, "2023/07/12", 2, 1, 2);
 INSERT INTO ACHAT(MontantTotal, DateAchat, Utilisateur, MoyenPaiement, Panier) VALUES (102, "2023/08/12", 1, 1, 1);
+
+
+COMMIT;
