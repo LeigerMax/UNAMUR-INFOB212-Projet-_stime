@@ -253,22 +253,26 @@ create table EVALUATION (
 *        VIEW          *
 ***********************/
 
-CREATE VIEW vue_entreprise_jeux
-     AS SELECT E.Nom, E.Description, E.AdresseWeb, G.Nom as NomJeu
-     FROM ENTREPRISE E
-     JOIN JEU G ON G.Developpeur = E.NumSiret AND G.Editeur = E.NumSiret;
+CREATE VIEW USERS_PASSWORDS AS
+    SELECT Username, MDP
+    FROM UTILISATEUR;
 
-CREATE VIEW vue_jeux_langues 
-AS SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, L.Langue
-FROM JEU J
-JOIN JEU_LANGUE_TEXTE JLT ON J.GameId = JLT.Jeu
-JOIN LANGUE L ON JLT.Langue = L.Langue;
+CREATE VIEW vue_entreprise_jeux AS
+    SELECT E.Nom, E.Description, E.AdresseWeb, G.Nom as NomJeu
+    FROM ENTREPRISE E
+    JOIN JEU G ON G.Developpeur = E.NumSiret AND G.Editeur = E.NumSiret;
+
+CREATE VIEW vue_jeux_langues AS
+    SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, L.Langue
+    FROM JEU J
+    JOIN JEU_LANGUE_TEXTE JLT ON J.GameId = JLT.Jeu
+    JOIN LANGUE L ON JLT.Langue = L.Langue;
 
 CREATE VIEW vue_jeux_categories AS
-SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, C.Nom AS Categorie
-FROM JEU J
-JOIN CATEGORIE_JEU CJ ON J.GameId = CJ.Jeu
-JOIN CATEGORIE C ON CJ.Categorie = C.Nom;
+    SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, C.Nom AS Categorie
+    FROM JEU J
+    JOIN CATEGORIE_JEU CJ ON J.GameId = CJ.Jeu
+    JOIN CATEGORIE C ON CJ.Categorie = C.Nom;
 
 CREATE VIEW CA_VENTE AS
 SELECT * FROM (
@@ -330,7 +334,8 @@ GRANT SELECT ON dbstime.CATEGORIE_JEU to 'UTILISATEUR';
 GRANT SELECT, INSERT ON dbstime.AVIS to 'UTILISATEUR';
 GRANT SELECT, INSERT ON dbstime.EVALUATION to 'UTILISATEUR';
 
-GRANT SELECT, INSERT ON dbstime.UTILISATEUR to 'NON_CONNECTE';
+GRANT SELECT ON dbstime.USERS_PASSWORDS to 'NON_CONNECTE';
+GRANT SELECT ON dbstime.UTILISATEUR to 'NON_CONNECTE';
 
 
 CREATE USER 'op01'@'%' IDENTIFIED BY 'pa55w0rd';
