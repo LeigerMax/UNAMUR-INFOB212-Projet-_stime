@@ -57,3 +57,9 @@ def get_cursor(kwargs):
 
     cnx = kwargs.pop("connection")
     return cnx.cursor()
+
+
+def update_user_password(user, password):
+    connection_setting["user"] = user
+    connection_setting["password"] = password
+
