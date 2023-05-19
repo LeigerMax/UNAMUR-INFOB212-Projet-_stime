@@ -1,3 +1,4 @@
+from app.controller.entreprise_profil import entreprise_profil
 from app.controller.game_shop import game_shop
 from app.controller.inventory import my_item
 from app.controller.item_shop import item_shop
@@ -45,5 +46,8 @@ def main_menu(username):
             profil(username)
             main_menu(username)
         case 7:
+            entreprise_profil(username)
+            main_menu(username)
+        case 8:
             exit_stime()
             exit_stime() #TODO: remove duplicate and fix the bug !!
