@@ -13,6 +13,9 @@ def game_shop_page_details_view(information_game,avisList):
     languages_audio = information_game[2]
     images_game = information_game[3]
     game_name_dlc = information_game[4]
+    categories = information_game[5]
+    developer = information_game[6]
+    publisher = information_game[7]
 
 
     clear_console()
@@ -20,9 +23,13 @@ def game_shop_page_details_view(information_game,avisList):
 
     # Affichage des détails du jeu
     print(f"Game Title: {gameNumber.nom}") 
-    print("Genre: <Genre du jeu>")
-    print("Developer: <Développeur du jeu>")
-    print("Publisher: <Éditeur du jeu>")
+
+    print("Categories:")
+    for category in categories:
+        print(f"- {category.nom}")
+
+    print(f"Developer: {developer.nom}")
+    print(f"Publisher: {publisher.nom}")
     print(f"Release Date: {gameNumber.date_de_sortie}")
     print(f"Price: {gameNumber.prix} €")
     print(f"Description: {gameNumber.description}")

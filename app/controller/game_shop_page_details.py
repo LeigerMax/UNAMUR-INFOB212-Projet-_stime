@@ -1,4 +1,5 @@
 import datetime
+from app.model.entreprise import Entreprise
 from app.model.evaluation import Evaluation
 from app.model.jeu import Jeu
 from app.model.langue import Langue
@@ -19,6 +20,9 @@ def game_shop_page_details(username,gameId):
     languages_text = JeuLangueTexte.select_langue_with_gameID(gameId) 
     languages_audio = JeuLangueAudio.select_langue_with_gameID(gameId) 
     images_game = Image.select_with_gameID(gameId) 
+    categories = Jeu.get_categories(Jeu(gameId))
+    developer = Entreprise.select(game_list.developpeur)
+    publisher = Entreprise.select(game_list.editeur)
 
 
     utilisateurId = Utilisateur.select_userid(username)
@@ -48,7 +52,7 @@ def game_shop_page_details(username,gameId):
 
     
 
-    information_game = [game_list, languages_text, languages_audio, images_game, dlc_game_name]
+    information_game = [game_list, languages_text, languages_audio, images_game, dlc_game_name,categories,developer,publisher]
 
     game_shop_page_details_view(information_game,avisList)
 
