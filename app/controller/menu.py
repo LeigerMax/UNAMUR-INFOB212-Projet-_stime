@@ -36,25 +36,25 @@ def main_menu(user):
             match user_choice:
                 case 1:
                     library(username)
-                    main_menu(username)
+                    main_menu(user)
                 case 2:
                     my_item(username)
-                    main_menu(username)
+                    main_menu(user)
                 case 3:
                     game_shop(username)
-                    main_menu(username)
+                    main_menu(user)
                 case 4:
                     item_shop(username)
-                    main_menu(username)
+                    main_menu(user)
                 case 5:
                     shop_panier(username)
-                    main_menu(username)
+                    main_menu(user)
                 case 6:
                     profil(username)
-                    main_menu(username)
+                    main_menu(user)
                 case 7:
                     entreprise_profil(username)
-                    main_menu(username)
+                    main_menu(user)
                 case 8:
                     exit_stime()
                     exit_stime() #TODO: remove duplicate and fix the bug !!
