@@ -12,65 +12,140 @@ INSERT INTO CATEGORIE (Nom, Description) VALUES ('Stratégie', 'Jeux de stratég
 INSERT INTO CATEGORIE (Nom, Description) VALUES ('Sport', 'Jeux de sport comme le football, le basket-ball, etc.');
 INSERT INTO CATEGORIE (Nom, Description) VALUES ('Course', 'Jeux de course de voitures, de motos, etc.');
 INSERT INTO CATEGORIE (Nom, Description) VALUES ('RPG', 'Jeux de rôle avec des personnages et des quêtes');
+INSERT INTO CATEGORIE (Nom, Description) VALUES ('MMORPG', 'Jeux de rôle en ligne avec des personnages et des quêtes');
+INSERT INTO CATEGORIE (Nom, Description) VALUES ('Survie', 'Jeux de survie, construire, trouver des vivres');
+INSERT INTO CATEGORIE (Nom, Description) VALUES ('Combat', 'Jeux de combat, battez vous contre vos amis ou une IA');
 
-INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (987654312, 'Stime', 'Stime est une plateforme de distribution de contenu vidéo ludique en ligne', 'https://www.stime.com');
-INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (123456789, 'UbiRoft', 'Description de l''entreprise UbiRoft', 'https://www.ubiroft.com');
-INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (987654321, 'EpicJeux', 'Description de l''entreprise EpicJeux', 'https://www.epicjeux.com');
-INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (456789123, 'Activisum', 'Description de l''entreprise Activisum', 'https://www.activisum.com');
-INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (496789124, 'Ae', 'Description de l''entreprise Ae', 'https://www.ae.com');
+INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (987654312, 'Volve', 'Volve est une entreprise de jeu vidéo, connue pour Half-Death', 'https://www.volve.com');
+INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (123456789, 'UbiRoft', 'Entreprise responsable des succès tel que Assassins Cream', 'https://www.ubiroft.com');
+INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (987654321, 'EpicJeux', 'On a créé FortKnife', 'https://www.epicjeux.com');
+INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (456789123, 'Activisum', 'Donnez votre argent, payez nos DLC, nos BattlePass', 'https://www.activisum.com');
+INSERT INTO ENTREPRISE (NumSiret, Nom, Description, AdresseWeb) VALUES (496789124, 'Ae', 'Its in our game', 'https://www.ae.com');
 
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Jeu1', 'Description du jeu1', '2022-01-01', 59.99, FALSE,'987654312','987654312',null,FALSE, null );
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('DLCJeu1', 'Description du dlc du jeu2', '2022-02-01', 29.99, TRUE, '987654312','987654312',null,TRUE, 1);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Jeu3', 'Description du jeu3', '2022-03-01', 39.99, FALSE, '987654312','987654312',null,FALSE, null);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Jeu4', 'Description du jeu4', '2022-03-01', 59.99, FALSE, '987654312','987654312',null,FALSE, null);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Super Aventure', 'Un jeu d action épique rempli de rebondissements et de défis passionnants.', '2022-04-15', 49.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Course Folle', 'Plongez dans l univers de la vitesse avec ce jeu de course palpitant.', '2022-05-20', 29.99, FALSE, '987654321', '987654321', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('RPG Magique', 'Explorez un monde fantastique et devenez le héros dans ce jeu de rôle captivant.', '2022-06-10', 39.99, FALSE, '987654321', '987654321', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Stratégie Totale', 'Testez vos compétences tactiques dans ce jeu de stratégie complexe et engageant.', '2022-07-05', 59.99, FALSE, '496789124', '496789124', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Grand Theft Auto: Petty Theft Automatic', 'Un jeu daction épique rempli de rebondissements et de défis passionnants.', '2021-09-17', 49.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
+INSERT INTO SOLDE(TauxSolde, DateDebutSolde, DateFinSolde) VALUES (50, "2023/05/19", "2023/06/30");
+INSERT INTO SOLDE(TauxSolde, DateDebutSolde, DateFinSolde) VALUES (1, "2023/05/19", "2023/06/30");
+
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Grand Theft Auto: Petty Theft Automatic', 'Un jeu daction épique rempli de rebondissements et de défis passionnants.', '2021-09-17', 49.99, FALSE, '123456789', '123456789', NULL, FALSE, NULL);
 INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Call of Booty: Skirmish in Skivvies', 'Une expérience de tir intense avec des combats en sous-vêtements et des batailles palpitantes.', '2022-07-08', 59.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('World of Warcrap: Universe of War Crap', 'Plongez dans un univers fantastique rempli de guerres absurdes et de personnages décalés.', '2020-03-22', 39.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('World of Warcrap: Universe of War Crap', 'Plongez dans un univers fantastique rempli de guerres absurdes et de personnages décalés.', '2020-03-22', 39.99, FALSE, '496789124', '496789124', 1, FALSE, NULL);
 INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Super Smash Brossard: Brawl of Veggies', 'Affrontez vos amis avec des personnages végétariens dans des combats délirants et explosifs.', '2019-11-12', 44.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
 INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('The Legend of Zoldo: The Legend of the Doofus', 'Partez à laventure avec un héros maladroit et découvrez un monde rempli de mystères et de quêtes épiques.', '2018-06-30', 29.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Minecrash: Build, Survive, and Avoid Bugs', 'Un jeu de construction et de survie où vous devez éviter les bugs qui menacent votre monde.', '2023-01-05', 39.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Assassins Cream: Cream of the Assassin', 'Incarnez un assassin culinaire et préparez les desserts les plus mortels dans ce jeu daction gourmand.', '2017-08-21', 19.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Minecrash: Build, Survive, and Avoid Bugs', 'Un jeu de construction et de survie où vous devez éviter les bugs qui menacent votre monde.', '2023-01-05', 39.99, FALSE, '987654321', '987654321', NULL, FALSE, NULL);
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Assassins Cream: Cream of the Assassin', 'Incarnez un assassin culinaire et préparez les desserts les plus mortels dans ce jeu daction gourmand.', '2017-08-21', 19.99, FALSE, '123456789', '123456789', NULL, FALSE, NULL);
 INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Street Fighter II Turbo: Sidewalk Boxer III Super', 'Affrontez les meilleurs combattants de rue dans des duels explosifs et des séquences de combat intenses.', '2016-04-02', 24.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Fallout 76 Dollars: Atomic Failure', 'Explorez un monde post-apocalyptique rempli de bugs et de déceptions dans cette expérience de jeu désastreuse.', '2018-11-14', 59.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Mario Kart: Tractor Leap', 'Prenez le volant de tracteurs personnalisables et défiez vos amis dans des courses déjantées et pleines de rebondissements.', '2020-08-27', 49.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('The Witcher 3: Witch Hunter 3 - The Great Cleanup', 'Incarnez un chasseur de sorcières dans une quête épique pour nettoyer le monde des forces maléfiques.', '2015-05-19', 39.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Final Fantasy: The Ultimate Delusion', 'Plongez dans un univers fantastique rempli de personnages excentriques et dhistoires captivantes dans ce jeu de rôle épique.', '2019-07-09', 59.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Metal Gear Salad: Stealthy Salad', 'Incarnez un chef cuisinier ninja et préparez des salades secrètes dans ce jeu dinfiltration culinaire.', '2017-02-28', 29.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('The Sims: The Fools', 'Créez votre monde virtuel et faites jouer des tours à vos Sims dans cette simulation de vie délirante.', '2022-10-11', 39.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Dark Souls: Black Souls', 'Affrontez des ennemis redoutables et relevez des défis sombres et impitoyables dans ce jeu de rôle hardcore.', '2011-09-22', 29.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('BioShock: Algae Shock', 'Explorez une ville sous-marine infestée dalgues mutantes et découvrez les mystères qui sy cachent.', '2007-08-21', 19.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Halo: Cosmic Hoop', 'Entraînez-vous pour devenir un guerrier intergalactique et participez à des combats intenses dans cet univers futuriste.', '2020-12-08', 59.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Fallout 76 Dollars: Atomic Failure', 'Explorez un monde post-apocalyptique rempli de bugs et de déceptions dans cette expérience de jeu désastreuse.', '2018-11-14', 59.99, FALSE, '987654312', '987654312', 2, FALSE, NULL);
 INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Pokémon Go: Gollum Snatch!', 'Partez à la chasse aux Pokémon dans le monde réel et capturez-les pour devenir le meilleur dresseur.', '2016-07-06', 0, TRUE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Red Dead Redemption: Dead Cow Reward', 'Explorez lOuest sauvage et affrontez les hors-la-loi pour obtenir des récompenses alléchantes dans ce jeu daction captivant.', '2018-10-26', 59.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
-INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('The Elder Scrolls: The Ancient Scrolls', 'Plongez dans un monde fantastique rempli de magie et de quêtes épiques dans cette aventure légendaire.', '2021-03-23', 49.99, FALSE, '456789123', '456789123', NULL, FALSE, NULL);
+INSERT INTO JEU (Nom, Description, DateDeSortie, Prix, GamePass, Developpeur, Editeur, Solde, EstDLC, DLC) VALUES ('Call of Booty: Battle Pass Season 19', 'Des Skins, des Cosmétiques pour être le guerrier le plus choupi sur le champ de bataille !', '2022-08-08', 19.99, FALSE, '456789123', '456789123', NULL, TRUE, 2);
 
-INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES ('https://example.com/image1.jpg', 'Image du jeu 1',1);
-INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES ('https://example.com/image2.jpg', 'Image du jeu 2',2);
-INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES ('https://example.com/image3.jpg', 'Image du jeu 3',3);
-INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES ('https://example.com/image4.jpg', 'Image du jeu 4',4);
+
+INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES ('https://example.com/GTA7.jpg', 'GTA : Petty Theft Automatic Gameplay Screenshot',1);
+INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES ('https://example.com/COD.jpg', 'COD Battle Pass Season 19 Image',2);
+INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES ('https://example.com/WOW.jpg', 'Nouvelle Extension WOW: Flush The Toilet',3);
+INSERT INTO IMAGE_JEU (URL_image, Alt, Jeu) VALUES ('https://example.com/SMB.jpg', 'Nouveau Personnage : Brussel Sprout',4);
 
 INSERT INTO LANGUE (Langue, Raccourci) VALUES ('Français', 'FR');
 INSERT INTO LANGUE (Langue, Raccourci) VALUES ('Anglais', 'EN');
 INSERT INTO LANGUE (Langue, Raccourci) VALUES ('Espagnol', 'ES');
 INSERT INTO LANGUE (Langue, Raccourci) VALUES ('Allemand', 'DE');
 
-INSERT INTO JEU_LANGUE_AUDIO (Langue, Jeu) VALUES ('Français', 1);
-INSERT INTO JEU_LANGUE_AUDIO (Langue, Jeu) VALUES ('Anglais', 1); 
+
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (1, 'Action');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (1, 'Course');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (2, 'Action');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (2, 'Stratégie');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (3, 'MMORPG');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (3, 'Aventure');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (4, 'Action');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (4, 'Sport');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (5, 'Aventure');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (5, 'RPG');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (6, 'Survie');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (6, 'Aventure');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (7, 'Action');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (7, 'Aventure');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (8, 'Combat');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (9, 'MMORPG');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (9, 'Aventure');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (9, 'Action');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (10, 'Aventure');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (10, 'RPG');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (11, 'Action');
+INSERT INTO CATEGORIE_JEU(Jeu, Categorie) VALUES (11, 'Stratégie');
+
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Anglais' , 1);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Anglais' , 2);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Français', 2);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Allemand', 2);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Espagnol', 2);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Anglais' , 3);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Français', 3);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Anglais' , 4);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Anglais' , 5);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Français', 6);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Anglais' , 7);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Français', 7);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Espagnol', 7);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Anglais' , 8);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Anglais' , 9);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Français', 9);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Anglais' , 10);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Anglais' , 11);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Français', 11);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Allemand', 11);
+INSERT INTO JEU_LANGUE_AUDIO(Langue, Jeu) VALUES ('Espagnol', 11);
+
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Anglais' ,1);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Français',1);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Espagnol',1);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',1);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Anglais' ,2);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Français',2);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Espagnol',2);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',2);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Anglais' ,3);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Français',3);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Espagnol',3);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',3);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Anglais' ,4);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Français',4);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Espagnol',4);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',4);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Anglais' ,5);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Français',5);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Espagnol',5);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',5);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Anglais' ,6);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Français',6);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Espagnol',6);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',6);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Anglais' ,7);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Français',7);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Espagnol',7);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',7);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Anglais' ,8);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Français',8);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Espagnol',8);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',8);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Anglais' ,9);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Français',9);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Espagnol',9);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',9);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Anglais' ,10);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Français',10);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Espagnol',10);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',10);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Anglais' ,11);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Français',11);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Espagnol',11);
+INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',11);
 
 
-INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ("Français", 1);
-INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ("Anglais", 1);
 
-
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet1', 'Description de l''objet1',1);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet2', 'Description de l''objet2',1);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet3', 'Description de l''objet3',1);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet4', 'Description de l''objet4',1);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Objet5', 'Description de l''objet5',1);
+INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Couteau en or massif 50K', 'Un beau couteau virtuel qui coute énormement d"argent bien réel',2);
+INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('T-Shirt "My Homies Hate SQL3"', 'On déteste tous ça',1);
+INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Graffiti "69, Nice"', 'Le fameux funny number',1);
+INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Le burn-out de Maxime', 'Il en a marre',4);
+INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Les examens de juin', 'Le pouvoir le plus redoutable pour vaincre les étudiants',3);
 
 INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("12", "Rue de la babouche", "Andenne", 5300, "Belgique");
 INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("69", "Rue du Funny Number", "Marrant", 6969, "Belgique");
@@ -142,3 +217,15 @@ INSERT INTO ACHAT(MontantTotal, DateAchat, Utilisateur, MoyenPaiement, Panier) V
 INSERT INTO ACHAT(MontantTotal, DateAchat, Utilisateur, MoyenPaiement, Panier) VALUES (84, "2023/06/12", 4, 1, 4);
 INSERT INTO ACHAT(MontantTotal, DateAchat, Utilisateur, MoyenPaiement, Panier) VALUES (54, "2023/07/12", 2, 1, 2);
 INSERT INTO ACHAT(MontantTotal, DateAchat, Utilisateur, MoyenPaiement, Panier) VALUES (102, "2023/08/12", 1, 1, 1);
+
+INSERT INTO AVIS(Jeu, Auteur, Date, Note, Commentaire) VALUES (1, 4, "2023/05/20", 9, "J'ai bien aimé le moment ou");
+INSERT INTO AVIS(Jeu, Auteur, Date, Note, Commentaire) VALUES (2, 5, "2023/05/20", 2, "J'ai payé tout les battle pass mais je suis pas plus fort que les autres...");
+INSERT INTO AVIS(Jeu, Auteur, Date, Note, Commentaire) VALUES (3, 1, "2023/05/20", 10, "Alors pour avoir passé 148 heures a farm le dernier boss, j'ai trop kiffé! Je fais du 143 DPS avec le sort 'Fart'.");
+
+INSERT INTO EVALUATION(Utilisateur, Avis, Approuve) VALUES (6, 3, 1);
+INSERT INTO EVALUATION(Utilisateur, Avis, Approuve) VALUES (5, 1, 0);
+INSERT INTO EVALUATION(Utilisateur, Avis, Approuve) VALUES (1, 2, 0);
+INSERT INTO EVALUATION(Utilisateur, Avis, Approuve) VALUES (2, 2, 0);
+INSERT INTO EVALUATION(Utilisateur, Avis, Approuve) VALUES (3, 2, 0);
+INSERT INTO EVALUATION(Utilisateur, Avis, Approuve) VALUES (4, 2, 0);
+INSERT INTO EVALUATION(Utilisateur, Avis, Approuve) VALUES (6, 2, 0);
