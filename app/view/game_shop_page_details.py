@@ -1,3 +1,4 @@
+import datetime
 from app.view.console_utils.colors import BLUE,GREEN, RED
 from app.view.console_utils.io import color_print, clear_console, string_input
 from app.model.langue import Langue
@@ -16,6 +17,7 @@ def game_shop_page_details_view(information_game,avisList):
     categories = information_game[5]
     developer = information_game[6]
     publisher = information_game[7]
+    solde = information_game[8]
 
 
     clear_console()
@@ -32,6 +34,11 @@ def game_shop_page_details_view(information_game,avisList):
     print(f"Publisher: {publisher.nom}")
     print(f"Release Date: {gameNumber.date_de_sortie}")
     print(f"Price: {gameNumber.prix} €")
+    if gameNumber.solde is not None :
+        for j, soldeSelect in enumerate(solde):
+            if(gameNumber.solde == soldeSelect.solde_id) and (datetime.date.today() >= soldeSelect.date_debut_solde) and (datetime.date.today() <= soldeSelect.date_fin_solde):
+                color_print(f"SALES: {soldeSelect.taux_solde} %", GREEN)
+
     print(f"Description: {gameNumber.description}")
     for image in images_game:
         print(f"Game picture: {image.alt}")

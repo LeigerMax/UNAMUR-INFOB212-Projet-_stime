@@ -43,11 +43,11 @@ def shop_panier_bought_card(username,panier,total_price):
         Achat.insert(achat)
 
         #Sauvegarde les produits sur le compte de l'user
-        for game_id, _, _ in panier:
+        for game_id, _, _, _ in panier:
             Utilisateur.add_jeu(Utilisateur(utilisateur.user_id), Jeu(game_id), 0)
 
         #Vide le panier
-        for game_id, _, _ in panier:
+        for game_id, _, _, _ in panier:
             Panier.remove_jeu(Panier(panier_id), Jeu(game_id))
 
         
@@ -73,11 +73,11 @@ def shop_panier_bought_wallet(username,panier,total_price):
         Achat.insert(achat)
 
         #Sauvegarde les produits sur le compte de l'user
-        for game_id, _, _ in panier:
+        for game_id, _, _, _ in panier:
             Utilisateur.add_jeu(Utilisateur(utilisateur.user_id), Jeu(game_id), 0)
 
         #Vide le panier
-        for game_id, _, _ in panier:
+        for game_id, _, _, _ in panier:
             Panier.remove_jeu(Panier(panier_id), Jeu(game_id))
 
         shop_panier_bought_sucess_view()
