@@ -15,6 +15,3 @@ def user_sell_details(username , choice):
         formatted_date = now.strftime('%Y-%m-%d')
         myTransact = Transaction(None,formatted_date,None,user_choice,user.user_id,None,choice)
         Transaction.insert(myTransact)
-
-  
-

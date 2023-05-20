@@ -1,6 +1,6 @@
 from app.exceptions import UserInputNotAnIntegerException, InputNumberNotInRangeException
 from app.view.console_utils.io import clear_console, color_print, int_input
-from app.view.console_utils.colors import BLUE, RED_BLD
+from app.view.console_utils.colors import BLUE, RED_BLD, VIOLET
 
 
 def welcome_menu_view(error_message=None):
@@ -37,7 +37,7 @@ What do you want to do ?
         return welcome_menu_view("Invalid input")
 
 
-def main_menu_view(username, error_message=None):
+def utilisateur_menu_view(username, error_message=None):
     """
     Show main menu when connected, then return user choice.
     :param username: name of the connected user.
@@ -68,4 +68,35 @@ What do you want to do ?
     try:
         return int_input(1, 8, placeholder="Choice: ")
     except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
-        return main_menu_view(username, "Invalid input")
+        return utilisateur_menu_view(username, "Invalid input")
+
+
+def compta_menu_view(username, error_message=None):
+    """
+    Show main menu when connected for user with COMPTA role (user.role=2), then return user choice.
+    :param username: name of the connected user.
+    :param error_message: a message to display
+    :return: the option selected
+    """
+
+    mode = "[COMPTA MODE]"
+    welcome_msg = f"Welcome {username} !"
+
+    options = """
+What do you want to do ?
+1.  See annual sales
+2.  See monthly sales
+3.  Leave
+    """
+
+    clear_console()
+    color_print(mode, VIOLET)
+    color_print(welcome_msg, BLUE)
+    print(options)
+    if error_message:
+        color_print(error_message, RED_BLD)
+
+    try:
+        return int_input(1, 3, placeholder="Choice: ")
+    except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
+        return utilisateur_menu_view(username, "Invalid input")

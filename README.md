@@ -43,12 +43,15 @@
 5. `pip install -r requirements.txt` to install Python packages
 6. `docker-compose up` to launch the database
 7. `python3 app/main.py` to run the program
+8. `chmod +x populate.sh` to make the script executable
+
 
 ## Running the project
 
 1. activate the virtual environment (via `.env`)
 2. `docker-compose up` to launch the database service (can be launched via Docker Desktop)
-3. `python main.py` to run the program
+3. `populate.bat`(Windows) or `populate.sh`(Linux) to populate the database
+4. `python main.py` to run the program
 
 ## Stopping the project
 
