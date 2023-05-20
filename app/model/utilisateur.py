@@ -74,14 +74,14 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Portefeuille,AdresseLivraison, AdresseFacturation, Panier, Role) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0, user.delivery_address, user.bill_address, user.panier, user.role))
+        query = "INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Portefeuille,AdresseLivraison, AdresseFacturation, Panier) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.inscription_date, user.date_of_birth, 0, user.delivery_address, user.bill_address, user.panier))
 
         # store new id
         user.user_id = cursor.lastrowid
 
         # also register user in mysql.user
-        query = "CREATE USER '%s'@'%' IDENTIFIED BY '%s'"
+        query = "CREATE USER %s@'%' IDENTIFIED BY %s"
         cursor.execute(query, (user.username, kwargs["password_clear"]))
 
         return user
