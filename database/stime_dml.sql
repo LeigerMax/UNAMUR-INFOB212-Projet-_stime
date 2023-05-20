@@ -171,12 +171,26 @@ INSERT INTO PANIER (PanierId, Montant) VALUES (4, 0);
 INSERT INTO PANIER (PanierId, Montant) VALUES (5, 0);
 INSERT INTO PANIER (PanierId, Montant) VALUES (6, 0);
 
+-- default users
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("InkMonster", "Lucas", "Pastori", "test@test.com", "b98f9643a856719a5944672f84cf13da694a1576c11fb9f3d57b7b71c9588981", "2022-03-01", "2000-06-06", 1); -- mdp: wéwéwé
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier, Portefeuille) VALUES ("test", "test", "test", "test@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02", 2, 100); -- mdp: test
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("max", "max", "max", "max@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-04-02", 3); -- mdp: test
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("BenAOrdure", "Benjamin", "Pans", "ben@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "2000-11-29", 4); -- mdp: test
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("PtitLouis", "Louis", "Cavrenne", "louis@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1999-07-28", 5); -- mdp: test
 INSERT INTO UTILISATEUR (Username, Prenom, Nom, Email, MDP, DateInscription, DateNaissance, Panier) VALUES ("MomoRiche", "Mohamed", "Ait Hassou", "momo@test.be", "1ab261b6ccd26fffd2781bd0d9dfdc5a95443bea35d7e2889a41fdf2b6cfe53b", "2022-03-01", "1987-09-11", 6); -- mdp: test
+
+CREATE USER 'InkMonster'@'%' IDENTIFIED BY 'wéwéwé';
+CREATE USER 'test'@'%' IDENTIFIED BY 'test';
+CREATE USER 'max'@'%' IDENTIFIED BY 'test';
+CREATE USER 'BenAOrdure'@'%' IDENTIFIED BY 'test';
+CREATE USER 'PtitLouis'@'%' IDENTIFIED BY 'test';
+CREATE USER 'MomoRiche'@'%' IDENTIFIED BY 'test';
+GRANT 'UTILISATEUR' TO 'InkMonster';
+GRANT 'UTILISATEUR' TO 'test';
+GRANT 'UTILISATEUR' TO 'max';
+GRANT 'UTILISATEUR' TO 'BenAOrdure';
+GRANT 'UTILISATEUR' TO 'PtitLouis';
+GRANT 'UTILISATEUR' TO 'MomoRiche';
 
 -- special users
 INSERT INTO PANIER (PanierId, Montant) VALUES (7, 0);
