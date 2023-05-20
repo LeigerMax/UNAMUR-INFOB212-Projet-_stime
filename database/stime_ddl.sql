@@ -12,8 +12,9 @@ create table ABONNEMENT (
      constraint ID_ABONNEMENT primary key (Type)
 );
 
+
 create table PANIER (
-     PanierId int not null AUTO_INCREMENT ,
+     PanierId int not null AUTO_INCREMENT,
      Montant float not null,
      constraint ID_PANIER primary key (PanierId)
 );
@@ -24,6 +25,7 @@ create table CATEGORIE (
      Description varchar(255) not null,
      constraint ID_CATEGORIE primary key (Nom)
 );
+
 
 create table LANGUE (
      Langue varchar(255) not null,
@@ -38,6 +40,7 @@ create table MOYEN_PAIEMENT (
      TaxeDuMoyen int not null,
      constraint ID_MOYEN_PAIEMENT primary key (MoyenPaiementId)
 );
+
 
 create table SOLDE (
      SoldeId int not null AUTO_INCREMENT,
@@ -58,6 +61,7 @@ create table ADRESSE (
      constraint ID_ADRESSE primary key (AdresseId)
 );
 
+
 create table UTILISATEUR (
      UserId int not null AUTO_INCREMENT,
      Username varchar(255) not null,
@@ -71,7 +75,7 @@ create table UTILISATEUR (
      AdresseLivraison int,
      AdresseFacturation int,
      Panier int not null,
-     Role int not null,
+     Role int default 1 not null,
      constraint ID_UTILISATEUR primary key (UserId),
      constraint FK_ADRESSE_LIVRAISON foreign key (AdresseLivraison) references ADRESSE (AdresseId),
      constraint FK_ADRESSE_FACTURATION foreign key (AdresseFacturation) references ADRESSE (AdresseId),
@@ -88,6 +92,7 @@ create table ENTREPRISE (
      EstEditeur BOOLEAN DEFAULT false not null,
      constraint IDENTREPRISE primary key (NumSiret)
 );
+
 
 create table ENTREPRISE_ADRESSE (
      Entreprise varchar(255) not null,
@@ -117,27 +122,29 @@ create table JEU (
      constraint FK_DLC foreign key (DLC) references JEU (GameId)
 );
 
+
 create table OBJET (
      ObjetId int not null AUTO_INCREMENT,
      Nom varchar(255) not null,
      Description varchar(255) not null,
      Jeu int not null,
+     prix float,
      constraint ID_OBJET primary key (ObjetId),
      constraint FK_JEU_OBJET foreign key (Jeu) references JEU (GameId)
 );
 
+
 create table OBJET_INSTANCE (
      Id int not null AUTO_INCREMENT,
-     DateObtention date not null,
-     Possesseur int not null,
+     DateObtention date,
+     Possesseur int,
      Objet int not null,
-     Panier int not null,
+     Panier int,
      constraint ID_OBJET_INSTANCE primary key (ID),
      constraint FK_POSSESSEUR foreign key (Possesseur) references UTILISATEUR (UserId),
-     constraint FK_PANIER_OBJETI foreign key (Panier) references PANIER (PanierId),
+     constraint FK_PANIER_OBJET foreign key (Panier) references PANIER (PanierId),
      constraint FK_OBJET foreign key (Objet) references OBJET (ObjetId)
 );
-
 
 
 create table TRANSACTION (
@@ -154,6 +161,7 @@ create table TRANSACTION (
      constraint FK_OBJET_INSTANCE foreign key (Objet) references OBJET_INSTANCE (Id)
 );
 
+
 create table ACHAT (
      AchatId int not null AUTO_INCREMENT,
      MontantTotal float not null,
@@ -167,6 +175,7 @@ create table ACHAT (
      constraint FK_PANIER_ACHAT foreign key (Panier) references PANIER (PanierId)
 );
 
+
 create TABLE UTILISATEUR_ABONNEMENT (
     Utilisateur int not null,
     Abonnement varchar(255) not null,
@@ -176,6 +185,7 @@ create TABLE UTILISATEUR_ABONNEMENT (
     constraint FK_UTILISATEUR_UTIL_ABO foreign key (Utilisateur) references UTILISATEUR (UserId),
     constraint FK_ABONNEMENT foreign key (Abonnement) references ABONNEMENT (Type)
 );
+
 
 create table UTILISATEUR_JEU (
      Utilisateur int not null,
@@ -195,6 +205,15 @@ create table PANIER_JEU (
      constraint FK_JEU_PANIER_JEU foreign key (Jeu) references JEU (GameId)
 );
 
+create table PANIER_OBJET_INSTANCE(
+     Panier int not null,
+     Objet int not null,
+     constraint ID_PANIER_OBJET primary key (Panier, Objet),
+     constraint FK_PANIER_ foreign key (Panier) references PANIER (PanierId),
+     constraint FK_JEU_PANIER_OBJET foreign key (Objet) references OBJET_INSTANCE (Id)
+);
+
+
 create table JEU_LANGUE_TEXTE (
      Langue varchar(255) not null,
      Jeu int not null,
@@ -202,6 +221,7 @@ create table JEU_LANGUE_TEXTE (
      constraint FK_LANGUE_TEXTE foreign key (Langue) references LANGUE (Langue),
      constraint FK_JEU_LANGUE_TEXTE foreign key (Jeu) references JEU (GameId)
 );
+
 
 create table JEU_LANGUE_AUDIO (
      Langue varchar(255) not null,
@@ -211,6 +231,7 @@ create table JEU_LANGUE_AUDIO (
      constraint FK_JEU_LANGUE_AUDIO foreign key (Jeu) references JEU (GameId)
 );
 
+
 create table IMAGE_JEU (
      URL_image varchar(255) not null,
      Alt varchar(255) not null,
@@ -219,6 +240,7 @@ create table IMAGE_JEU (
      constraint FK_JEU_IMAGE foreign key (Jeu) references JEU (GameId)
 );
 
+
 create table CATEGORIE_JEU (
      Jeu int not null,
      Categorie varchar(255) not null,
@@ -226,6 +248,7 @@ create table CATEGORIE_JEU (
      constraint FK_JEU_CATEGORIE foreign key (Jeu) references JEU (GameId),
      constraint FK_CATEGORIE foreign key (Categorie) references CATEGORIE (Nom)
 );
+
 
 create table AVIS (
      AvisId int not null AUTO_INCREMENT,
@@ -238,6 +261,7 @@ create table AVIS (
      constraint FK_JEU_AVIS foreign key (Jeu) references JEU (GameId),
      constraint FK_AUTEUR foreign key (Auteur) references UTILISATEUR (UserId)
 );
+
 
 create table EVALUATION (
      Utilisateur int not null,
@@ -253,32 +277,42 @@ create table EVALUATION (
 *        VIEW          *
 ***********************/
 
-CREATE VIEW vue_entreprise_jeux
-     AS SELECT E.Nom, E.Description, E.AdresseWeb, G.Nom as NomJeu
-     FROM ENTREPRISE E
-     JOIN JEU G ON G.Developpeur = E.NumSiret AND G.Editeur = E.NumSiret;
+CREATE VIEW USERS_PASSWORDS AS
+    SELECT UserId, Username, MDP
+    FROM UTILISATEUR;
 
-CREATE VIEW vue_jeux_langues 
-AS SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, L.Langue
-FROM JEU J
-JOIN JEU_LANGUE_TEXTE JLT ON J.GameId = JLT.Jeu
-JOIN LANGUE L ON JLT.Langue = L.Langue;
+CREATE VIEW vue_entreprise_jeux AS
+    SELECT E.Nom, E.Description, E.AdresseWeb, G.Nom as NomJeu
+    FROM ENTREPRISE E
+    JOIN JEU G ON G.Developpeur = E.NumSiret AND G.Editeur = E.NumSiret;
+
+CREATE VIEW vue_jeux_langues AS
+    SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, L.Langue
+    FROM JEU J
+    JOIN JEU_LANGUE_TEXTE JLT ON J.GameId = JLT.Jeu
+    JOIN LANGUE L ON JLT.Langue = L.Langue;
 
 CREATE VIEW vue_jeux_categories AS
-SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, C.Nom AS Categorie
-FROM JEU J
-JOIN CATEGORIE_JEU CJ ON J.GameId = CJ.Jeu
-JOIN CATEGORIE C ON CJ.Categorie = C.Nom;
+    SELECT J.GameId, J.Nom, J.Description, J.DateDeSortie, J.Prix, J.GamePass, J.Developpeur, J.Editeur, C.Nom AS Categorie
+    FROM JEU J
+    JOIN CATEGORIE_JEU CJ ON J.GameId = CJ.Jeu
+    JOIN CATEGORIE C ON CJ.Categorie = C.Nom;
 
 CREATE VIEW CA_VENTE AS
-SELECT YEAR(DateAchat) as Annee, SUM(MontantTotal) AS MontantAnnuel
-FROM ACHAT
-GROUP BY YEAR(DateAchat);
+SELECT * FROM (
+    SELECT SUM(MontantTotal) AS MontantAnnuel, YEAR(DateAchat) as Annee
+    FROM ACHAT
+    GROUP BY YEAR(DateAchat)
+) AS v
+ORDER BY v.Annee DESC;
 
 CREATE VIEW CA_VENTE_MENSUEL AS
-SELECT YEAR(DateAchat) as Annee,MONTH(DateAchat) as Mois, SUM(MontantTotal) AS MontantMensuel
-FROM ACHAT
-GROUP BY MONTH(DateAchat),YEAR(DateAchat);
+SELECT * FROM (
+    SELECT SUM(MontantTotal) AS MontantMensuel, YEAR(DateAchat) as Annee, MONTH(DateAchat) as Mois
+    FROM ACHAT
+    GROUP BY MONTH(DateAchat), YEAR(DateAchat)
+) AS v
+ORDER BY v.Annee DESC, v.Mois DESC;
 
 
 /***********************
@@ -287,15 +321,17 @@ GROUP BY MONTH(DateAchat),YEAR(DateAchat);
 
 CREATE ROLE 'OPERATEUR', 'ADMIN', 'ENTREPRISE', 'COMPTABILITE', 'UTILISATEUR', 'NON_CONNECTE';
 
-GRANT ALL PRIVILEGES ON *.* TO 'OPERATEUR';
+GRANT ALL PRIVILEGES ON *.* TO 'OPERATEUR' WITH GRANT OPTION;
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.* TO 'ADMIN';
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.JEU TO 'ENTREPRISE';
 GRANT SELECT, UPDATE ON dbstime.ENTREPRISE to 'ENTREPRISE';
+GRANT SELECT ON dbstime.UTILISATEUR to 'ENTREPRISE';
 
 GRANT SELECT ON dbstime.CA_VENTE to 'COMPTABILITE';
 GRANT SELECT ON dbstime.CA_VENTE_MENSUEL to 'COMPTABILITE';
+GRANT SELECT ON dbstime.UTILISATEUR to 'COMPTABILITE';
 
 GRANT SELECT ON dbstime.ABONNEMENT to 'UTILISATEUR';
 GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.PANIER to 'UTILISATEUR';
@@ -324,16 +360,18 @@ GRANT SELECT ON dbstime.CATEGORIE_JEU to 'UTILISATEUR';
 GRANT SELECT, INSERT ON dbstime.AVIS to 'UTILISATEUR';
 GRANT SELECT, INSERT ON dbstime.EVALUATION to 'UTILISATEUR';
 
-GRANT SELECT, INSERT ON dbstime.UTILISATEUR to 'NON_CONNECTE';
+GRANT SELECT ON dbstime.USERS_PASSWORDS to 'NON_CONNECTE';
+GRANT INSERT ON dbstime.UTILISATEUR to 'NON_CONNECTE';
+GRANT CREATE USER ON *.* to 'NON_CONNECTE';
 
+
+-- DO NOT CHANGE PASSWORDS --
 
 CREATE USER 'op01'@'%' IDENTIFIED BY 'pa55w0rd';
 GRANT 'OPERATEUR' TO 'op01';
 
-CREATE USER 'maxou_admin'@'%' IDENTIFIED BY 'pa55w0rd';
-CREATE USER 'louca_admin'@'%' IDENTIFIED BY 'pa55w0rd';
-GRANT 'ADMIN' TO 'maxou_admin';
-GRANT 'ADMIN' TO 'louca_admin';
+CREATE USER 'admin01'@'%' IDENTIFIED BY 'pa55w0rd';
+GRANT 'ADMIN' TO 'admin01';
 
 CREATE USER 'entreprise01'@'%' IDENTIFIED BY 'pa55w0rd';
 CREATE USER 'entreprise02'@'%' IDENTIFIED BY 'pa55w0rd';
@@ -342,8 +380,11 @@ GRANT 'ENTREPRISE' TO 'entreprise01';
 GRANT 'ENTREPRISE' TO 'entreprise02';
 GRANT 'ENTREPRISE' TO 'entreprise03';
 
-CREATE USER 'momo_compta'@'%' IDENTIFIED BY 'pa55w0rd';
-GRANT 'COMPTABILITE' TO 'momo_compta';
+CREATE USER 'compta01'@'%' IDENTIFIED BY 'pa55w0rd';
+GRANT 'COMPTABILITE' TO 'compta01';
 
 CREATE USER 'nobody'@'%' IDENTIFIED BY 'no_password';
 GRANT 'NON_CONNECTE' TO 'nobody';
+
+-- NEW USERS WILL HAVE THE UTILISATEUR ROLE
+SET PERSIST mandatory_roles = 'UTILISATEUR';

@@ -5,15 +5,16 @@ services:
         image: mysql:latest
         command:
             - --log-bin-trust-function-creators=1
+            - --activate-all-roles-on-login=ON
         ports:
             - "3306:3306"
         environment:
             MYSQL_ROOT_PASSWORD: "supersecretpassword123"
         volumes:
-            - "./database/database_stime.sql:/docker-entrypoint-initdb.d/init.sql"
+            - "./database/stime_ddl.sql:/docker-entrypoint-initdb.d/init.sql"
         healthcheck:
-            test: mysql --user=root --password=supersecretpassword123 -e 'use dbstime;'
-            start_period: 15s
+            test: mysql --user=op01 --password=pa55w0rd -e 'use dbstime;'
+            start_period: 10s
             interval: 5s
             timeout: 5s
             retries: 5
@@ -24,8 +25,8 @@ services:
             mysql:
               condition: service_healthy
         volumes:
-            - "./database/triggers.sql:/triggers.sql"
-        entrypoint: [ "bash", "-c", "mysql -h mysql -P 3306 -u root -p'supersecretpassword123' -D dbstime --protocol=tcp < /triggers.sql" ]
+            - "./database/stime_triggers.sql:/triggers.sql"
+        entrypoint: [ "bash", "-c", "mysql -h mysql -P 3306 -u op01 -p'pa55w0rd' -D dbstime --protocol=tcp < /triggers.sql" ]
 
     adminer:
         image: adminer:latest

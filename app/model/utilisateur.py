@@ -80,6 +80,10 @@ class Utilisateur:
         # store new id
         user.user_id = cursor.lastrowid
 
+        # also register user in mysql.user
+        query = "CREATE USER '%s'@'%' IDENTIFIED BY '%s'"
+        cursor.execute(query, (user.username, kwargs["password_clear"]))
+
         return user
 
     @classmethod
@@ -125,7 +129,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "SELECT * FROM UTILISATEUR WHERE Username = %s AND MDP = %s"
+        query = "SELECT * FROM USERS_PASSWORDS WHERE Username = %s AND MDP = %s"
         cursor.execute(query, (username, password))
 
         try:
@@ -136,6 +140,26 @@ class Utilisateur:
     #############################
     # Utilisateur-Jeu functions #
     #############################
+
+    @classmethod
+    @with_connection
+    def check_take_gamepass(cls, utilisateur,jeu, **kwargs):
+        """
+        Check is game take with game pass
+        :param utilisateur: the utilisateur owning the jeux
+        :return: boolean
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT * FROM UTILISATEUR_JEU where Utilisateur =  %s and Jeu = %s and GamePass = 1"
+        cursor.execute(query, (utilisateur.user_id, jeu.game_id))
+
+        # check if the game is taken with GamePass
+        return cursor.fetchone()
+
 
     @classmethod
     @with_connection

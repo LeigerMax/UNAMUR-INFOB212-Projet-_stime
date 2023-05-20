@@ -32,16 +32,18 @@ def card_view(panier,means_of_payment_data):
     print("What means of payment?")
     for i in range(len(means_of_payment_data)):
         means_of_payment = means_of_payment_data[i]
-        if(means_of_payment.moyen_paiement_id != 0):
-            i += 1
+        if(means_of_payment.moyen_paiement_id != 0 and means_of_payment.nom != "Wallet"):
             print(i,". ", means_of_payment.nom, " avec ", means_of_payment.taxe_du_moyen, "€ de taxe")
+            i += 1
 
     try:
-        choice = int_input(0, len(means_of_payment_data), placeholder="Choice: ")
+        choice = int_input(1, len(means_of_payment_data)-1, placeholder="Choice: ")
     except (UserInputNotAnIntegerException, InputNumberNotInRangeException):
             return card_view(panier,means_of_payment_data)
     
-    return choice
+    selected_review = means_of_payment_data[choice]
+    return selected_review.moyen_paiement_id
+    #return choice
 
     
 def wallet_view(panier, wallet_ok):
@@ -57,7 +59,7 @@ def wallet_view(panier, wallet_ok):
 def shop_panier_bought_sucess_view(total_price):
     clear_console()
 
-    print("Total : " + str(total_price) + "€")
+    print("Total : {:.2f}€".format(total_price))
 
     print("Ongoing treatment ... wait ...") 
     time.sleep(3)

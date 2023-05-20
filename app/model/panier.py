@@ -170,3 +170,22 @@ class Panier:
             objet_instances.append(ObjetInstance(*objet_instance))
 
         return objet_instances
+    
+    @classmethod
+    @with_connection
+    def add_objetInstance(cls, panier, ObjetInstance, **kwargs):
+        """
+        Add a objetInstance to a panier
+        :param panier: the exisiting panier (must contain an id)
+        :param objetInstance: the existing objetInstance to link to panier (must contain an id)
+        :return: true if a row has been added, false otherwise
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "INSERT INTO PANIER_OBJET_INSTANCE (Panier, Objet) values (%s, %s)"
+        cursor.execute(query, (panier.panier_id, ObjetInstance.id))
+
+        return cursor.rowcount > 0
