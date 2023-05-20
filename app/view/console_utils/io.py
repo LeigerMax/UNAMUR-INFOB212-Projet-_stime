@@ -119,7 +119,7 @@ def password_input(placeholder=None, with_clear=False):
         if with_clear:
             return hashed_password, unhashed_password
         else:
-            hashed_password
+            return hashed_password
     else:
         raise InputStringNotInRangeException(unhashed_password, 1, sys.maxsize)
 

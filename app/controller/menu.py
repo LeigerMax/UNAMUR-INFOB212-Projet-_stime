@@ -66,4 +66,3 @@ def main_menu(user):
                     main_menu(user)
                 case 3:
                     exit_stime()
-    print(user)
