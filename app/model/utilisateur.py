@@ -88,6 +88,18 @@ class Utilisateur:
 
     @classmethod
     @with_connection
+    def set_new_role_to_user(cls, user, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "GRANT 'UTILISATEUR' TO %s"
+        cursor.execute(query, (user.username,))
+
+
+
+    @classmethod
+    @with_connection
     def update(cls, user, **kwargs):
         # get cursor from connection in kwargs
         cursor = get_cursor(kwargs)

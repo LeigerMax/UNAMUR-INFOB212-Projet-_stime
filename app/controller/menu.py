@@ -18,6 +18,7 @@ def welcome_menu():
     match user_choice:
         case 1:
             main_menu(register())
+            exit_stime()
         case 2:
             main_menu(login())
         case 3:
