@@ -7,6 +7,7 @@ from app.model.jeu_langue_texte import JeuLangueTexte
 from app.model.jeu_langue_audio import JeuLangueAudio
 from app.model.image import Image
 from app.model.avis import Avis
+from app.model.solde import Solde
 from app.model.utilisateur import Utilisateur
 from app.model.panier import Panier
 from app.controller.shop_panier import shop_panier
@@ -48,11 +49,10 @@ def game_shop_page_details(username,gameId):
     else:
         dlc_game_name = None
 
-
-
+    solde = Solde.select_all()
     
 
-    information_game = [game_list, languages_text, languages_audio, images_game, dlc_game_name,categories,developer,publisher]
+    information_game = [game_list, languages_text, languages_audio, images_game, dlc_game_name,categories,developer,publisher,solde]
 
     game_shop_page_details_view(information_game,avisList)
 
@@ -138,7 +138,7 @@ def game_shop_page_details(username,gameId):
                 shop_panier(username)
 
             case 2:
-                user_choice_interne = eval_review_game()
+                user_choice_interne = eval_review_game(avisList)
                 if user_choice_interne == 0:
                     game_shop_page_details(username,gameId)
                 else:
