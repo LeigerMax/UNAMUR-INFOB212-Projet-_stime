@@ -106,7 +106,7 @@ class Utilisateur:
 
         # execute query
         query = "UPDATE UTILISATEUR SET Username = %s, Nom = %s, Prenom = %s, Email = %s, MDP = %s, DateNaissance = %s, PorteFeuille = %s, AdresseLivraison = %s, AdresseFacturation = %s, Panier = %s, Role = %s WHERE UserId = %s"
-        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.date_of_birth, user.wallet, user.delivery_address, user.bill_address, user.user_id, user.panier, user.role))
+        cursor.execute(query, (user.username, user.lastname, user.firstname, user.email, user.password, user.date_of_birth, user.wallet, user.delivery_address, user.bill_address, user.panier, user.role, user.user_id))
 
         return user
 
