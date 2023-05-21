@@ -32,7 +32,7 @@ def shop_panier_view(username,jeu, objets,soldeList):
 
             
         for j, objets in enumerate(objets):
-            nom_objet, descr_objet, prix_objet = objets
+            id_objet, nom_objet, descr_objet, prix_objet = objets
             total_price += prix_objet
             print(f"{j + 1 + len(jeu)}. Item name: {nom_objet} | Price: {prix_objet:.2f} €")
 

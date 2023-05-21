@@ -16,9 +16,10 @@ def item_shop_details_platform(username,itemId):
 
     if user_choice == 0:
         panier_id = utilisateurId.user_id
-        Panier.add_objetInstance(Panier(panier_id), ObjetInstance(itemId))
         objetI = ObjetInstance(None,None,None,itemId,panier_id)
         ObjetInstance.insert(objetI)
+        objetICreated = ObjetInstance.select_last()
+        Panier.add_objetInstance(Panier(panier_id), ObjetInstance(objetICreated.id))
         shop_panier(username)
     else:
         return

@@ -1,5 +1,6 @@
 import datetime
 from pickle import FALSE
+from app.model.objet_instance import ObjetInstance
 from app.view.shop_panier_bought import  shop_panier_bought_view,wallet_view,card_view,shop_panier_bought_sucess_view
 from app.model.moyen_paiement import MoyenPaiement
 from app.model.utilisateur import Utilisateur
@@ -7,7 +8,7 @@ from app.model.panier import Panier
 from app.model.achat import Achat
 from app.model.jeu import Jeu
 
-def shop_panier_bought(username,panier,total_price):
+def shop_panier_bought(username,panier,data_objet_in_panier,total_price):
     
 
     user_choice = shop_panier_bought_view(panier)
@@ -15,13 +16,13 @@ def shop_panier_bought(username,panier,total_price):
 
     match means_of_payment:
         case 1:
-            shop_panier_bought_card(username,panier,total_price)
+            shop_panier_bought_card(username,panier,data_objet_in_panier,total_price)
         case 2:
-            shop_panier_bought_wallet(username,panier,total_price)
+            shop_panier_bought_wallet(username,panier,data_objet_in_panier,total_price)
         case 3:
             return
 
-def shop_panier_bought_card(username,panier,total_price):
+def shop_panier_bought_card(username,panier,data_objet_in_panier,total_price):
     means_of_payment_data = MoyenPaiement.select_all()
     
     choice = card_view(panier,means_of_payment_data)
@@ -45,16 +46,24 @@ def shop_panier_bought_card(username,panier,total_price):
         #Sauvegarde les produits sur le compte de l'user
         for game_id, _, _, _ in panier:
             Utilisateur.add_jeu(Utilisateur(utilisateur.user_id), Jeu(game_id), 0)
+        for objet_id,_,_,_ in data_objet_in_panier:
+            objetI = ObjetInstance.select(objet_id)
+            objetI.date_obtention = datetime.date.today()
+            objetI.possesseur = utilisateur.user_id
+            objetI.panier = None
+            ObjetInstance.update(objetI)
 
         #Vide le panier
         for game_id, _, _, _ in panier:
             Panier.remove_jeu(Panier(panier_id), Jeu(game_id))
+        for objet_id,_,_,_ in data_objet_in_panier:
+            Panier.remove_objetInstance(Panier(panier_id),ObjetInstance(objet_id))
 
         
         shop_panier_bought_sucess_view(total_price)
 
 
-def shop_panier_bought_wallet(username,panier,total_price):   
+def shop_panier_bought_wallet(username,panier,data_objet_in_panier,total_price):   
     utilisateur = Utilisateur.select_userid(username)
     data_user = Utilisateur.select(utilisateur.user_id)
     panier_id = utilisateur.user_id
@@ -69,20 +78,31 @@ def shop_panier_bought_wallet(username,panier,total_price):
         Utilisateur.update_wallet(Utilisateur(data_user.wallet,data_user.user_id))
 
         #Sauvegarde l'achat
-        achat = Achat(montant_total=total_price, date_achat=datetime.date.today(), utilisateur=utilisateur.user_id, moyen_paiement=0, panier=panier_id)
+        achat = Achat(montant_total=total_price, date_achat=datetime.date.today(), utilisateur=utilisateur.user_id, moyen_paiement=1, panier=panier_id)
+        print(achat.montant_total)
+        print(achat.utilisateur)
+        print(achat.panier)
         Achat.insert(achat)
 
         #Sauvegarde les produits sur le compte de l'user
         for game_id, _, _, _ in panier:
             Utilisateur.add_jeu(Utilisateur(utilisateur.user_id), Jeu(game_id), 0)
+        for objet_id,_,_,_ in data_objet_in_panier:
+            objetI = ObjetInstance.select(objet_id)
+            objetI.date_obtention = datetime.date.today()
+            objetI.possesseur = utilisateur.user_id
+            objetI.panier = None
+            ObjetInstance.update(objetI)
 
         #Vide le panier
         for game_id, _, _, _ in panier:
             Panier.remove_jeu(Panier(panier_id), Jeu(game_id))
+        for objet_id,_,_,_ in data_objet_in_panier:
+            Panier.remove_objetInstance(Panier(panier_id),ObjetInstance(objet_id))
 
-        shop_panier_bought_sucess_view()
+        shop_panier_bought_sucess_view(total_price)
     else:
-        shop_panier_bought(username,panier,total_price)
+        shop_panier_bought(username,panier,data_objet_in_panier,total_price)
    
 
 

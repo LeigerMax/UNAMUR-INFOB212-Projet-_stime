@@ -189,3 +189,22 @@ class Panier:
         cursor.execute(query, (panier.panier_id, ObjetInstance.id))
 
         return cursor.rowcount > 0
+
+    @classmethod
+    @with_connection
+    def remove_objetInstance(cls, panier, objetInstance, **kwargs):
+        """
+        Remove a objetInstance to a panier
+        :param panier: the exisiting panier (must contain an id)
+        :param objetInstance: the existing objetInstance to remove from the panier (must contain an id)
+        :return: true if a row has been deleted, false otherwise
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "DELETE FROM PANIER_OBJET_INSTANCE WHERE Panier = %s AND Objet = %s"
+        cursor.execute(query, (panier.panier_id, objetInstance.id,))
+
+        return cursor.rowcount > 0

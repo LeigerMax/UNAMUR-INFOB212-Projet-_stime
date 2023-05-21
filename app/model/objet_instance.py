@@ -57,6 +57,21 @@ class ObjetInstance:
             objet_instances.append(ObjetInstance(*instance))
 
         return objet_instances
+    
+    @classmethod
+    @with_connection
+    def select_last(cls, **kwargs):
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "SELECT * FROM OBJET_INSTANCE ORDER BY id DESC LIMIT 1"
+        cursor.execute(query)
+
+        try:
+            return ObjetInstance(*cursor.fetchone())
+        except TypeError:
+            return None
 
     @classmethod
     @with_connection

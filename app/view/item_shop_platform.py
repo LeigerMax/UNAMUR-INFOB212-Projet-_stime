@@ -11,7 +11,6 @@ def item_shop_platform_view(all_objet):
     print("+{}+{}+{}+{}+{}+".format("-"*6, "-"*52,"-"*82, "-"*21, "-"*7))
 
     for i, objet in enumerate(all_objet, start=1):
-        print(objet.nom, objet.description,objet.game_id,objet.price)
         print("| {:<4} | {:<50} | {:<80} | {:<20}| {:<7}€ |".format(i, objet.nom, objet.description, objet.game_id, objet.price))
 
 

@@ -117,7 +117,7 @@ class Utilisateur:
         cursor = get_cursor(kwargs)
 
         # execute query
-        query = "UPDATE UTILISATEUR SET PorteFeuille = %s WHERE UserId = %s"
+        query = "UPDATE UTILISATEUR SET Portefeuille = %s WHERE UserId = %s"
         cursor.execute(query, (user.wallet, user.user_id,))
 
         return user
