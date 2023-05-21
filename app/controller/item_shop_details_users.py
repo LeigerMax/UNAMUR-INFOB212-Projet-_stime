@@ -39,7 +39,7 @@ def item_shop_details_users(username,transactId):
             myObjet.possesseur = myUser.user_id
             ObjetInstance.update(myObjet)
         else:
-            item_shop_details_view_user(myObjet, originalObject, 1)
+            item_shop_details_view_user(myObjet, originalObject, 1, myTransact.prix_vente)
     else:
         return
 
