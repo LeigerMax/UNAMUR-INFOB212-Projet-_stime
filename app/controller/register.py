@@ -55,6 +55,7 @@ def register():
     new_panier = Panier.insert(Panier(montant=0))
     new_user = Utilisateur.insert(Utilisateur(None,username, lastname, firstname, email, password, inscription_date, date_of_birth, 10, None, None, new_panier),
                                   password_clear=user_information["password_clear"])
+    Utilisateur.insert_utilisateur_abonnement(new_user.user_id, "Basique")
 
     # Donne le role UTTILISATEUR au nouvel utilisateur
     connection_setting["user"] = "op01"

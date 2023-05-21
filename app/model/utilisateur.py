@@ -1,3 +1,5 @@
+import datetime
+
 from app.database.connector import with_connection, get_cursor
 from app.model.abonnement import Abonnement
 from app.model.jeu import Jeu
@@ -238,6 +240,22 @@ class Utilisateur:
     ####################################
     # Utilisateur-Abonnement functions #
     ####################################
+
+    @classmethod
+    @with_connection
+    def insert_utilisateur_abonnement(cls, user_id, abonnement_id, **kwargs):
+        """
+        Get the abonnement of an utilisateur with the most recent date
+        :param user_id: the id of the user
+        :param abonnement_id: the id of the abonnement
+        """
+
+        # get cursor from connection in kwargs
+        cursor = get_cursor(kwargs)
+
+        # execute query
+        query = "INSERT INTO UTILISATEUR_ABONNEMENT (Utilisateur, Abonnement, DateDebut, Duree) VALUES (%s, %s, %s, %s)"
+        cursor.execute(query, (user_id, abonnement_id, datetime.datetime.now(), 365))
 
     @classmethod
     @with_connection
