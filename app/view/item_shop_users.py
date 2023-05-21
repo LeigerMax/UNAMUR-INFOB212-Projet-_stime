@@ -9,13 +9,14 @@ from app.view.console_utils.io import color_print, clear_console, int_input
 def item_shop_users_view(all_objet):
     clear_console()
     color_print("[ITEM USERS MARKET]", BLUE)
-    print("| {:<4}| {:<12}| {:<20} | {:<50} | {:<80} | {:<20}| {:<7} |".format("Num" ,"SellingDate", "Seller", "Name", "Description","Game", "Price"))
-    print("+{}+{}+{}+{}+{}+{}+{}+".format("-"*6,"-"*12,"-"*20, "-"*52,"-"*82, "-"*21, "-"*7))
+    print("| {:<4}| {:<12}| {:<8} | {:<50} | {:<80} | {:<8}| {:<7}€ |".format("Num" ,"SellingDate", "Seller", "Name", "Description","Game", "Price"))
+    print("+{}+{}+{}+{}+{}+{}+{}+".format("-"*6,"-"*12,"-"*10, "-"*52,"-"*82, "-"*9, "-"*7))
 
     for i, transaction in enumerate(all_objet, start=1):
         instance = ObjetInstance.select(transaction.objet)
         objet = Objet.select(instance.objet)
-        print("| {:<4} | {:<12}| {:<20} | {:<50} | {:<80} | {:<20}| {:<7}€ |".format(i, transaction.date_mise_en_vente, transaction.revendeur,objet.nom,objet.description, objet.game_id, transaction.prix_vente))
+        print("| {:<4} | {:<11}| {:<8} | {:<50} | {:<80} | {:<8}| {:<7}€ |".format(i, str(transaction.date_mise_en_vente), transaction.revendeur,objet.nom,objet.description, objet.game_id, transaction.prix_vente))
+        print("+{}+{}+{}+{}+{}+{}+{}+".format("-"*6,"-"*12,"-"*10, "-"*52,"-"*82, "-"*9, "-"*7))
 
     objet_total = 0
 

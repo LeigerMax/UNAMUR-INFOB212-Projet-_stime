@@ -75,13 +75,10 @@ def shop_panier_bought_wallet(username,panier,data_objet_in_panier,total_price):
 
         #Update wallet
         data_user.wallet = argent_dispo - total_price
-        Utilisateur.update_wallet(Utilisateur(data_user.wallet,data_user.user_id))
+        Utilisateur.update_wallet(Utilisateur(wallet=data_user.wallet, user_id=data_user.user_id))
 
         #Sauvegarde l'achat
         achat = Achat(montant_total=total_price, date_achat=datetime.date.today(), utilisateur=utilisateur.user_id, moyen_paiement=1, panier=panier_id)
-        print(achat.montant_total)
-        print(achat.utilisateur)
-        print(achat.panier)
         Achat.insert(achat)
 
         #Sauvegarde les produits sur le compte de l'user

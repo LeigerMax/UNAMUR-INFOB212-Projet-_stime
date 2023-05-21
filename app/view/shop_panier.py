@@ -5,7 +5,7 @@ from app.exceptions import UserInputNotAnIntegerException, InputNumberNotInRange
 
 def shop_panier_view(username,jeu, objets,soldeList):
     clear_console()
-    color_print("[CAST]", BLUE)
+    color_print("[CART]", BLUE)
 
     total_price = 0
 
