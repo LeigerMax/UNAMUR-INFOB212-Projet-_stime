@@ -128,7 +128,7 @@ create table OBJET (
      Nom varchar(255) not null,
      Description varchar(255) not null,
      Jeu int not null,
-     prix float,
+     Prix float not null,
      constraint ID_OBJET primary key (ObjetId),
      constraint FK_JEU_OBJET foreign key (Jeu) references JEU (GameId)
 );
@@ -367,7 +367,7 @@ GRANT SELECT ON dbstime.CATEGORIE_JEU to 'UTILISATEUR';
 GRANT SELECT, INSERT ON dbstime.AVIS to 'UTILISATEUR';
 GRANT SELECT, INSERT ON dbstime.EVALUATION to 'UTILISATEUR';
 GRANT SELECT, INSERT, UPDATE ON dbstime.ACHAT to 'UTILISATEUR';
-GRANT SELECT, INSERT, UPDATE ON dbstime.PANIER_OBJET_INSTANCE to 'UTILISATEUR';
+GRANT SELECT, INSERT, UPDATE, DELETE ON dbstime.PANIER_OBJET_INSTANCE to 'UTILISATEUR';
 GRANT SELECT ON vue_entreprise_jeux to 'UTILISATEUR';
 GRANT SELECT ON vue_jeux_langues to 'UTILISATEUR';
 GRANT SELECT ON vue_jeux_categories to 'UTILISATEUR';

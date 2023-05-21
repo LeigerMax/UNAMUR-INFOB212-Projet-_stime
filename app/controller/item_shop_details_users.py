@@ -31,8 +31,11 @@ def item_shop_details_users(username,transactId):
             Transaction.update(transact)
             ## donne argent
             vendeurId = transact.revendeur
+            print(vendeurId)
             vendeur = Utilisateur.select(vendeurId)
+            print(vendeur.user_id)
             vendeur.wallet = vendeur.wallet + transact.prix_vente
+            print(vendeur.wallet)
             Utilisateur.update(vendeur)
             ## update objetInstance
             myObjet.date_obtention = formatted_date

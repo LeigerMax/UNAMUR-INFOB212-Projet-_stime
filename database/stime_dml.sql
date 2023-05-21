@@ -144,11 +144,11 @@ INSERT INTO JEU_LANGUE_TEXTE(Langue, Jeu) VALUES ('Allemand',11);
 
 
 
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Couteau en or massif 50K', 'Un beau couteau virtuel qui coute énormement d"argent bien réel',2);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('T-Shirt "My Homies Hate SQL3"', 'On déteste tous ça',1);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Graffiti "69, Nice"', 'Le fameux funny number',1);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Le burn-out de Maxime', 'Il en a marre',4);
-INSERT INTO OBJET (Nom, Description, Jeu) VALUES ('Les examens de juin', 'Le pouvoir le plus redoutable pour vaincre les étudiants',3);
+INSERT INTO OBJET (Nom, Description, Jeu, Prix) VALUES ('Couteau en or massif 50K', 'Un beau couteau virtuel qui coute énormement d"argent bien réel',2, 10);
+INSERT INTO OBJET (Nom, Description, Jeu, Prix) VALUES ('T-Shirt "My Homies Hate SQL3"', 'On déteste tous ça',1,15);
+INSERT INTO OBJET (Nom, Description, Jeu, Prix) VALUES ('Graffiti "69, Nice"', 'Le fameux funny number',1,20);
+INSERT INTO OBJET (Nom, Description, Jeu, Prix) VALUES ('Le burn-out de Maxime', 'Il en a marre',4,25);
+INSERT INTO OBJET (Nom, Description, Jeu, Prix) VALUES ('Les examens de juin', 'Le pouvoir le plus redoutable pour vaincre les étudiants',3,30);
 
 INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("12", "Rue de la babouche", "Andenne", 5300, "Belgique");
 INSERT INTO ADRESSE (Numero, Rue, Ville, CodePostal, Pays) VALUES ("69", "Rue du Funny Number", "Marrant", 6969, "Belgique");
