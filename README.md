@@ -67,7 +67,7 @@
 - [@BenjaminPans](https://github.com/BenjaminPans) 
 - [@PastoriLucas](https://github.com/PastoriLucas) 
 - [@louisc-un](https://github.com/louisc-un)
-- [@simo-ath](https://github.com/simo-ath)
+
 
 
 ## 🛠 Built with
