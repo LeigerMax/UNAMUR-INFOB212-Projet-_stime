@@ -7,17 +7,20 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-    </li>
-    <li><a href="#authors">Authors</a></li>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#requirements">Requirements</a></li>
     <li><a href="#installation">Installation</a></li>
-    <li><a href="#-build-with">Build with</a></li>
+    <li><a href="#running-the-project">Running the project</a></li>
+    <li><a href="#stopping-the-project">Stopping the project</a></li>
+    <li><a href="#adminer">Adminer</a></li>
+    <li><a href="#authors">Authors</a></li>
+    <li><a href="#-built-with">Build with</a></li>
   </ol>
 </details>
 
 
 ## About The Project
+The aim of this project is to rebuild the database of an online platform for the distribution of entertainment video content, using SQL and Python.
 
 ## Requirements
 
@@ -67,7 +70,6 @@
 - [@BenjaminPans](https://github.com/BenjaminPans) 
 - [@PastoriLucas](https://github.com/PastoriLucas) 
 - [@louisc-un](https://github.com/louisc-un)
-
 
 
 ## 🛠 Built with
